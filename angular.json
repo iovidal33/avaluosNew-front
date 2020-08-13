@@ -24,6 +24,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+              "src/cdmx-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -47,8 +49,36 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -67,6 +97,9 @@
           "configurations": {
             "production": {
               "browserTarget": "base:build:production"
+            },
+            "qa":{
+              "browserTarget": "base:build:qa"
             }
           }
         },
@@ -88,6 +121,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +153,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "base"
+    }
+  },
+  "defaultProject": "base",
+  "cli": {
+    "analytics": "3e20a785-fefa-4634-90e8-4ae0f142c949"
+  }
 }

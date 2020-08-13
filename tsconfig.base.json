@@ -3,6 +3,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@comp/*": ["src/app/components/*"],
+      "@env/*": ["src/environments/*"],
+      "@serv/*": ["src/app/services/*"],
+      "@node_modules/*": ["node_modules/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

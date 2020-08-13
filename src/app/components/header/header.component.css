@@ -1,0 +1,9 @@
+.white-toolbar {
+  min-height: 100px;
+    background-color: white;
+    color: #828282;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }

@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h2>Nombre Sistema</h2>
+        <mat-error *ngIf="loginInvalid">
+          Credenciales Incorrectas
+        </mat-error>
+        <mat-form-field class="full-width-input">
+            
+          <input matInput placeholder="Email" formControlName="username" required>
+          <mat-error>
+            Introduce un correo valido.
+          </mat-error>
+          <button type="button" mat-button matSuffix mat-icon-button *ngIf="!form.get('username').value" type="button">
+            <mat-icon >person</mat-icon>
+        </button>
+          <button mat-button *ngIf="form.get('username').value" matSuffix mat-icon-button aria-label="Clear" (click)="form.patchValue({'username': ''})">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <input matInput [type]="passVisibility ? 'text':'password'" placeholder="Password" formControlName="password" required>
+          <button type="button" mat-button matSuffix mat-icon-button type="button" (click)="passVisibility = !passVisibility">
+            <mat-icon>{{passVisibility?'visibility':'visibility_off'}}</mat-icon>
+        </button>
+          <mat-error>
+            Introduce un password valido.
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button type="submit" color="primary" class="top-buffer" style="width: 100%;" [disabled]="form.invalid">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>

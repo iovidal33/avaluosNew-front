@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: flex; flex-direction: column }
+.content {
+    min-height: 630px;
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex-shrink: 0;
+    color: #898d8d;
+    background-color: #333333;
+  }
+  .footer b{
+      color: #FFF;
+  }
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+}
+  
+table {
+    width: 100%;
+}
+  
+.top-buffer {
+    margin-top: 25px;
+}
+  
+.bot-buffer {
+    margin-bottom: 25px;
+}
