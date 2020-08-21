@@ -1,14 +1,22 @@
 <mat-toolbar class="white-toolbar mat-elevation-z1">
-    
-      
-      <a routerLink="/" class="d-block d-md-none d-lg-none d-xl-none">
-        <img src="assets/img/logo_dependencia.png" class="img-responsive" alt="Secretaría de Administración y Finanzas">
-      </a>
-      <a routerLink="/" class="d-none d-md-block d-lg-block d-xl-block">
-        <img src="assets/img/logo_dependencia.png" height="70" alt="Secretaría de Administración y Finanzas">
-      </a>
-        <span class="spacer"></span>
-        
-          <!--img src="assets/img/header/ovica-logo.png" height="115"  alt=""-->
-        
+
+  <button mat-icon-button aria-label="Menú" (click)="sidenav.toggle()" *ngIf="isAuth">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/" class="d-block d-md-none d-lg-none d-xl-none">
+    <img src="assets/img/logo_dependencia.png" class="img-responsive" alt="Secretaría de Administración y Finanzas">
+  </a>
+  <a routerLink="/" class="d-none d-md-block d-lg-block d-xl-block">
+    <img src="assets/img/logo_dependencia.png" height="60" alt="Secretaría de Administración y Finanzas">
+  </a>
+  <span class="spacer"></span>
+  <div *ngIf="isAuth">
+      <ngx-avatar [name]="session.userData.nombre" [matMenuTriggerFor]="menu"></ngx-avatar>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="cerrarSession()">
+        <mat-icon>power_settings_new</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>
