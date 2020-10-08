@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   public loginInvalid: boolean;
   private formSubmitAttempt: boolean;
   public passVisibility = false;
+  loading = false;
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -48,9 +49,11 @@ export class LoginComponent implements OnInit {
           email: this.form.get('username').value,
           password: Md5.hashStr(this.form.get('password').value),
         };
+        this.loading = true;
         this.http.post(environment.ssoEndpoint + '/login', payload,
           this.httpOptions).subscribe(
             (res: any) => {
+              this.loading = false;
               this.authService.setSession({
                 token: res.token,
                 userData: res
@@ -58,6 +61,7 @@ export class LoginComponent implements OnInit {
               window.location.assign('/dashboard');
             },
             (error) => {
+              this.loading = false;
               this.snackBar.open(error.error.mensaje, 'Cerrar', {
                 duration: 10000,
                 horizontalPosition: 'end',

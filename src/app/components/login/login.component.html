@@ -32,7 +32,7 @@
         </mat-error>
       </mat-form-field>
       <br>
-      <button mat-raised-button type="submit" color="primary" class="top-buffer" style="width: 100%;" [disabled]="form.invalid">Login</button>
+      <button mat-raised-button type="submit" color="primary" class="top-buffer" style="width: 100%;" [class.spinner]="loading" [disabled]="form.invalid || loading">Login</button>
     </form>
   </mat-card-content>
 </mat-card>
