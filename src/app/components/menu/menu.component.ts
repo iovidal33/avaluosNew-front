@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@serv/auth.service';
 
-export interface Menu {
-  nombre: string;
-  ruta: string;
-  icono: string;
-}
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -12,13 +9,14 @@ export interface Menu {
 })
 export class MenuComponent implements OnInit {
 
-  menus: Menu[] = [
+  menus: any[] = [
     { nombre: 'Dashboard', ruta: '/dashboard', icono: 'dashboard' },
   ];
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.menus = this.authService.getMenu();
   }
 
 }
