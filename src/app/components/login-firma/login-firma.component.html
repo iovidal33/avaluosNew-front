@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-content>
+        <div class="container">
+            <ngx-avatar src="assets/img/avatar-person.svg" size="120"></ngx-avatar>
+          </div>
+        <form #firmaForm = "ngForm">
+        <mat-form-field>
+            <ngx-mat-file-input placeholder="Certificado" [accept]="'.cer'" color="" [(ngModel)]="cerFile" name="cerFile" (change)="readCer()" required>
+               <mat-icon ngxMatFileInputIcon>attachment</mat-icon>
+            </ngx-mat-file-input>
+            <mat-error>
+                El archivo del certificado es requerido.
+              </mat-error>
+         </mat-form-field>
+         <mat-form-field>
+            <ngx-mat-file-input placeholder="Llave Privada" [accept]="'.key'"  color="" [(ngModel)]="keyFile" name="keyFile" required>
+               <mat-icon ngxMatFileInputIcon>attachment</mat-icon>
+            </ngx-mat-file-input>
+            <mat-error>
+                El archivo key es requerido.
+              </mat-error>
+         </mat-form-field>
+         <mat-form-field>
+            <input matInput [type]="passVisibility ? 'text':'password'" name="pass" [(ngModel)]="pass" placeholder="Clave Privada" required>
+            <button type="button" mat-button matSuffix mat-icon-button type="button" (click)="passVisibility = !passVisibility">
+              <mat-icon>{{passVisibility?'visibility':'visibility_off'}}</mat-icon>
+          </button>
+            <mat-error>
+              La clave privada es requerida.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="RFC" name="rfc" [(ngModel)]="certificado.rfc" disabled>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button type="submit" color="primary" class="top-buffer" style="width: 100%;" [class.spinner]="loading" [disabled]="firmaForm.invalid || loading">Login</button>
+        </form>
+    </mat-card-content>
+</mat-card>

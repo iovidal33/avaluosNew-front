@@ -9,6 +9,7 @@ import localeEsMx from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMx, 'es-Mx');
 
 import { AppRoutingModule } from './app-routing.module';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardElevationDirective } from './card-elevation.directive';
@@ -16,6 +17,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { MenuComponent } from './components/menu/menu.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    LoginFirmaComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { MenuComponent } from './components/menu/menu.component';
     FormsModule,
     ReactiveFormsModule,
     AvatarModule,
+    NgxMatFileInputModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-Mx' }
