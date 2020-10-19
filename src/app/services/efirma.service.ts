@@ -9,16 +9,16 @@ export class EfirmaService {
 
   private endpoint;
 
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
    // this.endpoint = environment.OCSP.SAT.baseUrl + environment.OCSP.SAT.getCertificationState;
   }
 
-  readCer(cerFile): any {
+  readCer(cerFile: any): any {
     const cerAsn1 = forge.asn1.fromDer(cerFile);
     return forge.pki.certificateFromAsn1(cerAsn1);
   }
 
-  readKey(keyFile, pass): any {
+  readKey(keyFile: any, pass: string): any {
     const keyAsn1 = forge.asn1.fromDer(keyFile);
     const privateKeyInfo = forge.pki.decryptPrivateKeyInfo(keyAsn1, pass);
     if (privateKeyInfo) {
@@ -28,7 +28,7 @@ export class EfirmaService {
     }
   }
 
-  validateKeys(privateKey, publicKey): boolean {
+  validateKeys(privateKey: any, publicKey: any): boolean {
     if (JSON.stringify(privateKey.n.data) !== JSON.stringify(publicKey.n.data)) {
       throw new Error('El certificado no corresponde con la llave privada');
     } else {
@@ -36,7 +36,7 @@ export class EfirmaService {
     }
   }
 
-  signString(cadena: string, privateKey, encode: string = 'utf8'): string {
+  signString(cadena: string, privateKey: any, encode: string = 'utf8'): string {
     const md = forge.md.sha256.create();
     md.update(cadena, encode);
     return forge.util.encode64(privateKey.sign(md));

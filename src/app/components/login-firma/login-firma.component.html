@@ -3,7 +3,7 @@
         <div class="container">
             <ngx-avatar src="assets/img/avatar-person.svg" size="120"></ngx-avatar>
           </div>
-        <form #firmaForm = "ngForm">
+        <form #firmaForm = "ngForm" (ngSubmit)="login()">
         <mat-form-field>
             <ngx-mat-file-input placeholder="Certificado" [accept]="'.cer'" color="" [(ngModel)]="cerFile" name="cerFile" (change)="readCer()" required>
                <mat-icon ngxMatFileInputIcon>attachment</mat-icon>
