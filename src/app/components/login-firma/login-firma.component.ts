@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EfirmaService } from '@serv/efirma.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthService } from '@serv/auth.service';
 import { environment } from '@env/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -39,6 +41,8 @@ export class LoginFirmaComponent implements OnInit {
   constructor(
     private efirmaService: EfirmaService,
     private snackBar: MatSnackBar,
+    private router: Router,
+    private authService: AuthService,
     private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -79,6 +83,11 @@ export class LoginFirmaComponent implements OnInit {
             (res: any) => {
               this.success = true;
               this.loading = false;
+              this.authService.setSession({
+                token: res.token,
+                userData: res
+              });
+              this.router.navigate(['dashboard']);
             },
             (error) => {
               this.loading = false;
