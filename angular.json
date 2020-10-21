@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "base": {
+    "avaluos-front": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/base",
+            "outputPath": "dist/avaluos-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -94,21 +94,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "base:build"
+            "browserTarget": "avaluos-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "base:build:production"
+              "browserTarget": "avaluos-front:build:production"
             },
             "qa":{
-              "browserTarget": "base:build:qa"
+              "browserTarget": "avaluos-front:build:qa"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "base:build"
+            "browserTarget": "avaluos-front:build"
           }
         },
         "test": {
@@ -146,18 +146,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "base:serve"
+            "devServerTarget": "avaluos-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "base:serve:production"
+              "devServerTarget": "avaluos-front:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "base",
+  "defaultProject": "avaluos-front",
   "cli": {
     "analytics": "3e20a785-fefa-4634-90e8-4ae0f142c949"
   }

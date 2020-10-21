@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.menus = this.authService.getMenu();
+    console.log(this.menus);
   }
 
 }

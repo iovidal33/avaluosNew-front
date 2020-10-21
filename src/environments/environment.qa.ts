@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    appName: 'base',
+    appName: 'avaluos',
     endpoint: '',
     ssoEndpoint: '',
     ssoToken: '',

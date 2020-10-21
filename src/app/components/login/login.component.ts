@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      username: ['', Validators.email],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -46,11 +46,11 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       try {
         const payload = {
-          email: this.form.get('username').value,
-          password: Md5.hashStr(this.form.get('password').value),
+          login: this.form.get('username').value,
+          password: this.authService.hashPassword(this.form.get('password').value),
         };
         this.loading = true;
-        this.http.post(environment.ssoEndpoint + '/login', payload,
+        this.http.post(environment.ssoEndpoint + 'usuarios/login', payload,
           this.httpOptions).subscribe(
             (res: any) => {
               this.loading = false;
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                 token: res.token,
                 userData: res
               });
-              window.location.assign('/dashboard');
+              this.router.navigate(['main/bandeja-entrada']);
             },
             (error) => {
               this.loading = false;
