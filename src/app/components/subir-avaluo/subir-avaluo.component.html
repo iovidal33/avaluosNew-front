@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Subir Avalúo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <h2 class="cdmx-color-accent">Información</h2>
+        <hr class="cdmx bot-buffer">
+        <div class="alert alert-info">
+            <p>El formato de fichero a subir será en XML y con el formato correcto especificado por la secretaría de finanzas</p>
+        </div>
+        <h2 class="cdmx-color-accent">Caso del avalúo</h2>
+        <hr class="cdmx bot-buffer">
+        <mat-radio-group aria-label="caso">
+            <mat-radio-button value="1">Especial</mat-radio-button>
+          </mat-radio-group>
+          <br>
+          <br>
+        <h2 class="cdmx-color-accent">Seleccione el fichero XML</h2>
+        <hr class="cdmx bot-buffer">
+        <div class="row">
+            <mat-form-field class="col">
+                <ngx-mat-file-input placeholder="Elegir archivo" [accept]="'.xml'"  color="" required>
+                   <mat-icon ngxMatFileInputIcon>attachment</mat-icon>
+                </ngx-mat-file-input>
+                <mat-error>
+                    El archivo es requerido.
+                  </mat-error>
+             </mat-form-field>
+        </div>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading">Subir</button>
+    </mat-card-content>
+</mat-card>

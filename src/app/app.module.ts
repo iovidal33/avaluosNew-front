@@ -20,6 +20,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
 import { BandejaEntradaComponent } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
+import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MainComponent } from './components/main/main.component';
     MenuComponent,
     LoginFirmaComponent,
     BandejaEntradaComponent,
-    MainComponent
+    MainComponent,
+    SubirAvaluoComponent
   ],
   imports: [
     BrowserModule,

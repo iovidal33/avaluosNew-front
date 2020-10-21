@@ -19,7 +19,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: fl
     width: 100%;
     height: auto;
 }
-  
+.cdmx-color {
+  color: #00b140;
+}
+.cdmx-color-accent {
+  color: #0f4c42;
+}
+hr.cdmx {
+  border: 2px solid #00b140;
+  border-radius: 2px;
+}
+
+hr.cdmx-doted {
+  border: 1px dotted #00b140;
+}
+
 table {
     width: 100%;
 }
