@@ -19,7 +19,7 @@
         <hr class="cdmx bot-buffer">
         <div class="row">
             <mat-form-field class="col">
-                <ngx-mat-file-input placeholder="Elegir archivo" [accept]="'.xml'"  color="" required>
+                <ngx-mat-file-input placeholder="Elegir archivo" [accept]="'.xml,.rar'"  color="" [(ngModel)]="file" required>
                    <mat-icon ngxMatFileInputIcon>attachment</mat-icon>
                 </ngx-mat-file-input>
                 <mat-error>
@@ -29,6 +29,6 @@
         </div>
         <br>
         <br>
-        <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading">Subir</button>
+        <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
     </mat-card-content>
 </mat-card>
