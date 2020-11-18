@@ -34,10 +34,14 @@ export class LoginComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    if(this.authService.isAuthenticated){
+      this.router.navigate(['main/bandeja-entrada']);
+    }
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+
   }
 
   onSubmit(): void {
