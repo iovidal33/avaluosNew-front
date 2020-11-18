@@ -30,5 +30,10 @@
         <br>
         <br>
         <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
+        <br>
+        <br>
+        <div class="alert" [ngClass]="{'alert-warning': !success, 'alert-success': success}" *ngIf="mensaje">
+            {{mensaje}}
+        </div>
     </mat-card-content>
 </mat-card>

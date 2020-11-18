@@ -175,7 +175,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator *ngIf="!loading" [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
+        <mat-paginator  [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
         </mat-paginator>
     </mat-card-content>
 </mat-card>

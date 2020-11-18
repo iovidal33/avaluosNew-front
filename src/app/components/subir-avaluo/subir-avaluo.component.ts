@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SubirAvaluoComponent implements OnInit {
   loading = false;
   file;
+  mensaje;
+  success = false;
   constructor(
     private snackBar: MatSnackBar,
     private router: Router,
@@ -39,7 +41,12 @@ export class SubirAvaluoComponent implements OnInit {
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
-          console.log(res);
+          this.success = res.Estado;
+          if(res.Estado){
+            this.mensaje = 'Se subió el avaluo correctamente.';
+          }else{
+            this.mensaje = 'No se pudo cargar el avaluo';
+          }
         },
         (error) => {
           this.loading = false;
