@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import * as sha1 from 'js-sha1';
+
+
 // Auth Data poner todos los datos extras
 export interface AuthData {
   token: string;
@@ -37,7 +39,7 @@ export class AuthService {
 
   public closeSession(): void {
     localStorage.removeItem('session_' + environment.appName);
-    this.router.navigate(['/']);
+    this.router.navigate([environment.baseHref]);
   }
 
   public isAuthenticated(): boolean {

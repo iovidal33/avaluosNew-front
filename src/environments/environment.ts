@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseHref: '/',
   appName: 'avaluos',
   endpoint: 'http://localhost:8000/api/v1/',
   ssoEndpoint: 'http://localhost:8400/api/v1/',
