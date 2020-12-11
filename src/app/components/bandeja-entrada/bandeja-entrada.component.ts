@@ -31,7 +31,7 @@ export class BandejaEntradaComponent implements OnInit {
   pagina = 1;
   total = 0;
   loading = false;
-  displayedColumns: string[] = ['no_unico', 'cuenta_cat', 'fecha_pres',
+  displayedColumns: string[] = ['no_unico','no_avaluo', 'cuenta_cat', 'fecha_pres',
   'estado', 'perito', 'sociedad', 'notario', 'tipo', 'dict', 'select'];
   dataSource = [];
   httpOptions;
