@@ -37,6 +37,7 @@ export class BandejaEntradaComponent implements OnInit {
   dataSource = [];
   httpOptions;
   filtros: Filtros = {} as Filtros;
+  registroPeritoSociedad;
 
   constructor(
     private http: HttpClient,
@@ -63,6 +64,7 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   getData(): void {
+    console.log(this.filtros);
     this.loading = true;
     let filtros = '';
     if(this.filtros.fecha_fin && this.filtros.fecha_ini){
@@ -110,6 +112,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros = {} as Filtros;
     this.filtros.estado = '';
     this.filtros.vigencia = '';
+    this.registroPeritoSociedad = '';
   }
 
   openDialogPeritoSociedad(): void {
@@ -118,7 +121,8 @@ export class BandejaEntradaComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.filtros.perito_sociedad = result.registro;
+        this.filtros.perito_sociedad = result.idpersona;
+        this.registroPeritoSociedad = result.registro;
       }
       this.getData();
     });
