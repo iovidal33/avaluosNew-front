@@ -21,6 +21,7 @@ import { LoginFirmaComponent } from './components/login-firma/login-firma.compon
 import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.component';
+import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.com
     BandejaEntradaComponent,
     DialogPeritoSociedad,
     MainComponent,
-    SubirAvaluoComponent
+    SubirAvaluoComponent,
+    BandejaEntradaPeritoComponent
   ],
   imports: [
     BrowserModule,
