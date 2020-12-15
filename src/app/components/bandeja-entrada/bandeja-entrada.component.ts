@@ -38,6 +38,7 @@ export class BandejaEntradaComponent implements OnInit {
   httpOptions;
   filtros: Filtros = {} as Filtros;
   registroPeritoSociedad;
+  tipoBusqueda;
 
   constructor(
     private http: HttpClient,
@@ -121,8 +122,9 @@ export class BandejaEntradaComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        this.filtros.perito_sociedad = result.idpersona;
-        this.registroPeritoSociedad = result.registro;
+        this.filtros.perito_sociedad = result.PeritoSociedad.idpersona;
+        this.registroPeritoSociedad = result.PeritoSociedad.registro;
+        this.tipoBusqueda = result.tipoBusqueda;
       }
       this.getData();
     });
@@ -136,6 +138,11 @@ export interface FiltrosPeritoSociedad {
   nombre: string;
   primer_apellido: string;
   segundo_apellido: string;
+}
+
+export interface busqueda {
+  tipoBusqueda: string;
+  PeritoSociedad: string;
 }
 
 @Component({
@@ -154,6 +161,7 @@ export class DialogPeritoSociedad {
   filtros: FiltrosPeritoSociedad = {} as FiltrosPeritoSociedad;
   busquedaPeritoSociedad;
   PeritoSociedad;
+  busqueda: busqueda = {} as busqueda;
 
   constructor(
     private http: HttpClient,
@@ -180,6 +188,7 @@ export class DialogPeritoSociedad {
     this.loading = false;
     this.filtros = {} as FiltrosPeritoSociedad;
     this.busquedaPeritoSociedad = false;
+    this.busqueda = {} as busqueda;
   }
 
   getDataPeritoSociedad(): void {
@@ -225,6 +234,12 @@ export class DialogPeritoSociedad {
             verticalPosition: 'top'
           });
         });
+  }
+
+  radioSelected(dataRadio) {
+    this.busqueda.tipoBusqueda = this.tipoBusqueda;
+    this.busqueda.PeritoSociedad = dataRadio;
+    console.log(this.busqueda);
   }
 
 }

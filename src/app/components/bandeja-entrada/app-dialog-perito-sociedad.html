@@ -72,7 +72,7 @@
             <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
             <td mat-cell *matCellDef="let element">
                 <mat-radio-group [(ngModel)]="PeritoSociedad">
-                    <mat-radio-button [value]="element"></mat-radio-button>
+                    <mat-radio-button [value]="element" (change)="radioSelected(element)"></mat-radio-button>
                 </mat-radio-group>
             </td>
         </ng-container>
@@ -83,6 +83,6 @@
     </mat-paginator>
 </div>
 <mat-dialog-actions align="end">
-    <button mat-flat-button color="primary" *ngIf="PeritoSociedad && busquedaPeritoSociedad" [mat-dialog-close]="PeritoSociedad">Aceptar</button>
+    <button mat-flat-button color="primary" *ngIf="PeritoSociedad && busquedaPeritoSociedad" [mat-dialog-close]="busqueda">Aceptar</button>
     <button mat-button mat-dialog-close>Cerrar</button>
 </mat-dialog-actions>
