@@ -115,6 +115,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros.estado = '';
     this.filtros.vigencia = '';
     this.registroPeritoSociedad = '';
+    this.tipoBusqueda = '';
   }
 
   openDialogPeritoSociedad(): void {
