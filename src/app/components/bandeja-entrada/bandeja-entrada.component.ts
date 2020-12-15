@@ -65,7 +65,6 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   getData(): void {
-    console.log(this.filtros);
     this.loading = true;
     let filtros = '';
     if(this.filtros.fecha_fin && this.filtros.fecha_ini){
@@ -75,10 +74,12 @@ export class BandejaEntradaComponent implements OnInit {
     if(this.filtros.no_avaluo){
       filtros = filtros + '&no_avaluo=' + this.filtros.no_avaluo; 
     }
-    if(this.filtros.perito_sociedad){
-      filtros = filtros + '&perito_sociedad=' + this.filtros.perito_sociedad;
+    if(this.tipoBusqueda){
+      if(this.tipoBusqueda == 'perito')
+        filtros = filtros + '&id_perito=' + this.filtros.perito_sociedad;
+      else if(this.tipoBusqueda == 'sociedad')
+        filtros = filtros + '&id_sociedad=' + this.filtros.perito_sociedad;
     }
-
     if(this.filtros.no_unico){
       filtros = filtros + '&no_unico=' + this.filtros.no_unico;
     }
@@ -239,7 +240,6 @@ export class DialogPeritoSociedad {
   radioSelected(dataRadio) {
     this.busqueda.tipoBusqueda = this.tipoBusqueda;
     this.busqueda.PeritoSociedad = dataRadio;
-    console.log(this.busqueda);
   }
 
 }
