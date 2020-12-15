@@ -1,0 +1,88 @@
+<h1 mat-dialog-title>Perito o Sociedad</h1>
+<div mat-dialog-content>
+    <form #formDialog="ngForm">
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="input-filter-long">
+                    <mat-label>Búsqueda por:</mat-label>
+                    <mat-select [(value)]="tipoBusqueda" (selectionChange)="cleanBusqueda()">
+                        <mat-option value="perito">Clave perito</mat-option>
+                        <mat-option value="sociedad">Clave sociedad</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <ng-container *ngIf="tipoBusqueda == 'perito'">
+                <mat-form-field class="col-md-12">
+                    <mat-label>Registro</mat-label>
+                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro">
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre" [(ngModel)]="filtros.nombre" name="nombre">
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput placeholder="Apellido Paterno" [(ngModel)]="filtros.primer_apellido" name="primer_apellido">
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput placeholder="Apellido Materno" [(ngModel)]="filtros.segundo_apellido" name="segundo_apellido">
+                </mat-form-field>
+            </ng-container>
+            <ng-container *ngIf="tipoBusqueda == 'sociedad'">
+                <mat-form-field class="col-md-12">
+                    <mat-label>Registro</mat-label>
+                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro">
+                </mat-form-field>
+                <mat-form-field class="col-md-12">
+                    <mat-label>Razón Social</mat-label>
+                    <input matInput placeholder="Razón Social" [(ngModel)]="filtros.nombre" name="nombre">
+                </mat-form-field>
+            </ng-container>
+            <br>
+
+            <div class="col">
+                <h3 class="cdmx-color-accent">Resultado</h3>
+            </div>
+            <div class="col" align="end">
+                <button mat-icon-button color="primary" aria-label="Buscar" matTooltip="Buscar" (click)="getDataPeritoSociedad()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            
+        </div>
+    </form>
+    <div style="padding: 30px; text-align: center;" *ngIf="loading">
+        <mat-spinner style="margin:0 auto;"></mat-spinner>
+        <p>Cargando...</p>
+    </div>
+    <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading && busquedaPeritoSociedad">
+        No se encontraron datos.
+    </div>
+    <table mat-table [dataSource]="dataSource" *ngIf="dataSource.length > 0 && !loading && busquedaPeritoSociedad">
+        <ng-container matColumnDef="registro">
+            <th mat-header-cell *matHeaderCellDef> Registro </th>
+            <td mat-cell *matCellDef="let element"> {{(element.registro)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{ (element.apellidopaterno) ? element.apellidopaterno : '' }} {{ (element.apellidomaterno) ? element.apellidomaterno : '' }} {{element.nombre}} </td>
+        </ng-container>
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-radio-group [(ngModel)]="PeritoSociedad">
+                    <mat-radio-button [value]="element"></mat-radio-button>
+                </mat-radio-group>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="total" [pageSize]="5" [pageSizeOptions]="[5]" (page)="paginado($event)">
+    </mat-paginator>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" *ngIf="PeritoSociedad && busquedaPeritoSociedad" [mat-dialog-close]="PeritoSociedad">Aceptar</button>
+    <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

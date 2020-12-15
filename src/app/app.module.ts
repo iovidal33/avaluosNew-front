@@ -18,7 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
-import { BandejaEntradaComponent } from './components/bandeja-entrada/bandeja-entrada.component';
+import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.component';
 
@@ -32,6 +32,7 @@ import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.com
     MenuComponent,
     LoginFirmaComponent,
     BandejaEntradaComponent,
+    DialogPeritoSociedad,
     MainComponent,
     SubirAvaluoComponent
   ],
@@ -45,6 +46,9 @@ import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.com
     ReactiveFormsModule,
     AvatarModule,
     NgxMatFileInputModule,
+  ],
+  entryComponents: [
+    DialogPeritoSociedad,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-Mx' }

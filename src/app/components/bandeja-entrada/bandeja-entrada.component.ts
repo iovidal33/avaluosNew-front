@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 
 export interface Filtros {
@@ -40,7 +41,8 @@ export class BandejaEntradaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
-    private auth: AuthService
+    private auth: AuthService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -108,6 +110,117 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros = {} as Filtros;
     this.filtros.estado = '';
     this.filtros.vigencia = '';
+  }
+
+  openDialogPeritoSociedad(): void {
+    const dialogRef = this.dialog.open(DialogPeritoSociedad, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.filtros.perito_sociedad = result.registro;
+      }
+      this.getData();
+    });
+  }
+
+}
+
+
+export interface FiltrosPeritoSociedad {
+  registro: string;
+  nombre: string;
+  primer_apellido: string;
+  segundo_apellido: string;
+}
+
+@Component({
+  selector: 'app-dialog-perito-sociedad',
+  templateUrl: 'app-dialog-perito-sociedad.html',
+})
+export class DialogPeritoSociedad {
+  endpoint = environment.rconEndpoint + 'persona/';
+  pagina = 1;
+  total = 0;
+  displayedColumns: string[] = ['registro', 'nombre', 'select'];
+  dataSource = [];
+  httpOptions;
+  loading = false;
+  tipoBusqueda = '';
+  filtros: FiltrosPeritoSociedad = {} as FiltrosPeritoSociedad;
+  busquedaPeritoSociedad;
+  PeritoSociedad;
+
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<DialogPeritoSociedad>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.tipoBusqueda = 'perito';
+      this.busquedaPeritoSociedad = false;
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  paginado(evt): void{
+    this.pagina = evt.pageIndex + 1;
+    this.getDataPeritoSociedad();
+  }
+
+  cleanBusqueda(): void{
+    this.pagina = 1;
+    this.total = 0;
+    this.dataSource = [];
+    this.loading = false;
+    this.filtros = {} as FiltrosPeritoSociedad;
+    this.busquedaPeritoSociedad = false;
+  }
+
+  getDataPeritoSociedad(): void {
+    this.busquedaPeritoSociedad = true;
+    this.loading = true;
+    let filtros = '';
+    if(this.tipoBusqueda == 'perito'){
+      if(this.filtros.registro){
+        filtros = filtros + '&reg=' + this.filtros.registro;
+      }else{
+        if(this.filtros.nombre){
+          filtros = filtros + '&nombre=' + this.filtros.nombre;
+        }
+        if(this.filtros.primer_apellido){
+          filtros = filtros + '&apaterno=' + this.filtros.primer_apellido; 
+        }
+        if(this.filtros.segundo_apellido){
+          filtros = filtros + '&amaterno=' + this.filtros.segundo_apellido;
+        }
+      }
+    }
+    if(this.tipoBusqueda == 'sociedad'){
+      if(this.filtros.registro){
+        filtros = filtros + '&reg=' + this.filtros.registro;
+      }else{
+        if(this.filtros.nombre){
+          filtros = filtros + '&nombre=' + this.filtros.nombre;
+        }
+      }
+    }
+    this.http.get(this.endpoint + this.tipoBusqueda + '?page=' + this.pagina + filtros,
+      this.httpOptions).subscribe(
+        (res: any) => {
+          this.loading = false;
+          this.dataSource = res.data;
+          this.total = res.total;
+        },
+        (error) => {
+          this.loading = false;
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        });
   }
 
 }

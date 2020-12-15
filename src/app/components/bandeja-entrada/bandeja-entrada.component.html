@@ -32,10 +32,13 @@
                     <mat-label>No. Avalúo</mat-label>
                     <input matInput [(ngModel)]="filtros.no_avaluo">
                 </mat-form-field>
-                <!--mat-form-field class="input-filter">
+                <mat-form-field class="input-filter">
                     <mat-label>Perito o Sociedad</mat-label>
                     <input matInput [(ngModel)]="filtros.perito_sociedad">
-                </mat-form-field-->
+                </mat-form-field>
+                <button mat-mini-fab color="primary" (click)="openDialogPeritoSociedad()" aria-label="Buscar Peritos" matTooltip="Buscar Peritos">
+                    <mat-icon>account_box</mat-icon>
+                </button>
             </div>
         </div>
         <div class="row">
