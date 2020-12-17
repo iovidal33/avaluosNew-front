@@ -18,5 +18,6 @@
         <span>Cerrar Sesión</span>
       </button>
     </mat-menu>
+    <span style="font-size: 15px;"> {{(session.userData.nombre) ? session.userData.nombre : ''}} {{(session.userData.primer_apellido) ? session.userData.primer_apellido : ''}} {{(session.userData.segundo_apellido) ? session.userData.segundo_apellido : ''}} </span>
   </div>
 </mat-toolbar>
