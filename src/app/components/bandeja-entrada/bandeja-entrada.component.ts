@@ -40,7 +40,7 @@ export class BandejaEntradaComponent implements OnInit {
   registroPeritoSociedad;
   tipoBusqueda;
   filtroSelected;
-  opcionFiltro: string[] = ['true', 'true', 'true', 'true'];
+  opcionFiltro: boolean[] = [true, true, true, true];
 
   constructor(
     private http: HttpClient,
@@ -120,7 +120,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.registroPeritoSociedad = '';
     this.tipoBusqueda = '';
     this.filtroSelected = '';
-    this.opcionFiltro = ['true', 'true', 'true', 'true'];
+    this.opcionFiltro = [true, true, true, true];
   }
 
   openDialogPeritoSociedad(): void {
@@ -138,7 +138,32 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   getFiltroSelected(event): void {
-    console.log(event.value);
+    if(event.value == 0){
+      this.opcionFiltro[0] = false;
+      this.opcionFiltro[1] = true;
+      this.opcionFiltro[2] = true;
+      this.opcionFiltro[3] = true;
+    }
+    else if(event.value == 1){
+      this.opcionFiltro[0] = true;
+      this.opcionFiltro[1] = false;
+      this.opcionFiltro[2] = true;
+      this.opcionFiltro[3] = true;
+    }
+    else if(event.value == 2){
+      this.opcionFiltro[0] = true;
+      this.opcionFiltro[1] = true;
+      this.opcionFiltro[2] = false;
+      this.opcionFiltro[3] = true;
+    }
+    else if(event.value == 3){
+      this.opcionFiltro[0] = true;
+      this.opcionFiltro[1] = true;
+      this.opcionFiltro[2] = true;
+      this.opcionFiltro[3] = false;
+    }
+
+    this.filtros = {} as Filtros;
   }
 
 }
