@@ -43,9 +43,9 @@ export class SubirAvaluoComponent implements OnInit {
           this.loading = false;
           this.success = res.Estado;
           if(res.Estado){
-            this.mensaje = 'Se subió el avaluo correctamente.';
+            this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
           }else{
-            this.mensaje = 'No se pudo cargar el avaluo';
+            this.mensaje = 'No se pudo cargar el avalúo';
           }
         },
         (error) => {
