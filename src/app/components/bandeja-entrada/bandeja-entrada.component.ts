@@ -138,6 +138,7 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   getFiltroSelected(event): void {
+    this.clean();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.opcionFiltro[1] = true;
@@ -162,8 +163,6 @@ export class BandejaEntradaComponent implements OnInit {
       this.opcionFiltro[2] = true;
       this.opcionFiltro[3] = false;
     }
-
-    this.filtros = {} as Filtros;
   }
 
 }
