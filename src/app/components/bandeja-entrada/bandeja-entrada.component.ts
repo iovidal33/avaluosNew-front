@@ -120,6 +120,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.registroPeritoSociedad = '';
     this.tipoBusqueda = '';
     this.filtroSelected = '';
+    this.opcionFiltro = ['true', 'true', 'true', 'true'];
   }
 
   openDialogPeritoSociedad(): void {
