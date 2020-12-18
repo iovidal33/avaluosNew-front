@@ -39,6 +39,7 @@ export class BandejaEntradaComponent implements OnInit {
   filtros: Filtros = {} as Filtros;
   registroPeritoSociedad;
   tipoBusqueda;
+  filtroSelected;
 
   constructor(
     private http: HttpClient,
