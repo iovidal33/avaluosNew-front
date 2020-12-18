@@ -51,6 +51,7 @@ export class BandejaEntradaComponent implements OnInit {
   ngOnInit(): void {
     this.filtros.estado = '';
     this.filtros.vigencia = '';
+    this.filtroSelected = '';
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -117,6 +118,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros.vigencia = '';
     this.registroPeritoSociedad = '';
     this.tipoBusqueda = '';
+    this.filtroSelected = '';
   }
 
   openDialogPeritoSociedad(): void {
