@@ -7,7 +7,7 @@
         <mat-radio-group [(ngModel)]="filtroSelected">
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="1"></mat-radio-button>
+                    <mat-radio-button value="1" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Rango de fechas:</h4>
@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="2"></mat-radio-button>
+                    <mat-radio-button value="2" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">No. Avalúo:</h4>
@@ -50,7 +50,7 @@
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="3"></mat-radio-button>
+                    <mat-radio-button value="3" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">No. único avalúo:</h4>
@@ -64,7 +64,7 @@
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="4"></mat-radio-button>
+                    <mat-radio-button value="4" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Cuenta catastral:</h4>

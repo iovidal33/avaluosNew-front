@@ -135,6 +135,10 @@ export class BandejaEntradaComponent implements OnInit {
     });
   }
 
+  getFiltroSelected(event): void {
+    console.log(event.value);
+  }
+
 }
 
 
