@@ -7,7 +7,7 @@
         <mat-radio-group [(ngModel)]="filtroSelected">
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="1" (change)="getFiltroSelected($event)"></mat-radio-button>
+                    <mat-radio-button value="0" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Rango de fechas:</h4>
@@ -15,13 +15,13 @@
                 <div class="col">
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Inicio</mat-label>
-                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini">
+                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]">
                         <mat-datepicker-toggle matSuffix [for]="pickini"></mat-datepicker-toggle>
                         <mat-datepicker #pickini></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Fin</mat-label>
-                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin">
+                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]">
                         <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
                         <mat-datepicker #pickfin></mat-datepicker>
                     </mat-form-field>
@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="2" (change)="getFiltroSelected($event)"></mat-radio-button>
+                    <mat-radio-button value="1" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">No. Avalúo:</h4>
@@ -37,20 +37,20 @@
                 <div class="col">
                     <mat-form-field class="input-filter">
                         <mat-label>No. Avalúo</mat-label>
-                        <input matInput [(ngModel)]="filtros.no_avaluo">
+                        <input matInput [(ngModel)]="filtros.no_avaluo" [disabled]="opcionFiltro[1]">
                     </mat-form-field>
                     <mat-form-field class="input-filter">
                         <mat-label>Perito o Sociedad</mat-label>
-                        <input matInput [(ngModel)]="registroPeritoSociedad">
+                        <input matInput [(ngModel)]="registroPeritoSociedad" [disabled]="opcionFiltro[1]">
                     </mat-form-field>
-                    <button mat-mini-fab color="primary" (click)="openDialogPeritoSociedad()" aria-label="Buscar Peritos" matTooltip="Buscar Peritos">
+                    <button mat-mini-fab color="primary" (click)="openDialogPeritoSociedad()" aria-label="Buscar Peritos" matTooltip="Buscar Peritos" [disabled]="opcionFiltro[1]">
                         <mat-icon>account_box</mat-icon>
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="3" (change)="getFiltroSelected($event)"></mat-radio-button>
+                    <mat-radio-button value="2" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">No. único avalúo:</h4>
@@ -58,13 +58,13 @@
                 <div class="col">
                     <mat-form-field class="input-filter">
                         <mat-label>No. único avalúo</mat-label>
-                        <input matInput [(ngModel)]="filtros.no_unico">
+                        <input matInput [(ngModel)]="filtros.no_unico" [disabled]="opcionFiltro[2]">
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-1">
-                    <mat-radio-button value="4" (change)="getFiltroSelected($event)"></mat-radio-button>
+                    <mat-radio-button value="3" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Cuenta catastral:</h4>
@@ -72,19 +72,19 @@
                 <div class="col">
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Región</mat-label>
-                        <input matInput [(ngModel)]="filtros.region">
+                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Manzana</mat-label>
-                        <input matInput [(ngModel)]="filtros.manzana">
+                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Lote</mat-label>
-                        <input matInput [(ngModel)]="filtros.lote">
+                        <input matInput [(ngModel)]="filtros.lote" [disabled]="opcionFiltro[3]">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Unidad Privativa</mat-label>
-                        <input matInput [(ngModel)]="filtros.unidad">
+                        <input matInput [(ngModel)]="filtros.unidad" [disabled]="opcionFiltro[3]">
                     </mat-form-field>
                 </div>
             </div>

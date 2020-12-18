@@ -40,6 +40,7 @@ export class BandejaEntradaComponent implements OnInit {
   registroPeritoSociedad;
   tipoBusqueda;
   filtroSelected;
+  opcionFiltro: string[] = ['true', 'true', 'true', 'true'];
 
   constructor(
     private http: HttpClient,
