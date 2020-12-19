@@ -36,6 +36,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   filtros: Filtros = {} as Filtros;
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
+  busqueda;
 
   constructor(
     private http: HttpClient,
@@ -47,6 +48,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtros.estado = '';
     this.filtros.vigencia = '';
     this.filtroSelected = '';
+    this.busqueda = false;
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -62,6 +64,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   getData(): void {
     this.loading = true;
+    this.busqueda = true;
     let filtros = '';
     if(this.filtros.fecha_fin && this.filtros.fecha_ini){
       filtros = filtros + '&fecha_ini=' + moment(this.filtros.fecha_ini).format('YYYY-MM-DD') +
