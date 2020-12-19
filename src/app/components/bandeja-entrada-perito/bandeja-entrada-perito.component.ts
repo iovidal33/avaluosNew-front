@@ -53,7 +53,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         Authorization: this.auth.getSession().token
       })
     };
-    this.getData();
   }
 
   paginado(evt): void{
