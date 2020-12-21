@@ -139,4 +139,14 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
   }
 
+  keyPressAlphaNumeric(event) {
+    var inp = String.fromCharCode(event.keyCode);
+    if (/[a-zA-Z0-9]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
 }

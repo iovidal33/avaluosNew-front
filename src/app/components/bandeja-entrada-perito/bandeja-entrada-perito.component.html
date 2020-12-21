@@ -65,19 +65,19 @@
                 <div class="col">
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Región</mat-label>
-                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]">
+                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Manzana</mat-label>
-                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]">
+                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Lote</mat-label>
-                        <input matInput [(ngModel)]="filtros.lote" [disabled]="opcionFiltro[3]">
+                        <input matInput [(ngModel)]="filtros.lote" [disabled]="opcionFiltro[3]" minlength="2" maxlength="2" (keypress)="keyPressAlphaNumeric($event)">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Unidad Privativa</mat-label>
-                        <input matInput [(ngModel)]="filtros.unidad" [disabled]="opcionFiltro[3]">
+                        <input matInput [(ngModel)]="filtros.unidad" [disabled]="opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
                     </mat-form-field>
                 </div>
             </div>
