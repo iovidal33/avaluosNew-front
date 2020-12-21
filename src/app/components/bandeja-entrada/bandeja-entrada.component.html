@@ -15,13 +15,13 @@
                 <div class="col">
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Inicio</mat-label>
-                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]">
+                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]" [required]="fechaRequerido">
                         <mat-datepicker-toggle matSuffix [for]="pickini"></mat-datepicker-toggle>
                         <mat-datepicker #pickini></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Fin</mat-label>
-                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]">
+                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]" [required]="fechaRequerido">
                         <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
                         <mat-datepicker #pickfin></mat-datepicker>
                     </mat-form-field>
@@ -127,7 +127,7 @@
                     <button mat-icon-button color="primary" aria-label="Limpiar Filtros" matTooltip="Limpiar Filtros" (click)="clean()">
                         <mat-icon>clear</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" aria-label="Busqueda" matTooltip="Buscar" (click)="getData()">
+                    <button mat-icon-button color="primary" aria-label="Busqueda" matTooltip="Buscar" (click)="getData()" [disabled]="(fechaRequerido) ? ((!filtros.fecha_ini || !filtros.fecha_fin) ? true : false) : false">
                         <mat-icon>search</mat-icon>
                     </button>
                 </div>

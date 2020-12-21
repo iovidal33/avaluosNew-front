@@ -42,6 +42,7 @@ export class BandejaEntradaComponent implements OnInit {
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
+  fechaRequerido = false;
 
   constructor(
     private http: HttpClient,
@@ -123,6 +124,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.tipoBusqueda = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
+    this.fechaRequerido = false;
   }
 
   openDialogPeritoSociedad(): void {
@@ -143,26 +145,15 @@ export class BandejaEntradaComponent implements OnInit {
     this.clean();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
-      this.opcionFiltro[1] = true;
-      this.opcionFiltro[2] = true;
-      this.opcionFiltro[3] = true;
+      this.fechaRequerido = true;
     }
     else if(event.value == 1){
-      this.opcionFiltro[0] = true;
       this.opcionFiltro[1] = false;
-      this.opcionFiltro[2] = true;
-      this.opcionFiltro[3] = true;
     }
     else if(event.value == 2){
-      this.opcionFiltro[0] = true;
-      this.opcionFiltro[1] = true;
       this.opcionFiltro[2] = false;
-      this.opcionFiltro[3] = true;
     }
     else if(event.value == 3){
-      this.opcionFiltro[0] = true;
-      this.opcionFiltro[1] = true;
-      this.opcionFiltro[2] = true;
       this.opcionFiltro[3] = false;
     }
   }
