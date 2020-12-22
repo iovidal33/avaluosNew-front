@@ -25,7 +25,7 @@ export interface Filtros {
 })
 export class BandejaEntradaPeritoComponent implements OnInit {
 
-  endpoint = environment.endpoint + 'bandeja-entrada/avaluos';
+  endpoint = environment.endpoint + 'bandeja-entrada/avaluos-perito';
   pagina = 1;
   total = 0;
   loading = false;
