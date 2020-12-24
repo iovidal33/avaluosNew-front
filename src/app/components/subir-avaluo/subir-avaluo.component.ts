@@ -7,7 +7,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { FileUploadService } from "@serv/file-upload.service";
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-subir-avaluo',
@@ -29,7 +28,6 @@ export class SubirAvaluoComponent implements OnInit {
   mode: ProgressBarMode = 'determinate';
   progress: number;
   bufferValue: number;
-  source = timer(100, 1000);
 
   ngOnInit(): void {
     const session = this.authService.getSession();
@@ -44,31 +42,23 @@ export class SubirAvaluoComponent implements OnInit {
 
   subirAvaluo(): void {
     this.loading = true;
-    this.progress = 0;
     const formData = new FormData();
     formData.append('files', this.file, this.file.name);
     formData.append('idPersona', '264');
-    const subscription = this.source.subscribe(val => {
-      this.progress = val 
-    });
     this.fileUploadService.sendFile(this.endpoint, formData, this.httpOptions
-      ).subscribe(
-        (event: HttpEvent<any>) => {
-          console.log(event);
+      ).subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
           case HttpEventType.Sent:
-            console.log('Request has been made!');
+            //console.log('Request has been made!');
             break;
           case HttpEventType.ResponseHeader:
-            console.log('Response header has been received!');
+            //console.log('Response header has been received!');
             break;
           case HttpEventType.UploadProgress:
-            //this.progress = Math.round(event.loaded / event.total * 100);
-            console.log(`Uploaded! ${this.progress}%`);
+            this.progress = Math.round(event.loaded / event.total * 100);
+            //console.log(`Uploaded! ${this.progress}%`);
             break;
           case HttpEventType.Response:
-            this.loading = false;
-            subscription.unsubscribe();
             //console.log('User successfully created!', event.body);
             setTimeout(() => {
               this.progress = 0;
@@ -76,7 +66,6 @@ export class SubirAvaluoComponent implements OnInit {
         }
       },
       (res: any) => {
-        subscription.unsubscribe();
         this.loading = false;
         this.success = res.Estado;
         if(res.Estado){
@@ -84,8 +73,7 @@ export class SubirAvaluoComponent implements OnInit {
         }else{
           this.mensaje = 'No se pudo cargar el avalúo';
         }
-      }
-      );
+      });
     /*this.http.post(this.endpoint, formData,
       this.httpOptions).subscribe(
         (res: any) => {
