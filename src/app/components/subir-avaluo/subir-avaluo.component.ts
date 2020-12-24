@@ -57,13 +57,21 @@ export class SubirAvaluoComponent implements OnInit {
           case HttpEventType.UploadProgress:
             this.progress = Math.round(event.loaded / event.total * 100);
             console.log(`Uploaded! ${this.progress}%`);
-            this.loading = false;
             break;
           case HttpEventType.Response:
             console.log('User successfully created!', event.body);
             setTimeout(() => {
               this.progress = 0;
             }, 1500);
+        }
+      },
+      (res: any) => {
+        this.loading = false;
+        this.success = res.Estado;
+        if(res.Estado){
+          this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
+        }else{
+          this.mensaje = 'No se pudo cargar el avalúo';
         }
       });
     /*this.http.post(this.endpoint, formData,
