@@ -53,17 +53,17 @@ export class SubirAvaluoComponent implements OnInit {
     this.fileUploadService.sendFile(this.endpoint, formData, this.httpOptions
       ).subscribe(
         (event: HttpEvent<any>) => {
-          console.log(event);
+          //console.log(event);
         switch (event.type) {
           case HttpEventType.Sent:
-            console.log('Request has been made!');
+            //console.log('Request has been made!');
             break;
           case HttpEventType.ResponseHeader:
-            console.log('Response header has been received!');
+            //console.log('Response header has been received!');
             break;
           case HttpEventType.UploadProgress:
             //this.progress = Math.round(event.loaded / event.total * 100);
-            console.log(`Uploaded! ${this.progress}%`);
+            //console.log(`Uploaded! ${this.progress}%`);
             break;
           case HttpEventType.Response:
             this.loading = false;
