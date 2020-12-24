@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '@serv/auth.service';
 import { environment } from '@env/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {ProgressBarMode} from '@angular/material/progress-bar';
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { FileUploadService } from "@serv/file-upload.service";
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-subir-avaluo',
@@ -18,13 +20,13 @@ export class SubirAvaluoComponent implements OnInit {
   success = false;
   constructor(
     private snackBar: MatSnackBar,
-    private router: Router,
     private authService: AuthService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    public fileUploadService: FileUploadService) { }
   endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
   mode: ProgressBarMode = 'determinate';
-  progress = 50;
+  progress = 0;
   bufferValue = 75;
 
   ngOnInit(): void {
