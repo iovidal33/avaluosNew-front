@@ -28,12 +28,10 @@
              </mat-form-field>
         </div>
         <br>
-
-
-        <h3 class="cdmx-color-accent">Subiendo archivo...</h3>
-        <mat-progress-bar [mode]="mode" [value]="progress" [bufferValue]="bufferValue"></mat-progress-bar>
-
-
+        <ng-container *ngIf="loading">
+            <h3 class="cdmx-color-accent">Subiendo archivo...</h3>
+            <mat-progress-bar [mode]="mode" [value]="progress" [bufferValue]="bufferValue"></mat-progress-bar>
+        </ng-container>
         <br>
         <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
         <br>

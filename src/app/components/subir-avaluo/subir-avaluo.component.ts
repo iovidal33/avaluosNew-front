@@ -43,7 +43,27 @@ export class SubirAvaluoComponent implements OnInit {
     const formData = new FormData();
     formData.append('files', this.file, this.file.name);
     formData.append('idPersona', '138');
-    this.http.post(this.endpoint, formData,
+    this.fileUploadService.sendFile(this.endpoint, formData, this.httpOptions
+      ).subscribe((event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            console.log('Request has been made!');
+            break;
+          case HttpEventType.ResponseHeader:
+            console.log('Response header has been received!');
+            break;
+          case HttpEventType.UploadProgress:
+            this.progress = Math.round(event.loaded / event.total * 100);
+            console.log(`Uploaded! ${this.progress}%`);
+            break;
+          case HttpEventType.Response:
+            console.log('User successfully created!', event.body);
+            setTimeout(() => {
+              this.progress = 0;
+            }, 1500);
+        }
+      });
+    /*this.http.post(this.endpoint, formData,
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
@@ -62,7 +82,7 @@ export class SubirAvaluoComponent implements OnInit {
             verticalPosition: 'top'
           });
         }
-      );
+      );*/
   }
 
 }
