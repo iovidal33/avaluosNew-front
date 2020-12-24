@@ -27,14 +27,16 @@ export class SubirAvaluoComponent implements OnInit {
   httpOptions;
   mode: ProgressBarMode = 'determinate';
   progress = 0;
-  bufferValue = 75;
+  bufferValue = 15;
 
   ngOnInit(): void {
     const session = this.authService.getSession();
     this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: session.token
-      })
+      }),
+      reportProgress: true,
+      observe: 'events'
     };
   }
 
@@ -42,7 +44,7 @@ export class SubirAvaluoComponent implements OnInit {
     this.loading = true;
     const formData = new FormData();
     formData.append('files', this.file, this.file.name);
-    formData.append('idPersona', '138');
+    formData.append('idPersona', '264');
     this.fileUploadService.sendFile(this.endpoint, formData, this.httpOptions
       ).subscribe((event: HttpEvent<any>) => {
         switch (event.type) {
@@ -55,6 +57,7 @@ export class SubirAvaluoComponent implements OnInit {
           case HttpEventType.UploadProgress:
             this.progress = Math.round(event.loaded / event.total * 100);
             console.log(`Uploaded! ${this.progress}%`);
+            this.loading = false;
             break;
           case HttpEventType.Response:
             console.log('User successfully created!', event.body);
