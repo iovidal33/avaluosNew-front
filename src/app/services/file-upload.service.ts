@@ -17,7 +17,7 @@ export class FileUploadService {
 
   sendFile(endpoint, formData, httpOptions): Observable<any> {
     return this.http.post(endpoint, formData, httpOptions).pipe(
-      catchError(this.errorMgmt)
+      catchError((res) => this.errorMgmt(res))
     )
   }
 
@@ -29,6 +29,11 @@ export class FileUploadService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      this.snackBar.open(error.error.mensaje, 'Cerrar', {
+        duration: 10000,
+        horizontalPosition: 'end',
+        verticalPosition: 'top'
+      });
     }
     console.log(errorMessage);
     return throwError(errorMessage);
