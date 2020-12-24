@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '@serv/auth.service';
 import { environment } from '@env/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {ProgressBarMode} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-subir-avaluo',
@@ -22,6 +23,9 @@ export class SubirAvaluoComponent implements OnInit {
     private http: HttpClient) { }
   endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
+  mode: ProgressBarMode = 'determinate';
+  value = 50;
+  bufferValue = 75;
 
   ngOnInit(): void {
     const session = this.authService.getSession();
