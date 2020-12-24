@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,10 @@ import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 
 export class FileUploadService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    ) { }
 
   sendFile(endpoint, formData, httpOptions): Observable<any> {
     return this.http.post(endpoint, formData, httpOptions).pipe(
