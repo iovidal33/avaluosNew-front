@@ -24,7 +24,7 @@ export class SubirAvaluoComponent implements OnInit {
   endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
   mode: ProgressBarMode = 'determinate';
-  value = 50;
+  progress = 50;
   bufferValue = 75;
 
   ngOnInit(): void {
