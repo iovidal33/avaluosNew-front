@@ -35,7 +35,6 @@ export class FileUploadService {
         verticalPosition: 'top'
       });
     }
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 
