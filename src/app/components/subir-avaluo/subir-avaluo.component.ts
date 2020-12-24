@@ -26,8 +26,8 @@ export class SubirAvaluoComponent implements OnInit {
   endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
   mode: ProgressBarMode = 'determinate';
-  progress = 0;
-  bufferValue = 15;
+  progress: number;
+  bufferValue: number;
 
   ngOnInit(): void {
     const session = this.authService.getSession();
