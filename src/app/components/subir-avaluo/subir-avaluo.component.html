@@ -35,9 +35,7 @@
         <br>
         <button mat-raised-button color="primary" class="top-buffer" [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
         &nbsp;
-        <ng-container *ngIf="loading">
-            <button mat-raised-button color="default" class="top-buffer" [disabled]="!loading">Cancelar</button>
-        </ng-container>
+        <button mat-raised-button color="default" class="top-buffer" *ngIf="loading">Cancelar</button>
         <br>
         <br>
         <div class="alert" [ngClass]="{'alert-warning': !success, 'alert-success': success}" *ngIf="mensaje">
