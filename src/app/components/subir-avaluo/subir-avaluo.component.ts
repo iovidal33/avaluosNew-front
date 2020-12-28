@@ -83,4 +83,8 @@ export class SubirAvaluoComponent implements OnInit {
       );
   }
 
+  cancelarAvaluo(): void {
+    console.log("hola");
+  }
+
 }
