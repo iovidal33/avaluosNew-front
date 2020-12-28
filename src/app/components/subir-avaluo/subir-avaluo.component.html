@@ -33,7 +33,11 @@
             <mat-progress-bar [mode]="mode" [value]="progress" [bufferValue]="bufferValue"></mat-progress-bar>
         </ng-container>
         <br>
-        <button mat-raised-button color="primary" class="top-buffer"  [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
+        <button mat-raised-button color="primary" class="top-buffer" [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
+        &nbsp;
+        <ng-container *ngIf="loading">
+            <button mat-raised-button color="default" class="top-buffer" [disabled]="!loading">Cancelar</button>
+        </ng-container>
         <br>
         <br>
         <div class="alert" [ngClass]="{'alert-warning': !success, 'alert-success': success}" *ngIf="mensaje">
