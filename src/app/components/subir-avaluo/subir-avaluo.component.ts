@@ -68,22 +68,18 @@ export class SubirAvaluoComponent implements OnInit {
           case HttpEventType.Response:
             this.loading = false;
             subscription.unsubscribe();
+            this.success = event.body.Estado;
+            if(event.body.Estado){
+              this.mensaje = 'El avalúo con numero único ' + event.body.numeroUnico + ' se subió correctamente';
+            }else{
+              this.mensaje = 'No se pudo cargar el avalúo';
+            }
             //console.log('User successfully created!', event.body);
             setTimeout(() => {
               this.progress = 0;
             }, 1500);
         }
       },
-      (res: any) => {
-        subscription.unsubscribe();
-        this.loading = false;
-        this.success = res.Estado;
-        if(res.Estado){
-          this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
-        }else{
-          this.mensaje = 'No se pudo cargar el avalúo';
-        }
-      }
       );
 
     
