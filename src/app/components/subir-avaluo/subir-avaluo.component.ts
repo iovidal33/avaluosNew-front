@@ -78,31 +78,9 @@ export class SubirAvaluoComponent implements OnInit {
             setTimeout(() => {
               this.progress = 0;
             }, 1500);
-        }
-      },
-      );
-
-    
-    /*this.http.post(this.endpoint, formData,
-      this.httpOptions).subscribe(
-        (res: any) => {
-          this.loading = false;
-          this.success = res.Estado;
-          if(res.Estado){
-            this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
-          }else{
-            this.mensaje = 'No se pudo cargar el avalúo';
           }
         },
-        (error) => {
-          this.loading = false;
-          this.snackBar.open(error.error.mensaje, 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
-        }
-      );*/
+      );
   }
 
 }
