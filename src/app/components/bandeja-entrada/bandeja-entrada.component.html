@@ -15,15 +15,16 @@
                 <div class="col">
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Inicio</mat-label>
-                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]" [required]="fechaRequerido">
+                        <input matInput [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]" [required]="fechaRequerido" (dateChange)="validateDate()">
                         <mat-datepicker-toggle matSuffix [for]="pickini"></mat-datepicker-toggle>
                         <mat-datepicker #pickini></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Fin</mat-label>
-                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]" [required]="fechaRequerido">
+                        <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]" [required]="fechaRequerido" (dateChange)="validateDate()" [min]="filtros.fecha_ini">
                         <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
                         <mat-datepicker #pickfin></mat-datepicker>
+                        <mat-error>{{errorDate.errorMessage}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

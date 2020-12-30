@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   cerrarSession(): void{
     this.auth.closeSession();
-    window.location.assign('/');
+    this.router.navigate(['/login']);
   }
 
 }

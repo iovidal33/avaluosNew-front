@@ -43,6 +43,7 @@ export class BandejaEntradaComponent implements OnInit {
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
   fechaRequerido = false;
+  errorDate: any = {isError: false, errorMessage: ''};
 
   constructor(
     private http: HttpClient,
@@ -165,6 +166,14 @@ export class BandejaEntradaComponent implements OnInit {
     } else {
       event.preventDefault();
       return false;
+    }
+  }
+
+  validateDate(){
+    if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
+      this.errorDate = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+    }else{
+      this.errorDate = {isError:false, errorMessage:''};
     }
   }
 
