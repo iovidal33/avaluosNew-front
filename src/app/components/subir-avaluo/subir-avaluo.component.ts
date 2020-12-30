@@ -72,6 +72,7 @@ export class SubirAvaluoComponent implements OnInit {
            
               const dialogRef = this.dialog.open(DialogValidacionesXML, {
                 width: '600px',
+                data: error.error.mensaje
               });
               dialogRef.afterClosed().subscribe(result => {
                 
@@ -135,10 +136,13 @@ export class SubirAvaluoComponent implements OnInit {
   templateUrl: 'app-dialog-validaciones-xml.html',
 })
 export class DialogValidacionesXML {
+  displayedColumns: string[] = ['error'];
+  errores = [];
  
   constructor(
     public dialogRef: MatDialogRef<DialogValidacionesXML>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.errores = data;
     }
 
   onNoClick(): void {

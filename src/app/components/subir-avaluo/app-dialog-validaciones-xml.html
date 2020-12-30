@@ -1,6 +1,13 @@
 <h1 mat-dialog-title>Validaciones</h1>
 <div mat-dialog-content>
-    
+    <table mat-table [dataSource]="errores">
+        <ng-container matColumnDef="error">
+            <mat-header-cell *matHeaderCellDef> Error </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element}} </mat-cell>
+        </ng-container>     
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 </div>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cerrar</button>
