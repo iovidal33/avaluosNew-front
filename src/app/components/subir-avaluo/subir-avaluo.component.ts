@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '@serv/auth.service';
@@ -8,6 +8,7 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 import { FileUploadService } from "@serv/file-upload.service";
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { timer } from 'rxjs';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-subir-avaluo',
@@ -23,7 +24,8 @@ export class SubirAvaluoComponent implements OnInit {
     private snackBar: MatSnackBar,
     private authService: AuthService,
     private http: HttpClient,
-    public fileUploadService: FileUploadService) { }
+    public fileUploadService: FileUploadService,
+    public dialog: MatDialog,) { }
   endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
   mode: ProgressBarMode = 'determinate';
@@ -67,12 +69,13 @@ export class SubirAvaluoComponent implements OnInit {
               verticalPosition: 'top'
             });
           }else{
-            console.log("hola");
-            this.snackBar.open(error.error.mensaje, 'Cerrar', {
-              duration: 10000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
+           
+              const dialogRef = this.dialog.open(DialogValidacionesXML, {
+                width: '600px',
+              });
+              dialogRef.afterClosed().subscribe(result => {
+                
+              });
           }
           
         }
@@ -123,5 +126,23 @@ export class SubirAvaluoComponent implements OnInit {
   cancelarAvaluo(): void {
     console.log("hola");
   }*/
+
+}
+
+
+@Component({
+  selector: 'app-dialog-validaciones-xml',
+  templateUrl: 'app-dialog-validaciones-xml.html',
+})
+export class DialogValidacionesXML {
+ 
+  constructor(
+    public dialogRef: MatDialogRef<DialogValidacionesXML>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

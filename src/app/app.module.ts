@@ -20,7 +20,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
 import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
-import { SubirAvaluoComponent } from './components/subir-avaluo/subir-avaluo.component';
+import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-avaluo/subir-avaluo.component';
 import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 
 @NgModule({
@@ -36,6 +36,7 @@ import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-peri
     DialogPeritoSociedad,
     MainComponent,
     SubirAvaluoComponent,
+    DialogValidacionesXML,
     BandejaEntradaPeritoComponent
   ],
   imports: [
