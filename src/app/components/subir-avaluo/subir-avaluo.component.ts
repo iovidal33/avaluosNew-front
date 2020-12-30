@@ -60,11 +60,16 @@ export class SubirAvaluoComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-          this.snackBar.open(error.error.mensaje, 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          if(!(error.error.mensaje instanceof Array)){
+            this.snackBar.open(error.error.mensaje, 'Cerrar', {
+              duration: 10000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
+          }else{
+            console.log("hola");
+          }
+          
         }
       );
   }
