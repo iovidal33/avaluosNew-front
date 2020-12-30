@@ -37,12 +37,39 @@ export class SubirAvaluoComponent implements OnInit {
       headers: new HttpHeaders({
         Authorization: session.token
       }),
-      reportProgress: true,
-      observe: 'events'
+      //reportProgress: true,
+      //observe: 'events'
     };
   }
 
   subirAvaluo(): void {
+    this.loading = true;
+    const formData = new FormData();
+    formData.append('files', this.file, this.file.name);
+    formData.append('idPersona', '264');
+    this.http.post(this.endpoint, formData,
+      this.httpOptions).subscribe(
+        (res: any) => {
+          this.loading = false;
+          this.success = res.Estado;
+          if(res.Estado){
+            this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
+          }else{
+            this.mensaje = 'No se pudo cargar el avalúo';
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        }
+      );
+  }
+
+  /*subirAvaluo(): void {
     this.loading = true;
     const formData = new FormData();
     formData.append('files', this.file, this.file.name);
@@ -85,6 +112,6 @@ export class SubirAvaluoComponent implements OnInit {
 
   cancelarAvaluo(): void {
     console.log("hola");
-  }
+  }*/
 
 }
