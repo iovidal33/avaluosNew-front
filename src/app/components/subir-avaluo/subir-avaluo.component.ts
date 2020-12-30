@@ -68,6 +68,11 @@ export class SubirAvaluoComponent implements OnInit {
             });
           }else{
             console.log("hola");
+            this.snackBar.open(error.error.mensaje, 'Cerrar', {
+              duration: 10000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
           }
           
         }
