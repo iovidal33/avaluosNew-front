@@ -142,7 +142,7 @@ export class DialogValidacionesXML {
   constructor(
     public dialogRef: MatDialogRef<DialogValidacionesXML>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.errores = data;
+      this.errores = data.flat();
     }
 
   onNoClick(): void {
