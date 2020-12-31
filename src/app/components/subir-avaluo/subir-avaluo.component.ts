@@ -136,7 +136,7 @@ export class SubirAvaluoComponent implements OnInit {
   templateUrl: 'app-dialog-validaciones-xml.html',
 })
 export class DialogValidacionesXML {
-  displayedColumns: string[] = ['error'];
+  displayedColumns: string[] = ['num', 'error'];
   errores = [];
  
   constructor(
