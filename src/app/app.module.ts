@@ -22,6 +22,7 @@ import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/band
 import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-avaluo/subir-avaluo.component';
 import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
+import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-peri
     MainComponent,
     SubirAvaluoComponent,
     DialogValidacionesXML,
-    BandejaEntradaPeritoComponent
+    BandejaEntradaPeritoComponent,
+    DialogoConfirmacionComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-peri
     NgxMatFileInputModule,
   ],
   entryComponents: [
-    DialogPeritoSociedad,
+    DialogPeritoSociedad,DialogoConfirmacionComponent
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-Mx' }

@@ -3,7 +3,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
+import { DialogService } from '../shared/dialog.service';
 import * as moment from 'moment';
+import { TileStyler } from '@angular/material/grid-list/tile-styler';
 
 export interface Filtros {
   fecha_ini: Date;
@@ -26,6 +28,7 @@ export interface Filtros {
 export class BandejaEntradaPeritoComponent implements OnInit {
 
   endpoint = environment.endpoint + 'bandeja-entrada/avaluos-perito';
+  endpointcancel = environment.endpoint + 'bandeja-entrada/modificarestadoavaluo';
   pagina = 1;
   total = 0;
   loading = false;
@@ -44,6 +47,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     private http: HttpClient,
     private snackBar: MatSnackBar,
     private auth: AuthService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -63,7 +67,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.pagina = evt.pageIndex + 1;
     this.getData();
   }
-
+ 
   getData(): void {
     this.loading = true;
     this.busqueda = true;
@@ -103,6 +107,35 @@ export class BandejaEntradaPeritoComponent implements OnInit {
             verticalPosition: 'top'
           });
         });
+  }
+
+  cancelAvaluo(no_unico): void{  
+    this.dialogService.openConfirmDialog('Nuevo Estado Cancelado')
+    .afterClosed().subscribe(res =>{      
+      if(res){
+        //console.log(no_unico);
+        //this.notificationService.warn('Cambio exitoso');
+        this.http.get(this.endpointcancel + '?page=' + this.pagina + '&no_unico=' + no_unico + '&code_estado_avaluo=2',
+        this.httpOptions).subscribe(
+          (res: any) => {  
+            this.loading = false;
+            this.snackBar.open(res.mensaje, 'Cerrar', {
+              duration: 10000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
+            this.getData();
+          },
+          (error) => {
+            this.loading = false;
+            this.snackBar.open(error.error.mensaje, 'Cerrar', {
+              duration: 10000,
+              horizontalPosition: 'end',
+              verticalPosition: 'top'
+            });
+          });
+      }
+    });
   }
 
   clean(): void{

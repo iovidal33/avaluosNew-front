@@ -188,14 +188,26 @@
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="cancelAvaluo(element.numerounico)">
+                            <mat-icon>sync_alt</mat-icon>
+                            <span>Cancelar avalúo</span>
+                        </button>                          
+                        <!--<button mat-menu-item>
                             <mat-icon>videocam</mat-icon>
                             <span>Avalúos Próximos</span>
                           </button>
                         <button mat-menu-item>
+                            <mat-icon>account_box</mat-icon>
+                            <span>Asignar notario</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>account_box</mat-icon>
+                            <span>Acuse avalúo</span>
+                        </button>
+                        <button mat-menu-item>
                           <mat-icon>zoom_in</mat-icon>
                           <span>Visualizar Avalúo</span>
-                        </button>
+                        </button> -->
                         
                       </mat-menu>
                 </td>
