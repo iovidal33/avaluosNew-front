@@ -7,6 +7,7 @@ import { DialogService } from '../shared/dialog.service';
 import * as moment from 'moment';
 import { TileStyler } from '@angular/material/grid-list/tile-styler';
 import { MatDatepicker } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
  
 
 export interface Filtros {
@@ -49,7 +50,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     private http: HttpClient,
     private snackBar: MatSnackBar,
     private auth: AuthService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -184,6 +186,10 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }else{
       this.errorDate = {isError:false, errorMessage:''};
     }
+  }
+
+  avaluosProximos(no_unico): void{
+    this.router.navigate(['main/avaluos-proximos/' + no_unico]);
   }
 
 }
