@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { TileStyler } from '@angular/material/grid-list/tile-styler';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
  
 
 export interface Filtros {
@@ -51,7 +52,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     private snackBar: MatSnackBar,
     private auth: AuthService,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -190,6 +192,32 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   avaluosProximos(no_unico): void{
     this.router.navigate(['main/avaluos-proximos/' + no_unico]);
+  }
+
+  openDialogAsignaNotario(): void {
+    const dialogRef = this.dialog.open(DialogAsignaNotario, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+}
+
+
+@Component({
+  selector: 'app-dialog-asigna-notario',
+  templateUrl: 'app-dialog-asigna-notario.html',
+})
+export class DialogAsignaNotario {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogAsignaNotario>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

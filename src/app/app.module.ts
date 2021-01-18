@@ -21,7 +21,7 @@ import { LoginFirmaComponent } from './components/login-firma/login-firma.compon
 import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-avaluo/subir-avaluo.component';
-import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
+import { BandejaEntradaPeritoComponent, DialogAsignaNotario } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/dialogo-confirmacion.component';
 import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
 
@@ -41,7 +41,8 @@ import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-
     DialogValidacionesXML,
     BandejaEntradaPeritoComponent,
     DialogoConfirmacionComponent,
-    AvaluosProximosComponent
+    AvaluosProximosComponent,
+    DialogAsignaNotario,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,9 @@ import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-
     NgxMatFileInputModule,
   ],
   entryComponents: [
-    DialogPeritoSociedad,DialogoConfirmacionComponent
+    DialogPeritoSociedad,
+    DialogoConfirmacionComponent,
+    DialogAsignaNotario,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-Mx' }
