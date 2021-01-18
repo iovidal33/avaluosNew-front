@@ -6,6 +6,8 @@ import { AuthService } from '@serv/auth.service';
 import { DialogService } from '../shared/dialog.service';
 import * as moment from 'moment';
 import { TileStyler } from '@angular/material/grid-list/tile-styler';
+import { MatDatepicker } from '@angular/material/datepicker';
+ 
 
 export interface Filtros {
   fecha_ini: Date;
@@ -152,9 +154,11 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.fechaRequerido = true;
+      this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
+      this.filtros.fecha_fin = new Date((new Date().getTime()));
     }
     else if(event.value == 1){
-      this.opcionFiltro[1] = false;
+      this.opcionFiltro[1] = false;  
     }
     else if(event.value == 2){
       this.opcionFiltro[2] = false;
