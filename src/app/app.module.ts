@@ -23,6 +23,7 @@ import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-avaluo/subir-avaluo.component';
 import { BandejaEntradaPeritoComponent } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/dialogo-confirmacion.component';
+import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/
     SubirAvaluoComponent,
     DialogValidacionesXML,
     BandejaEntradaPeritoComponent,
-    DialogoConfirmacionComponent
+    DialogoConfirmacionComponent,
+    AvaluosProximosComponent
   ],
   imports: [
     BrowserModule,
