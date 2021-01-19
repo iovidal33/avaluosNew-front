@@ -199,25 +199,90 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        console.log(result);
+      }
     });
   }
 
 }
 
 
+export interface FiltroNotario {
+  no_notario: string;
+  nombre: string;
+  primer_apellido: string;
+  segundo_apellido: string;
+}
+
 @Component({
   selector: 'app-dialog-asigna-notario',
   templateUrl: 'app-dialog-asigna-notario.html',
 })
 export class DialogAsignaNotario {
+  endpoint = environment.endpoint + 'bandeja-entrada/buscaNotario';
+  pagina = 1;
+  paginaSize = 15;
+  total = 0;
+  displayedColumns: string[] = ['numero', 'nombre', 'select'];
+  dataSource = [];
+  httpOptions;
+  loading = false;
+  filtro: FiltroNotario = {} as FiltroNotario;
+  dataNotario;
 
   constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<DialogAsignaNotario>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  paginado(evt): void{
+    this.pagina = evt.pageIndex + 1;
+    this.getDataNotario();
+  }
+
+  getDataNotario(): void {
+    this.loading = true;
+    let filtro = '';
+    
+    if(this.filtro.no_notario){
+      filtro = filtro + '&numero_notario=' + this.filtro.no_notario;
+    }
+    if(this.filtro.nombre){
+      filtro = filtro + '&nombre_notario=' + this.filtro.nombre;
+    }
+    if(this.filtro.primer_apellido){
+      filtro = filtro + '&ape_paterno=' + this.filtro.primer_apellido; 
+    }
+    if(this.filtro.segundo_apellido){
+      filtro = filtro + '&ape_materno=' + this.filtro.segundo_apellido;
+    }
+    this.http.get(this.endpoint + '?page=' + this.pagina + '&page_size=' + this.paginaSize + filtro,
+      this.httpOptions).subscribe(
+        (res: any) => {
+          console.log(res);
+          this.loading = false;
+          this.dataSource = res.data;
+          this.total = res.total;
+        },
+        (error) => {
+          this.loading = false;
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        });
+  }
+
+  radioSelected(dataRadio) {
+    this.dataNotario = dataRadio;
   }
 
 }
