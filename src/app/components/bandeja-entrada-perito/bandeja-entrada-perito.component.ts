@@ -194,13 +194,28 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.router.navigate(['main/avaluos-proximos/' + no_unico]);
   }
 
-  openDialogAsignaNotario(): void {
+  openDialogAsignaNotario(numerounico): void {
     const dialogRef = this.dialog.open(DialogAsignaNotario, {
       width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        console.log(result);
+      if(result){        
+        this.http.get(environment.endpoint + 'bandeja-entrada/asignaNotarioAvaluo?id_persona_notario=' + result.IDPERSONA + '&no_unico='+ numerounico,
+          this.httpOptions).subscribe(
+            (res: any) => {
+              this.snackBar.open(res.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+            },
+            (error) => {
+              this.snackBar.open(error.error.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+          });
       }
     });
   }
@@ -266,7 +281,6 @@ export class DialogAsignaNotario {
     this.http.get(this.endpoint + '?page=' + this.pagina + '&page_size=' + this.paginaSize + filtro,
       this.httpOptions).subscribe(
         (res: any) => {
-          console.log(res);
           this.loading = false;
           this.dataSource = res.data;
           this.total = res.total;
