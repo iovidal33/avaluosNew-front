@@ -208,6 +208,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
                 horizontalPosition: 'end',
                 verticalPosition: 'top'
               });
+              this.getData();
             },
             (error) => {
               this.snackBar.open(error.error.mensaje, 'Cerrar', {
