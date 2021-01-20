@@ -8,85 +8,93 @@
             <p>Cargando...</p>
         </div>
         <ng-container *ngIf="dataAvaluo">
-            <div class="row">
-                <div class="col">
-                    <strong>NÚMERO ÚNICO </strong>{{noUnico}}
+            <div id="contenidoPDF">
+                <div class="row">
+                    <div class="col">
+                        <strong>NÚMERO ÚNICO </strong>{{noUnico}}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <strong>I. CUENTA CATASTRAL</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Reg.</th>
+                                    <th scope="col">Manz.</th>
+                                    <th scope="col">Lote</th>
+                                    <th scope="col">Loc.</th>
+                                    <th scope="col">D.V.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{dataAvaluo.cuentaCatastral.region}}</td>
+                                    <td>{{dataAvaluo.cuentaCatastral.manzana}}</td>
+                                    <td>{{dataAvaluo.cuentaCatastral.lote}}</td>
+                                    <td>{{dataAvaluo.cuentaCatastral.unidadprivativa}}</td>
+                                    <td>{{dataAvaluo.cuentaCatastral.digitoverificador}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <strong>II. CUENTA DE AGUA</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{dataAvaluo.cuentaAgua}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <strong>III. DATOS DEL PROPIETARIO O SOLICITANTE DEL AVALÚO</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{dataAvaluo.cuentaAgua}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col">
-                    <strong>I. CUENTA CATASTRAL</strong>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Reg.</th>
-                                <th scope="col">Manz.</th>
-                                <th scope="col">Lote</th>
-                                <th scope="col">Loc.</th>
-                                <th scope="col">D.V.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{dataAvaluo.cuentaCatastral.region}}</td>
-                                <td>{{dataAvaluo.cuentaCatastral.manzana}}</td>
-                                <td>{{dataAvaluo.cuentaCatastral.lote}}</td>
-                                <td>{{dataAvaluo.cuentaCatastral.unidadprivativa}}</td>
-                                <td>{{dataAvaluo.cuentaCatastral.digitoverificador}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col">
-                    <strong>II. CUENTA DE AGUA</strong>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{dataAvaluo.cuentaAgua}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col">
-                    <strong>III. DATOS DEL PROPIETARIO O SOLICITANTE DEL AVALÚO</strong>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{dataAvaluo.cuentaAgua}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </ng-container>     
+        </ng-container>   
     </mat-card-content>
+    <br>
+    <div class="col-md">
+        <button mat-raised-button (click)="generarPDF(noUnico)">
+            <mat-icon>save</mat-icon> Guardar
+        </button>
+    </div>
 </mat-card>

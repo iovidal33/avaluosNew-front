@@ -6,6 +6,8 @@ import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-acuse-avaluo',
@@ -55,6 +57,21 @@ export class AcuseAvaluoComponent implements OnInit {
             verticalPosition: 'top'
           });
         });
+  }
+
+  generarPDF(noUnico): void {
+    html2canvas(document.getElementById('contenidoPDF'), {
+      // Opciones
+      imageTimeout: 2000,
+      allowTaint: true,
+      useCORS: false,
+      // Calidad del PDF
+    }).then(function(canvas) {
+      var img = canvas.toDataURL("image/png");
+      var doc = new jsPDF();
+      doc.addImage(img,'PNG',7, 20, 195, 105);
+      doc.save(noUnico + '.pdf');
+    });
   }
 
 }
