@@ -8,6 +8,7 @@ import { MainComponent } from '@comp/main/main.component';
 import { SubirAvaluoComponent } from '@comp/subir-avaluo/subir-avaluo.component';
 import { GuardService } from '@serv/guard.service';
 import { AvaluosProximosComponent } from '@comp/avaluos-proximos/avaluos-proximos.component';
+import { AcuseAvaluoComponent } from '@comp/acuse-avaluo/acuse-avaluo.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
        { path: 'bandeja-entrada', component: BandejaEntradaComponent, canActivate: [GuardService] },
        { path: 'subir-avaluo', component: SubirAvaluoComponent, canActivate: [GuardService] },
        { path: 'bandeja-entrada-perito', component: BandejaEntradaPeritoComponent, canActivate: [GuardService] },
-       { path: 'avaluos-proximos/:no_unico', component: AvaluosProximosComponent, canActivate: [GuardService] }
+       { path: 'avaluos-proximos/:no_unico', component: AvaluosProximosComponent, canActivate: [GuardService] },
+       { path: 'acuse-avaluo/:no_unico', component: AcuseAvaluoComponent, canActivate: [GuardService] },
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

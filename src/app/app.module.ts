@@ -24,6 +24,7 @@ import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-
 import { BandejaEntradaPeritoComponent, DialogAsignaNotario } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/dialogo-confirmacion.component';
 import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
+import { AcuseAvaluoComponent } from './components/acuse-avaluo/acuse-avaluo.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-
     DialogoConfirmacionComponent,
     AvaluosProximosComponent,
     DialogAsignaNotario,
+    AcuseAvaluoComponent,
   ],
   imports: [
     BrowserModule,
