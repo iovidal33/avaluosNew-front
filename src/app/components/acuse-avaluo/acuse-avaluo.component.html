@@ -1,1 +1,92 @@
-<p>acuse-avaluo works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>AVALUOS - Descargar acuse de avalúo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div style="padding: 30px; text-align: center;" *ngIf="!dataAvaluo">
+            <mat-spinner style="margin:0 auto;"></mat-spinner>
+            <p>Cargando...</p>
+        </div>
+        <ng-container *ngIf="dataAvaluo">
+            <div class="row">
+                <div class="col">
+                    <strong>NÚMERO ÚNICO </strong>{{noUnico}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <strong>I. CUENTA CATASTRAL</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Reg.</th>
+                                <th scope="col">Manz.</th>
+                                <th scope="col">Lote</th>
+                                <th scope="col">Loc.</th>
+                                <th scope="col">D.V.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{dataAvaluo.cuentaCatastral.region}}</td>
+                                <td>{{dataAvaluo.cuentaCatastral.manzana}}</td>
+                                <td>{{dataAvaluo.cuentaCatastral.lote}}</td>
+                                <td>{{dataAvaluo.cuentaCatastral.unidadprivativa}}</td>
+                                <td>{{dataAvaluo.cuentaCatastral.digitoverificador}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <strong>II. CUENTA DE AGUA</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{dataAvaluo.cuentaAgua}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <strong>III. DATOS DEL PROPIETARIO O SOLICITANTE DEL AVALÚO</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{dataAvaluo.cuentaAgua}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </ng-container>     
+    </mat-card-content>
+</mat-card>
