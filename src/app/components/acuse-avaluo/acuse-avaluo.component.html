@@ -72,20 +72,176 @@
                         <strong>III. DATOS DEL PROPIETARIO O SOLICITANTE DEL AVALÚO</strong>
                     </div>
                 </div>
+                <div class="borde">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span><strong>Nombre, denominación o razón social</strong></span>
+                        </div>
+                        <div class="col-md-8">
+                            {{dataAvaluo.propietario.apellidopaterno}} {{dataAvaluo.propietario.apellidomaterno}} {{dataAvaluo.propietario.nombre}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span><strong>Calle</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            {{dataAvaluo.propietario.calle}}
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>No. Exterior</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            {{dataAvaluo.propietario.numeroexterior}}
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>No. Interior</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            {{dataAvaluo.propietario.numerointerior}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span><strong>Colonia</strong></span>
+                        </div>
+                        <div class="col-md-11">
+                            {{dataAvaluo.propietario.nombrecolonia}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <span><strong>Delegación o Municipio</strong></span>
+                        </div>
+                        <div class="col-md-5">
+                            {{dataAvaluo.propietario.nombredelegacion}}
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>Código Postal</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            {{dataAvaluo.propietario.codigopostal}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <span><strong>Entidad Federativa</strong></span>
+                        </div>
+                        <div class="col-md-6">
+                            DISTRITO FEDERAL
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>Teléfono</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            5555555555
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{dataAvaluo.cuentaAgua}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <strong>IV. UBICACIÓN DEL INMUEBLE QUE SE ADQUIERE</strong>
+                    </div>
+                </div>
+                <div class="borde">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span><strong>Calle</strong></span>
+                        </div>
+                        <div class="col-md-11">
+                            AAAAAAAAAAAAAAAA
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span><strong>Manzana</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            1111
+                        </div>
+                        <div class="col-md-1">
+                            <span><strong>Lote</strong></span>
+                        </div>
+                        <div class="col-md-2">
+                            1111
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>No. Exterior</strong></span>
+                        </div>
+                        <div class="col-md-1">
+                            1111
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>No. Interior</strong></span>
+                        </div>
+                        <div class="col-md-1">
+                            1111
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span><strong>Colonia</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            AAAAAAAAAAAAA
+                        </div>
+                        <div class="col-md-1">
+                            <span><strong>Delegación</strong></span>
+                        </div>
+                        <div class="col-md-3">
+                            AAAAAAAAAAAAA
+                        </div>
+                        <div class="col-md-2">
+                            <span><strong>Código Postal</strong></span>
+                        </div>
+                        <div class="col-md-1">
+                            11111
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <strong>V. DATOS DE LA ESCRITURA</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span><strong>Número Escritura</strong></span>
+                    </div>
+                    <div class="col-md-2">
+                        {{dataAvaluo.escritura.numescritura}}
+                    </div>
+                    <div class="col-md-1">
+                        <span><strong>Fecha</strong></span>
+                    </div>
+                    <div class="col-md-2">
+                        {{dataAvaluo.fuenteInformacionLegal.fecha | date}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span><strong>Número Notaria</strong></span>
+                    </div>
+                    <div class="col-md-2">
+                        {{dataAvaluo.escritura.numnotario}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span><strong>Nombre del Notario</strong></span>
+                    </div>
+                    <div class="col-md-4">
+                        {{dataAvaluo.escritura.nombrenotario}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <span><strong>Entidad Federativa</strong></span>
+                    </div>
+                    <div class="col-md-1">
+                        {{dataAvaluo.escritura.distritojudicialnotario}}
                     </div>
                 </div>
             </div>
