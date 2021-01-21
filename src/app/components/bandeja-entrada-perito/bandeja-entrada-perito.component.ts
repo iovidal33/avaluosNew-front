@@ -37,7 +37,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   total = 0;
   loading = false;
   displayedColumns: string[] = ['no_unico','no_avaluo', 'cuenta_cat', 'fecha_pres',
-  'estado', 'perito', 'sociedad', 'notario', 'tipo', 'dict', 'select'];
+  'estado', 'perito', 'notario', 'tipo', 'dict', 'select'];
   dataSource = [];
   httpOptions;
   filtros: Filtros = {} as Filtros;
