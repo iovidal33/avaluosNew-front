@@ -67,6 +67,13 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         Authorization: this.auth.getSession().token
       })
     };
+
+    if(sessionStorage.filtrosPerito){
+      this.filtros = JSON.parse(sessionStorage.filtrosPerito);
+      this.opcionFiltro[sessionStorage.filtroSelected] = false;
+      this.filtroSelected = sessionStorage.filtroSelected;
+      this.getData();
+    }
   }
 
   paginado(evt): void{
@@ -98,6 +105,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     if(this.filtros.vigencia){
       filtros = filtros + '&vigencia=' + this.filtros.vigencia;
     }
+    sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -170,6 +178,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     else if(event.value == 3){
       this.opcionFiltro[3] = false;
     }
+
+    sessionStorage.filtroSelected = event.value;
   }
 
   keyPressAlphaNumeric(event) {
