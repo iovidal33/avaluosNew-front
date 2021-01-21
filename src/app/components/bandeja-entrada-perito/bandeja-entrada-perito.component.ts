@@ -74,6 +74,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.filtroSelected = sessionStorage.filtroSelected;
       this.getData();
     }
+
+    sessionStorage.clear();
   }
 
   paginado(evt): void{
