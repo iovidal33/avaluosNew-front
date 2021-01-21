@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
@@ -29,7 +30,8 @@ export class AvaluosProximosComponent implements OnInit {
     private snackBar: MatSnackBar,
     private auth: AuthService,
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +67,10 @@ export class AvaluosProximosComponent implements OnInit {
             verticalPosition: 'top'
           });
         });
+  }
+
+  regresar(): void{
+    this.router.navigate(['main/bandeja-entrada-perito/']);
   }
 
 }

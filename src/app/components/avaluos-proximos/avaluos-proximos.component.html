@@ -55,4 +55,9 @@
         <mat-paginator  [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
         </mat-paginator>
     </mat-card-content>
+    <div class="col-md">
+        <button mat-raised-button (click)="regresar()">
+            <mat-icon>arrow_back</mat-icon> Regresar
+        </button>
+    </div>
 </mat-card>
