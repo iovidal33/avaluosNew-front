@@ -45,7 +45,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
   errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
-  canSearch = true;
+  canSearch = false;
 
   constructor(
     private http: HttpClient,
@@ -72,7 +72,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.opcionFiltro[sessionStorage.filtroSelected] = false;
       this.filtroSelected = sessionStorage.filtroSelected;
-      this.canSearch = sessionStorage.canSearch;
       this.getData();
     }
 
@@ -112,7 +111,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
     
     sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
-    sessionStorage.canSearch = this.canSearch;
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -169,12 +167,12 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtros.vigencia = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
-    this.canSearch = true;
+    this.canSearch = false;
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
       this.filtros.fecha_fin = new Date((new Date().getTime()));
-      this.canSearch = false;
+      this.canSearch = true;
     }
     else if(event.value == 1){
       this.opcionFiltro[1] = false;  
@@ -202,14 +200,14 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   validateDate(){
     if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
       this.errores[0] = {isError:true, errorMessage:'La fechas son requeridas.'};
-      this.canSearch = true;
+      this.canSearch = false;
     }else{
       if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
         this.errores[0] = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
-        this.canSearch = true;
+        this.canSearch = false;
       }else{
         this.errores[0] = {isError:false, errorMessage:''};
-        this.canSearch = false;
+        this.canSearch = true;
       }
     }
   }
@@ -217,20 +215,20 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   checkCanSearch(){
     switch(this.filtroSelected) {
       case '1': {
-        this.canSearch = (this.filtros.no_avaluo) ? false : true;
-         break; 
+        this.canSearch = (this.filtros.no_avaluo) ? true : false;
+        break; 
       }
       case '2': {
-        this.canSearch = (this.filtros.no_unico) ? false : true;
-         break; 
+        this.canSearch = (this.filtros.no_unico) ? true : false;
+        break; 
       }
       case '3': {
-        this.canSearch = (this.filtros.region || this.filtros.manzana) ? false : true;
-         break; 
+        this.canSearch = (this.filtros.region || this.filtros.manzana) ? true : false;
+        break; 
       }       
-      default: { 
-         //statements; 
-         break; 
+      default: {
+        this.canSearch = false;
+        break; 
       } 
    } 
   }
