@@ -114,6 +114,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
+          console.log(res);
           this.loading = false;
           this.dataSource = res.data;
           this.total = res.total;

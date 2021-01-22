@@ -188,7 +188,7 @@
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="cancelAvaluo(element.numerounico)">
+                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado'" (click)="cancelAvaluo(element.numerounico)">
                             <mat-icon>sync_alt</mat-icon>
                             <span>Cancelar avalúo</span>
                         </button>                          
@@ -196,7 +196,7 @@
                             <mat-icon>videocam</mat-icon>
                             <span>Avalúos Próximos</span>
                           </button>
-                        <button mat-menu-item (click)="openDialogAsignaNotario(element.numerounico)">
+                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado'" (click)="openDialogAsignaNotario(element.numerounico)">
                             <mat-icon>account_box</mat-icon>
                             <span>Asignar notario</span>
                         </button>
