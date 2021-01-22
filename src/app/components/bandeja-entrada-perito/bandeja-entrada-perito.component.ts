@@ -98,9 +98,11 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     if(this.filtros.no_unico){
       filtros = filtros + '&no_unico=' + this.filtros.no_unico;
     }
-    if(this.filtros.region && this.filtros.manzana && this.filtros.lote && this.filtros.unidad){
-      filtros = filtros + '&cta_catastral=' + this.filtros.region
-      + '-' + this.filtros.manzana + '-' + this.filtros.lote + '-' +  this.filtros.unidad;
+    if(this.filtros.region || this.filtros.manzana || this.filtros.lote || this.filtros.unidad){
+      filtros = filtros + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
+      + '-' + ((this.filtros.manzana) ? this.filtros.manzana : ' ')
+      + '-' + ((this.filtros.lote) ? this.filtros.lote : ' ')
+      + '-' + ((this.filtros.unidad) ? this.filtros.unidad : ' ');
     }
     if(this.filtros.estado){
       filtros = filtros + '&estado=' + this.filtros.estado;
@@ -108,6 +110,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     if(this.filtros.vigencia){
       filtros = filtros + '&vigencia=' + this.filtros.vigencia;
     }
+    
     sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
     sessionStorage.canSearch = this.canSearch;
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
