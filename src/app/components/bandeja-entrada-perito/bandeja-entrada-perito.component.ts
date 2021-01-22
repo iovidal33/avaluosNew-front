@@ -214,6 +214,27 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
   }
 
+  checkCanSearch(){
+    switch(this.filtroSelected) {
+      case '1': {
+        this.canSearch = (this.filtros.no_avaluo) ? false : true;
+         break; 
+      }
+      case '2': {
+        this.canSearch = (this.filtros.no_unico) ? false : true;
+         break; 
+      }
+      case '3': {
+        this.canSearch = (this.filtros.region || this.filtros.manzana) ? false : true;
+         break; 
+      }       
+      default: { 
+         //statements; 
+         break; 
+      } 
+   } 
+  }
+
   avaluosProximos(no_unico): void{
     this.router.navigate(['main/avaluos-proximos/' + no_unico]);
   }
