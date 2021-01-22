@@ -44,7 +44,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
-  fechaRequerido = false;
   errorDate: any = {isError: false, errorMessage: ''};
   canSearch = true;
 
@@ -163,7 +162,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtros.vigencia = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
-    this.fechaRequerido = false;
     this.canSearch = true;
   }
 
@@ -171,7 +169,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.clean();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
-      this.fechaRequerido = true;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
       this.filtros.fecha_fin = new Date((new Date().getTime()));
       this.canSearch = false;
