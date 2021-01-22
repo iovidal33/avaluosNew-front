@@ -46,6 +46,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   busqueda;
   fechaRequerido = false;
   errorDate: any = {isError: false, errorMessage: ''};
+  canSearch = true;
 
   constructor(
     private http: HttpClient,
@@ -72,6 +73,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.opcionFiltro[sessionStorage.filtroSelected] = false;
       this.filtroSelected = sessionStorage.filtroSelected;
+      this.canSearch = sessionStorage.canSearch;
       this.getData();
     }
 
@@ -108,6 +110,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       filtros = filtros + '&vigencia=' + this.filtros.vigencia;
     }
     sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
+    sessionStorage.canSearch = this.canSearch;
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -161,6 +164,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
     this.fechaRequerido = false;
+    this.canSearch = true;
   }
 
   getFiltroSelected(event): void {
@@ -170,6 +174,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.fechaRequerido = true;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
       this.filtros.fecha_fin = new Date((new Date().getTime()));
+      this.canSearch = false;
     }
     else if(event.value == 1){
       this.opcionFiltro[1] = false;  
@@ -195,10 +200,17 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   }
 
   validateDate(){
-    if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
-      this.errorDate = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+    if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
+      this.errorDate = {isError:true, errorMessage:'La fechas son requeridas.'};
+      this.canSearch = true;
     }else{
-      this.errorDate = {isError:false, errorMessage:''};
+      if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
+        this.errorDate = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+        this.canSearch = true;
+      }else{
+        this.errorDate = {isError:false, errorMessage:''};
+        this.canSearch = false;
+      }
     }
   }
 
