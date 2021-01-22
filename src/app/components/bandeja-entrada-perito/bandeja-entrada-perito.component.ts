@@ -160,16 +160,16 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   }
 
   clean(): void{
+    this.busqueda = false;
+  }
+
+  getFiltroSelected(event): void {
     this.filtros = {} as Filtros;
     this.filtros.estado = '';
     this.filtros.vigencia = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
     this.canSearch = true;
-  }
-
-  getFiltroSelected(event): void {
-    this.clean();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
