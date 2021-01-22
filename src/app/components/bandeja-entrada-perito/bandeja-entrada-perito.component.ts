@@ -44,7 +44,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
-  errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}];
+  errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
   canSearch = true;
 
   constructor(
