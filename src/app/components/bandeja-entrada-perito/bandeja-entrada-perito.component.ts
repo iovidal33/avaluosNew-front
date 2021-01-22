@@ -44,7 +44,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
-  errorDate: any = {isError: false, errorMessage: ''};
+  errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}, {isError: false, errorMessage: ''}];
   canSearch = true;
 
   constructor(
@@ -198,14 +198,14 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   validateDate(){
     if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
-      this.errorDate = {isError:true, errorMessage:'La fechas son requeridas.'};
+      this.errores[0] = {isError:true, errorMessage:'La fechas son requeridas.'};
       this.canSearch = true;
     }else{
       if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
-        this.errorDate = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+        this.errores[0] = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
         this.canSearch = true;
       }else{
-        this.errorDate = {isError:false, errorMessage:''};
+        this.errores[0] = {isError:false, errorMessage:''};
         this.canSearch = false;
       }
     }

@@ -24,7 +24,7 @@
                         <input matInput [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [disabled]="opcionFiltro[0]" [required]="!opcionFiltro[0]" (dateChange)="validateDate()" [min]="filtros.fecha_ini">
                         <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
                         <mat-datepicker #pickfin></mat-datepicker>
-                        <mat-error>{{errorDate.errorMessage}}</mat-error>
+                        <mat-error>{{errores[0].errorMessage}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
