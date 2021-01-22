@@ -297,6 +297,7 @@ export class DialogAsignaNotario {
     private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<DialogAsignaNotario>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
     }
 
   onNoClick(): void {
