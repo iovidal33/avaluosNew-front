@@ -20,7 +20,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
 import { BandejaEntradaComponent, DialogPeritoSociedad } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
-import { SubirAvaluoComponent, DialogValidacionesXML } from './components/subir-avaluo/subir-avaluo.component';
+import { SubirAvaluoComponent, DialogValidacionesXML, DialogProgresoUpload } from './components/subir-avaluo/subir-avaluo.component';
 import { BandejaEntradaPeritoComponent, DialogAsignaNotario } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
 import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/dialogo-confirmacion.component';
 import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
@@ -40,6 +40,7 @@ import { AcuseAvaluoComponent } from './components/acuse-avaluo/acuse-avaluo.com
     MainComponent,
     SubirAvaluoComponent,
     DialogValidacionesXML,
+    DialogProgresoUpload,
     BandejaEntradaPeritoComponent,
     DialogoConfirmacionComponent,
     AvaluosProximosComponent,

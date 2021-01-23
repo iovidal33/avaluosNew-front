@@ -44,6 +44,15 @@ export class SubirAvaluoComponent implements OnInit {
     };
   }
 
+  openDialogProgreso(): void {
+    const dialogRef = this.dialog.open(DialogProgresoUpload, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
+
   subirAvaluo(): void {
     this.loading = true;
     const formData = new FormData();
@@ -130,7 +139,6 @@ export class SubirAvaluoComponent implements OnInit {
 
 }
 
-
 @Component({
   selector: 'app-dialog-validaciones-xml',
   templateUrl: 'app-dialog-validaciones-xml.html',
@@ -144,6 +152,24 @@ export class DialogValidacionesXML {
     @Inject(MAT_DIALOG_DATA) public data: any) {
       dialogRef.disableClose = true;
       this.errores = data.flat();
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'app-dialog-progreso-upload',
+  templateUrl: 'app-dialog-progreso-upload.html',
+})
+export class DialogProgresoUpload {
+  
+  constructor(
+    public dialogRef: MatDialogRef<DialogProgresoUpload>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
     }
 
   onNoClick(): void {
