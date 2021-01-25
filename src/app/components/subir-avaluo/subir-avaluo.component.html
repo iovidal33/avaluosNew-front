@@ -28,18 +28,7 @@
              </mat-form-field>
         </div>
         <br>
-        <!--<ng-container *ngIf="loading">
-            <h3 class="cdmx-color-accent">Subiendo archivo...</h3>
-            <mat-progress-bar [mode]="mode" [value]="progress" [bufferValue]="bufferValue"></mat-progress-bar>
-        </ng-container>-->
         <br>
-        <button mat-raised-button color="primary" class="top-buffer" [class.spinner]="loading" [disabled]="loading || !file" (click)="subirAvaluo()">Subir</button>
-        <!--&nbsp;
-        <button mat-raised-button color="default" class="top-buffer" *ngIf="loading" (click)="cancelarAvaluo()">Cancelar</button>-->
-        <br>
-        <br>
-        <div class="alert" [ngClass]="{'alert-warning': !success, 'alert-success': success}" *ngIf="mensaje">
-            {{mensaje}}
-        </div>
+        <button mat-raised-button color="primary" class="top-buffer" [disabled]="!file" (click)="subirAvaluo()">Subir</button>
     </mat-card-content>
 </mat-card>

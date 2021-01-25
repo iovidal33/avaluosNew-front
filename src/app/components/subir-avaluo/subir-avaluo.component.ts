@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { AuthService } from '@serv/auth.service';
 import { environment } from '@env/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,91 +15,66 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./subir-avaluo.component.css']
 })
 export class SubirAvaluoComponent implements OnInit {
-  loading = false;
-  file;
-  mensaje;
-  success = false;
-  constructor(
-    private snackBar: MatSnackBar,
-    private authService: AuthService,
-    private http: HttpClient,
-    public fileUploadService: FileUploadService,
-    public dialog: MatDialog,) { }
-  endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
   httpOptions;
-  mode: ProgressBarMode = 'determinate';
-  progress: number;
-  bufferValue: number;
-  source = timer(100,1000);
+  file;
 
+  constructor(
+    private authService: AuthService,
+    public dialog: MatDialog,
+    ) { }
+  
   ngOnInit(): void {
     const session = this.authService.getSession();
     this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: session.token
       }),
-      //reportProgress: true,
-      //observe: 'events'
+      reportProgress: true,
+      observe: 'events'
     };
   }
 
-  openDialogProgreso(): void {
+  subirAvaluo(): void {
     const dialogRef = this.dialog.open(DialogProgresoUpload, {
       width: '600px',
+      data: {httpOptions: this.httpOptions, file: this.file},
     });
     dialogRef.afterClosed().subscribe(result => {
-      
+      window.location.reload();
     });
   }
 
-  subirAvaluo(): void {
-    this.loading = true;
-    const formData = new FormData();
-    formData.append('files', this.file, this.file.name);
-    formData.append('idPersona', '264');
-    this.http.post(this.endpoint, formData,
-      this.httpOptions).subscribe(
-        (res: any) => {
-          this.loading = false;
-          this.success = res.Estado;
-          if(res.Estado){
-            this.mensaje = 'El avalúo con numero único ' + res.numeroUnico + ' se subió correctamente';
-          }else{
-            this.mensaje = 'No se pudo cargar el avalúo';
-          }
-        },
-        (error) => {
-          this.loading = false;
-          if(!(error.error.mensaje instanceof Array)){
-            this.snackBar.open(error.error.mensaje, 'Cerrar', {
-              duration: 10000,
-              horizontalPosition: 'end',
-              verticalPosition: 'top'
-            });
-          }else{
-           
-              const dialogRef = this.dialog.open(DialogValidacionesXML, {
-                width: '600px',
-                data: error.error.mensaje
-              });
-              dialogRef.afterClosed().subscribe(result => {
-                
-              });
-          }
-          
-        }
-      );
-  }
+}
 
-  /*subirAvaluo(): void {
-    this.loading = true;
-    const formData = new FormData();
-    formData.append('files', this.file, this.file.name);
-    formData.append('idPersona', '264');
-    const subscription = this.source.subscribe(val => {
-      this.progress = val 
-    });
-    this.fileUploadService.sendFile(this.endpoint, formData, this.httpOptions
+@Component({
+  selector: 'app-dialog-progreso-upload',
+  templateUrl: 'app-dialog-progreso-upload.html',
+})
+export class DialogProgresoUpload {
+  endpoint = environment.endpoint + 'bandeja-entrada/guardarAvaluo';
+  loading = false;
+  success = false;
+  mensaje;
+  mode: ProgressBarMode = 'determinate';
+  progress: number;
+  bufferValue: number;
+  source = timer(100,1000);
+  
+  constructor(
+    public fileUploadService: FileUploadService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<DialogProgresoUpload>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
+      this.loading = true;
+      const formData = new FormData();
+      formData.append('files', data.file, data.file.name);
+      formData.append('idPersona', '264');
+      const subscription = this.source.subscribe(val => {
+        this.progress = val 
+      });
+      this.fileUploadService.sendFile(this.endpoint, formData, data.httpOptions
       ).subscribe(
         (event: HttpEvent<any>) => {
           //console.log(event);
@@ -119,10 +93,10 @@ export class SubirAvaluoComponent implements OnInit {
             this.loading = false;
             subscription.unsubscribe();
             this.success = event.body.Estado;
-            if(event.body.Estado){
+            if(this.success){
               this.mensaje = 'El avalúo con numero único ' + event.body.numeroUnico + ' se subió correctamente';
             }else{
-              this.mensaje = 'No se pudo cargar el avalúo';
+              this.mensaje = 'No se pudo cargar el avalúo';                   
             }
             //console.log('User successfully created!', event.body);
             setTimeout(() => {
@@ -131,45 +105,6 @@ export class SubirAvaluoComponent implements OnInit {
           }
         },
       );
-  }
-
-  cancelarAvaluo(): void {
-    console.log("hola");
-  }*/
-
-}
-
-@Component({
-  selector: 'app-dialog-validaciones-xml',
-  templateUrl: 'app-dialog-validaciones-xml.html',
-})
-export class DialogValidacionesXML {
-  displayedColumns: string[] = ['num', 'error'];
-  errores = [];
- 
-  constructor(
-    public dialogRef: MatDialogRef<DialogValidacionesXML>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-      dialogRef.disableClose = true;
-      this.errores = data.flat();
-    }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
-
-@Component({
-  selector: 'app-dialog-progreso-upload',
-  templateUrl: 'app-dialog-progreso-upload.html',
-})
-export class DialogProgresoUpload {
-  
-  constructor(
-    public dialogRef: MatDialogRef<DialogProgresoUpload>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-      dialogRef.disableClose = true;
     }
 
   onNoClick(): void {

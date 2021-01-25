@@ -3,6 +3,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class FileUploadService {
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog,
     ) { }
 
   sendFile(endpoint, formData, httpOptions): Observable<any> {
@@ -34,13 +37,45 @@ export class FileUploadService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      this.snackBar.open(error.error.mensaje, 'Cerrar', {
-        duration: 10000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top'
-      });
+      if(!(error.error.mensaje instanceof Array)){
+        this.snackBar.open(error.error.mensaje, 'Cerrar', {
+          duration: 10000,
+          horizontalPosition: 'end',
+          verticalPosition: 'top'
+        });
+      }else{
+          const dialogRef = this.dialog.open(DialogValidacionesXML, {
+            width: '600px',
+            data: error.error.mensaje
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            window.location.reload();            
+          });     
+      }    
     }
     return throwError(errorMessage);
+  }
+
+}
+
+
+@Component({
+  selector: 'app-dialog-validaciones-xml',
+  templateUrl: 'app-dialog-validaciones-xml.html',
+})
+export class DialogValidacionesXML {
+  displayedColumns: string[] = ['num', 'error'];
+  errores = [];
+ 
+  constructor(
+    public dialogRef: MatDialogRef<DialogValidacionesXML>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
+      this.errores = data.flat();
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }
