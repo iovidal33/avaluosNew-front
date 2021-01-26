@@ -68,21 +68,21 @@
                 <div class="col">
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Región</mat-label>
-                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event)" (ngModelChange)="checkCanSearch()">
+                        <input matInput #region [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event, manzana)" (ngModelChange)="checkCanSearch()">
                         <mat-error>{{errores[3].errorMessage}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Manzana</mat-label>
-                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event)" (ngModelChange)="checkCanSearch()">
+                        <input matInput #manzana [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event, lote)" (ngModelChange)="checkCanSearch()">
                         <mat-error>{{errores[3].errorMessage}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Lote</mat-label>
-                        <input matInput [(ngModel)]="filtros.lote" [disabled]="opcionFiltro[3]" minlength="2" maxlength="2" (keypress)="keyPressAlphaNumeric($event)">
+                        <input matInput #lote [(ngModel)]="filtros.lote" [disabled]="opcionFiltro[3]" minlength="2" maxlength="2" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event, unidad)">
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Unidad Privativa</mat-label>
-                        <input matInput [(ngModel)]="filtros.unidad" [disabled]="opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
+                        <input matInput #unidad [(ngModel)]="filtros.unidad" [disabled]="opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
                     </mat-form-field>
                 </div>
             </div>

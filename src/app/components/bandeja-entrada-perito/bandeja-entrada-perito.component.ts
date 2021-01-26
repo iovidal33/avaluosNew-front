@@ -195,9 +195,9 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
   }
 
-  focusNextInput(event) {
+  focusNextInput(event, input) {
     if(event.srcElement.value.length === event.srcElement.maxLength){
-      console.log("focus");
+      input.focus();
     }
   }
 
