@@ -63,6 +63,20 @@ export class BandejaEntradaComponent implements OnInit {
         Authorization: this.auth.getSession().token
       })
     };
+
+    if(sessionStorage.filtrosRevisor){
+      this.filtroSelected = sessionStorage.filtroSelected;
+      this.opcionFiltro[sessionStorage.filtroSelected] = false;
+      this.canSearch = sessionStorage.canSearch;
+      this.filtros = JSON.parse(sessionStorage.filtrosRevisor);
+      if(this.filtros.perito_sociedad){
+        this.registroPeritoSociedad = sessionStorage.registroPeritoSociedad;
+        this.tipoBusqueda = sessionStorage.tipoBusqueda;
+      }
+      this.getData();
+    }
+
+    sessionStorage.clear();
   }
 
   paginado(evt): void{
@@ -102,6 +116,13 @@ export class BandejaEntradaComponent implements OnInit {
     if(this.filtros.vigencia){
       filtros = filtros + '&vigencia=' + this.filtros.vigencia;
     }
+    sessionStorage.filtrosRevisor = JSON.stringify(this.filtros);
+    sessionStorage.filtroSelected = this.filtroSelected;
+    sessionStorage.canSearch = this.canSearch;
+    if(this.filtros.perito_sociedad){
+      sessionStorage.registroPeritoSociedad = this.registroPeritoSociedad;
+      sessionStorage.tipoBusqueda = this.tipoBusqueda;
+    }
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -132,6 +153,9 @@ export class BandejaEntradaComponent implements OnInit {
         this.filtros.perito_sociedad = result.PeritoSociedad.idpersona;
         this.registroPeritoSociedad = result.PeritoSociedad.registro;
         this.tipoBusqueda = result.tipoBusqueda;
+
+        sessionStorage.registroPeritoSociedad = this.registroPeritoSociedad;
+        sessionStorage.tipoBusqueda = this.tipoBusqueda;
       }
     });
   }
@@ -160,6 +184,9 @@ export class BandejaEntradaComponent implements OnInit {
     else if(event.value == 3){
       this.opcionFiltro[3] = false;
     }
+
+    sessionStorage.filtroSelected = event.value;
+    sessionStorage.canSearch = this.canSearch;
   }
 
   keyPressAlphaNumeric(event) {
@@ -196,6 +223,7 @@ export class BandejaEntradaComponent implements OnInit {
         this.canSearch = true;
       }
     }
+    sessionStorage.canSearch = this.canSearch;
   }
 
   checkCanSearch(){
@@ -217,6 +245,7 @@ export class BandejaEntradaComponent implements OnInit {
         break; 
       } 
     }
+    sessionStorage.canSearch = this.canSearch;
   }
 
 }
