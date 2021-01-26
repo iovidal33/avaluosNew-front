@@ -231,7 +231,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         break; 
       }
       case '3': {
-        this.canSearch = (this.filtros.region || this.filtros.manzana) ? true : false;
+        this.canSearch = (this.filtros.region && this.filtros.manzana) ? true : false;
         break; 
       }       
       default: {
