@@ -112,6 +112,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
     
     sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
+    sessionStorage.filtroSelected = this.filtroSelected;
+    sessionStorage.canSearch = this.canSearch;
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
