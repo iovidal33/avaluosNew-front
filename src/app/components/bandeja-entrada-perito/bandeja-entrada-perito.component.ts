@@ -69,12 +69,14 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     };
 
     if(sessionStorage.filtrosPerito){
-      console.log(sessionStorage);
       this.filtroSelected = sessionStorage.filtroSelected;
       this.opcionFiltro[sessionStorage.filtroSelected] = false;
+      this.canSearch = sessionStorage.canSearch;
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.getData();
     }
+
+    sessionStorage.clear();
   }
 
   paginado(evt): void{
@@ -184,6 +186,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
 
     sessionStorage.filtroSelected = event.value;
+    sessionStorage.canSearch = this.canSearch;
   }
 
   keyPressAlphaNumeric(event) {
@@ -220,6 +223,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         this.canSearch = true;
       }
     }
+    sessionStorage.canSearch = this.canSearch;
   }
 
   checkCanSearch(){
@@ -240,7 +244,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         this.canSearch = false;
         break; 
       } 
-   } 
+    }
+    sessionStorage.canSearch = this.canSearch;
   }
 
   avaluosProximos(no_unico): void{
