@@ -68,12 +68,12 @@
                 <div class="col">
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Región</mat-label>
-                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (ngModelChange)="checkCanSearch()">
+                        <input matInput [(ngModel)]="filtros.region" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event)" (ngModelChange)="checkCanSearch()">
                         <mat-error>{{errores[3].errorMessage}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">
                         <mat-label>Manzana</mat-label>
-                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (ngModelChange)="checkCanSearch()">
+                        <input matInput [(ngModel)]="filtros.manzana" [disabled]="opcionFiltro[3]" [required]="!opcionFiltro[3]" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event)" (ngModelChange)="checkCanSearch()">
                         <mat-error>{{errores[3].errorMessage}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="input-cta-catastral">

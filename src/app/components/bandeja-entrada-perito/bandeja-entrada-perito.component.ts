@@ -195,6 +195,12 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
   }
 
+  focusNextInput(event) {
+    if(event.srcElement.value.length === event.srcElement.maxLength){
+      console.log("focus");
+    }
+  }
+
   validateDate(){
     if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
       this.errores[0] = {isError:true, errorMessage:'La fechas son requeridas.'};

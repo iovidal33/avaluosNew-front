@@ -26,6 +26,7 @@ import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/
 import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
 import { AcuseAvaluoComponent } from './components/acuse-avaluo/acuse-avaluo.component';
 import { DialogValidacionesXML } from "@serv/file-upload.service";
+import { MoveNextByMaxLengthDirective } from './directives/move-next-by-max-length.directive';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     AvaluosProximosComponent,
     DialogAsignaNotario,
     AcuseAvaluoComponent,
+    MoveNextByMaxLengthDirective,
   ],
   imports: [
     BrowserModule,
