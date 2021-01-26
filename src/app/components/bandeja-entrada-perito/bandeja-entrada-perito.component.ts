@@ -69,9 +69,10 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     };
 
     if(sessionStorage.filtrosPerito){
-      this.filtros = JSON.parse(sessionStorage.filtrosPerito);
-      this.opcionFiltro[sessionStorage.filtroSelected] = false;
+      console.log(sessionStorage);
       this.filtroSelected = sessionStorage.filtroSelected;
+      this.opcionFiltro[sessionStorage.filtroSelected] = false;
+      this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.getData();
     }
   }
@@ -202,6 +203,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   }
 
   changeVigencia(event) {
+    this.filtros.vigencia = event.value;
     this.getData();
   }
 
