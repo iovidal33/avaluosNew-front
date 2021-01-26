@@ -109,9 +109,9 @@
             </div>
             <div class="col">
                 <mat-radio-group aria-label="Vigencia" [(ngModel)]="filtros.vigencia">
-                    <mat-radio-button value="">Todos</mat-radio-button>
-                    <mat-radio-button value="1">Vigentes</mat-radio-button>
-                    <mat-radio-button value="2">No Vigentes</mat-radio-button>
+                    <mat-radio-button value="" (change)="changeVigencia($event)">Todos</mat-radio-button>
+                    <mat-radio-button value="1" (change)="changeVigencia($event)">Vigentes</mat-radio-button>
+                    <mat-radio-button value="2" (change)="changeVigencia($event)">No Vigentes</mat-radio-button>
                   </mat-radio-group>
             </div>
         </div>

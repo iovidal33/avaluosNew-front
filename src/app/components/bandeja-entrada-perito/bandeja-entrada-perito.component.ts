@@ -201,6 +201,10 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
   }
 
+  changeVigencia(event) {
+    this.getData();
+  }
+
   validateDate(){
     if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
       this.errores[0] = {isError:true, errorMessage:'La fechas son requeridas.'};
