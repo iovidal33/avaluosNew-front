@@ -42,8 +42,8 @@ export class BandejaEntradaComponent implements OnInit {
   filtroSelected;
   opcionFiltro: boolean[] = [true, true, true, true];
   busqueda;
-  fechaRequerido = false;
-  errorDate: any = {isError: false, errorMessage: ''};
+  errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
+  canSearch = false;
 
   constructor(
     private http: HttpClient,
@@ -90,9 +90,11 @@ export class BandejaEntradaComponent implements OnInit {
     if(this.filtros.no_unico){
       filtros = filtros + '&no_unico=' + this.filtros.no_unico;
     }
-    if(this.filtros.region && this.filtros.manzana && this.filtros.lote && this.filtros.unidad){
-      filtros = filtros + '&cta_catastral=' + this.filtros.region
-      + '-' + this.filtros.manzana + '-' + this.filtros.lote + '-' +  this.filtros.unidad;
+    if(this.filtros.region || this.filtros.manzana || this.filtros.lote || this.filtros.unidad){
+      filtros = filtros + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
+      + '-' + ((this.filtros.manzana) ? this.filtros.manzana : ' ')
+      + '-' + ((this.filtros.lote) ? this.filtros.lote : ' ')
+      + '-' + ((this.filtros.unidad) ? this.filtros.unidad : ' ');
     }
     if(this.filtros.estado){
       filtros = filtros + '&estado=' + this.filtros.estado;
@@ -118,14 +120,7 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   clean(): void{
-    this.filtros = {} as Filtros;
-    this.filtros.estado = '';
-    this.filtros.vigencia = '';
-    this.registroPeritoSociedad = '';
-    this.tipoBusqueda = '';
-    this.filtroSelected = '';
-    this.opcionFiltro = [true, true, true, true];
-    this.fechaRequerido = false;
+    this.busqueda = false;
   }
 
   openDialogPeritoSociedad(): void {
@@ -138,15 +133,23 @@ export class BandejaEntradaComponent implements OnInit {
         this.registroPeritoSociedad = result.PeritoSociedad.registro;
         this.tipoBusqueda = result.tipoBusqueda;
       }
-      this.getData();
     });
   }
 
   getFiltroSelected(event): void {
-    this.clean();
+    this.filtros = {} as Filtros;
+    this.registroPeritoSociedad = '';
+    this.tipoBusqueda = '';
+    this.filtros.estado = '';
+    this.filtros.vigencia = '';
+    this.filtroSelected = '';
+    this.opcionFiltro = [true, true, true, true];
+    this.canSearch = false;
     if(event.value == 0){
       this.opcionFiltro[0] = false;
-      this.fechaRequerido = true;
+      this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
+      this.filtros.fecha_fin = new Date((new Date().getTime()));
+      this.canSearch = true;
     }
     else if(event.value == 1){
       this.opcionFiltro[1] = false;
@@ -169,11 +172,50 @@ export class BandejaEntradaComponent implements OnInit {
     }
   }
 
+  focusNextInput(event, input) {
+    if(event.srcElement.value.length === event.srcElement.maxLength){
+      input.focus();
+    }
+  }
+
+  changeVigencia(event) {
+    this.filtros.vigencia = event.value;
+    this.getData();
+  }
+
   validateDate(){
-    if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
-      this.errorDate = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+    if(!this.filtros.fecha_ini || !this.filtros.fecha_fin){
+      this.errores[0] = {isError:true, errorMessage:'La fechas son requeridas.'};
+      this.canSearch = false;
     }else{
-      this.errorDate = {isError:false, errorMessage:''};
+      if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
+        this.errores[0] = {isError:true, errorMessage:'La fecha fin tiene que ser mayor a la inicial.'};
+        this.canSearch = false;
+      }else{
+        this.errores[0] = {isError:false, errorMessage:''};
+        this.canSearch = true;
+      }
+    }
+  }
+
+  checkCanSearch(){
+    switch(this.filtroSelected) {
+      case '1': {
+        this.canSearch = (this.filtros.no_avaluo) ? true : false;
+        break; 
+      }
+      case '2': {
+        this.canSearch = (this.filtros.no_unico) ? true : false;
+        break; 
+      }
+      case '3': {
+        this.canSearch = (this.filtros.region && this.filtros.manzana) ? true : false;
+        break; 
+      }       
+      default: {
+        this.canSearch = false;
+        break; 
+      } 
     }
   }
 
