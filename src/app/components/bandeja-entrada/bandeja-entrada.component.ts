@@ -398,6 +398,11 @@ export class DialogPeritoSociedad {
     this.busqueda.PeritoSociedad = dataRadio;
   }
 
+  resetPaginator() {
+    this.pagina = 1;
+    this.paginator.firstPage();
+  }
+
 }
 
 export interface FiltroNotario {
