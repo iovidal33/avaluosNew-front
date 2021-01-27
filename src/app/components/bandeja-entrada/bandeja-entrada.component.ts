@@ -281,6 +281,10 @@ export class BandejaEntradaComponent implements OnInit {
     });
   }
 
+  acuseAvaluo(no_unico): void{
+    this.router.navigate(['main/acuse-avaluo/' + no_unico]);
+  }
+
 }
 
 
