@@ -75,8 +75,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.getData();
     }
-
-    sessionStorage.clear();
   }
 
   paginado(evt): void{
@@ -186,7 +184,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     else if(event.value == 3){
       this.opcionFiltro[3] = false;
     }
-
+    sessionStorage.clear();
     sessionStorage.filtroSelected = event.value;
     sessionStorage.canSearch = this.canSearch;
   }

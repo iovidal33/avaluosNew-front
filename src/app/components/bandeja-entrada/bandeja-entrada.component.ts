@@ -78,8 +78,6 @@ export class BandejaEntradaComponent implements OnInit {
       }
       this.getData();
     }
-
-    sessionStorage.clear();
   }
 
   paginado(evt): void{
@@ -187,7 +185,8 @@ export class BandejaEntradaComponent implements OnInit {
     else if(event.value == 3){
       this.opcionFiltro[3] = false;
     }
-
+    
+    sessionStorage.clear();
     sessionStorage.filtroSelected = event.value;
     sessionStorage.canSearch = this.canSearch;
   }
