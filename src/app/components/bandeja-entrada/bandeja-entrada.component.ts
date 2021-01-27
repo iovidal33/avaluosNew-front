@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 export interface Filtros {
@@ -50,6 +51,7 @@ export class BandejaEntradaComponent implements OnInit {
     private snackBar: MatSnackBar,
     private auth: AuthService,
     public dialog: MatDialog,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -248,6 +250,37 @@ export class BandejaEntradaComponent implements OnInit {
     sessionStorage.canSearch = this.canSearch;
   }
 
+  avaluosProximos(no_unico): void{
+    this.router.navigate(['main/avaluos-proximos/' + no_unico]);
+  }
+
+  openDialogAsignaNotario(numerounico): void {
+    const dialogRef = this.dialog.open(DialogAsignaNotarioRevisor, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){        
+        this.http.get(environment.endpoint + 'bandeja-entrada/asignaNotarioAvaluo?id_persona_notario=' + result.IDPERSONA + '&no_unico='+ numerounico,
+          this.httpOptions).subscribe(
+            (res: any) => {
+              this.snackBar.open(res.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+              this.getData();
+            },
+            (error) => {
+              this.snackBar.open(error.error.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+          });
+      }
+    });
+  }
+
 }
 
 
@@ -357,6 +390,85 @@ export class DialogPeritoSociedad {
   radioSelected(dataRadio) {
     this.busqueda.tipoBusqueda = this.tipoBusqueda;
     this.busqueda.PeritoSociedad = dataRadio;
+  }
+
+}
+
+export interface FiltroNotario {
+  no_notario: string;
+  nombre: string;
+  primer_apellido: string;
+  segundo_apellido: string;
+}
+
+@Component({
+  selector: 'app-dialog-asigna-notario',
+  templateUrl: 'app-dialog-asigna-notario.html',
+})
+export class DialogAsignaNotarioRevisor {
+  endpoint = environment.endpoint + 'bandeja-entrada/buscaNotario';
+  pagina = 1;
+  paginaSize = 15;
+  total = 0;
+  displayedColumns: string[] = ['numero', 'nombre', 'select'];
+  dataSource = [];
+  httpOptions;
+  loading = false;
+  filtro: FiltroNotario = {} as FiltroNotario;
+  dataNotario;
+
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<DialogAsignaNotarioRevisor>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  paginado(evt): void{
+    this.pagina = evt.pageIndex + 1;
+    this.getDataNotario();
+  }
+
+  getDataNotario(): void {
+    this.loading = true;
+    let filtro = '';
+    
+    if(this.filtro.no_notario){
+      filtro = filtro + '&numero_notario=' + this.filtro.no_notario;
+    }
+    if(this.filtro.nombre){
+      filtro = filtro + '&nombre_notario=' + this.filtro.nombre;
+    }
+    if(this.filtro.primer_apellido){
+      filtro = filtro + '&ape_paterno=' + this.filtro.primer_apellido; 
+    }
+    if(this.filtro.segundo_apellido){
+      filtro = filtro + '&ape_materno=' + this.filtro.segundo_apellido;
+    }
+    this.http.get(this.endpoint + '?page=' + this.pagina + '&page_size=' + this.paginaSize + filtro,
+      this.httpOptions).subscribe(
+        (res: any) => {
+          this.loading = false;
+          this.dataSource = res.data;
+          this.total = res.total;
+        },
+        (error) => {
+          this.loading = false;
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        });
+  }
+
+  radioSelected(dataRadio) {
+    this.dataNotario = dataRadio;
   }
 
 }

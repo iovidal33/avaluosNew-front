@@ -1,0 +1,68 @@
+<h1 mat-dialog-title>Enviar al notario</h1>
+<div mat-dialog-content>
+    <form #formDialog="ngForm">
+        <div class="row">
+            <mat-form-field class="col-md-12">
+                <mat-label>N° de notario</mat-label>
+                <input matInput placeholder="N° de notario" [(ngModel)]="filtro.no_notario" name="no_notario">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" [(ngModel)]="filtro.nombre" name="nombre">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <mat-label>Apellido Paterno</mat-label>
+                <input matInput placeholder="Apellido Paterno" [(ngModel)]="filtro.primer_apellido" name="primer_apellido">
+            </mat-form-field>
+            <mat-form-field class="col-md-12">
+                <mat-label>Apellido Materno</mat-label>
+                <input matInput placeholder="Apellido Materno" [(ngModel)]="filtro.segundo_apellido" name="segundo_apellido">
+            </mat-form-field>
+            
+            <br>
+
+            <div class="col">
+                <h3 class="cdmx-color-accent">Resultado</h3>
+            </div>
+            <div class="col" align="end">
+                <button mat-icon-button color="primary" aria-label="Buscar" matTooltip="Buscar" (click)="getDataNotario()">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+            
+        </div>
+    </form>
+    <div style="padding: 30px; text-align: center;" *ngIf="loading">
+        <mat-spinner style="margin:0 auto;"></mat-spinner>
+        <p>Cargando...</p>
+    </div>
+    <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading">
+        No se encontraron datos.
+    </div>
+    <table mat-table [dataSource]="dataSource" *ngIf="dataSource.length > 0 && !loading">
+        <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef> N° </th>
+            <td mat-cell *matCellDef="let element"> {{(element.NUMERO)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{ (element.APELLIDOPATERNO) ? element.APELLIDOPATERNO : '' }} {{ (element.APELLIDOMATERNO) ? element.APELLIDOMATERNO : '' }} {{element.NOMBRE}} </td>
+        </ng-container>
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef> Seleccionar </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-radio-group [(ngModel)]="PeritoSociedad">
+                    <mat-radio-button [value]="element" (change)="radioSelected(element)"></mat-radio-button>
+                </mat-radio-group>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [length]="total" [pageSize]="paginaSize" [pageSizeOptions]="[paginaSize]" (page)="paginado($event)">
+    </mat-paginator>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cerrar</button>
+    <button mat-flat-button color="primary" *ngIf="dataNotario" [mat-dialog-close]="dataNotario">Aceptar</button>
+</mat-dialog-actions>
