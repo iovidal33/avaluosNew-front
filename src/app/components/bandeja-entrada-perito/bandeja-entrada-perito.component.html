@@ -196,13 +196,17 @@
                             <mat-icon>videocam</mat-icon>
                             <span>Avalúos Próximos</span>
                           </button>
-                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado'" (click)="openDialogAsignaNotario(element.numerounico)">
+                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado' || element.tipotramite == 'CAT'"  (click)="openDialogAsignaNotario(element.numerounico)">
                             <mat-icon>account_box</mat-icon>
                             <span>Asignar notario</span>
                         </button>
-                        <button mat-menu-item (click)="acuseAvaluo(element.numerounico)">
+                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Cancelado'" (click)="acuseAvaluo(element.numerounico)">
                             <mat-icon>account_box</mat-icon>
                             <span>Acuse avalúo</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon>account_box</mat-icon>
+                            <span>Descargar Justificante</span>
                         </button>
                         <!--<button mat-menu-item>
                           <mat-icon>zoom_in</mat-icon>
