@@ -209,7 +209,6 @@ export class BandejaEntradaComponent implements OnInit {
 
   changeVigencia(event) {
     this.filtros.vigencia = event.value;
-    this.getData();
   }
 
   validateDate(){
