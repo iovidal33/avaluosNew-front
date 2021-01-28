@@ -184,7 +184,9 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     else if(event.value == 3){
       this.opcionFiltro[3] = false;
     }
-    sessionStorage.clear();
+    sessionStorage.removeItem('filtrosPerito');
+    sessionStorage.removeItem('filtroSelected');
+    sessionStorage.removeItem('canSearch');
     sessionStorage.filtroSelected = event.value;
     sessionStorage.canSearch = this.canSearch;
   }

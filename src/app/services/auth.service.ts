@@ -17,19 +17,19 @@ export class AuthService {
   constructor(public router: Router) { }
 
   public setSession(session: AuthData): void {
-    localStorage.setItem('session_' + environment.appName, JSON.stringify(session));
+    sessionStorage.setItem('session_' + environment.appName, JSON.stringify(session));
   }
 
   public getSession(): AuthData {
     if (this.isAuthenticated()) {
-      return JSON.parse(localStorage.getItem('session_' + environment.appName))
+      return JSON.parse(sessionStorage.getItem('session_' + environment.appName))
     } else {
       return {} as AuthData;
     }
   }
 
   public getMenu(): any {
-    const sess = JSON.parse(localStorage.getItem('session_' + environment.appName));
+    const sess = JSON.parse(sessionStorage.getItem('session_' + environment.appName));
     if (sess) {
       return sess.userData.menu;
     } else {
@@ -38,12 +38,12 @@ export class AuthService {
   }
 
   public closeSession(): void {
-    localStorage.removeItem('session_' + environment.appName);
+    sessionStorage.removeItem('session_' + environment.appName);
     this.router.navigate([environment.baseHref]);
   }
 
   public isAuthenticated(): boolean {
-    const session = localStorage.getItem('session_' + environment.appName);
+    const session = sessionStorage.getItem('session_' + environment.appName);
     return session ? true : false;
   }
 

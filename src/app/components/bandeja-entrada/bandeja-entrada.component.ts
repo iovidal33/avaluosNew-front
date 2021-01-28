@@ -186,7 +186,11 @@ export class BandejaEntradaComponent implements OnInit {
       this.opcionFiltro[3] = false;
     }
     
-    sessionStorage.clear();
+    sessionStorage.removeItem('filtrosRevisor');
+    sessionStorage.removeItem('filtroSelected');
+    sessionStorage.removeItem('canSearch');
+    sessionStorage.removeItem('registroPeritoSociedad');
+    sessionStorage.removeItem('tipoBusqueda');
     sessionStorage.filtroSelected = event.value;
     sessionStorage.canSearch = this.canSearch;
   }
