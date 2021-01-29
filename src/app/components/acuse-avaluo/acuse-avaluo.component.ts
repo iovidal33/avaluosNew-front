@@ -15,7 +15,7 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./acuse-avaluo.component.css']
 })
 export class AcuseAvaluoComponent implements OnInit {
-  endpoint = environment.endpoint + 'bandeja-entrada/acuseAvaluo';
+  endpoint = environment.endpoint + 'bandeja-entrada';
   loading = false;
   httpOptions;
   noUnico;
@@ -43,7 +43,7 @@ export class AcuseAvaluoComponent implements OnInit {
 
   getData(): void {
     this.loading = true;
-    this.http.get(this.endpoint + '?no_unico=' + this.noUnico,
+    this.http.get(this.endpoint + '/acuseAvaluo?no_unico=' + this.noUnico,
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
@@ -60,19 +60,36 @@ export class AcuseAvaluoComponent implements OnInit {
         });
   }
 
-  generarPDF(noUnico): void {
-    html2canvas(document.getElementById('contenidoPDF'), {
-      // Opciones
-      imageTimeout: 2000,
-      allowTaint: true,
-      useCORS: false,
-      // Calidad del PDF
-    }).then(function(canvas) {
-      var img = canvas.toDataURL("image/png");
-      var doc = new jsPDF();
-      doc.addImage(img,'PNG',7, 20, 195, 105);
-      doc.save(noUnico + '.pdf');
-    });
+  generarPDF(): void {
+    this.http.post(this.endpoint + '/generaAcusePDF', { 'token': this.tokenDataAvaluo, 'no_unico': this.noUnico },
+      this.httpOptions).subscribe(
+        (res: any) => {
+          if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
+            const byteCharacters = atob(res.pdfbase64);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            window.navigator.msSaveOrOpenBlob(blob, res.nombre);
+          } else {
+            const linkSource = 'data:application/pdf;base64,' + res.pdfbase64;
+            const downloadLink = document.createElement('a');
+            const fileName = res.nombre;
+            downloadLink.href = linkSource;
+            downloadLink.download = fileName;
+            downloadLink.click();
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        });
   }
 
 }
