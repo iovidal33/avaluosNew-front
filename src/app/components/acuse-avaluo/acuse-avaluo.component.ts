@@ -20,6 +20,7 @@ export class AcuseAvaluoComponent implements OnInit {
   httpOptions;
   noUnico;
   dataAvaluo;
+  tokenDataAvaluo;
 
   constructor(
     private http: HttpClient,
@@ -46,8 +47,8 @@ export class AcuseAvaluoComponent implements OnInit {
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
-          this.dataAvaluo = res;
-          console.log(this.dataAvaluo);
+          this.dataAvaluo = res[0];
+          this.tokenDataAvaluo = res[1];
         },
         (error) => {
           this.loading = false;
