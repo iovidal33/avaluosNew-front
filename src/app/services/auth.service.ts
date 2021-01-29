@@ -39,6 +39,7 @@ export class AuthService {
 
   public closeSession(): void {
     sessionStorage.removeItem('session_' + environment.appName);
+    sessionStorage.clear();
     this.router.navigate([environment.baseHref]);
   }
 
