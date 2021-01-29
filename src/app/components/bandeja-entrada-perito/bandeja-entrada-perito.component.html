@@ -94,7 +94,7 @@
             <div class="col">
                 <mat-form-field class="input-filter-long">
                     <mat-label>Estado</mat-label>
-                    <mat-select [(ngModel)]="filtros.estado">
+                    <mat-select [(ngModel)]="filtros.estado" (selectionChange)="resetPaginator()">
                         <mat-option value="">Todos</mat-option>
                         <mat-option value="1">Recibido</mat-option>
                         <mat-option value="2">Cancelado</mat-option>
@@ -219,7 +219,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator  [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
+        <mat-paginator #paginator [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
         </mat-paginator>
     </mat-card-content>
 </mat-card>

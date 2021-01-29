@@ -46,6 +46,7 @@ export class BandejaEntradaComponent implements OnInit {
   busqueda;
   errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
   canSearch = false;
+  @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(
     private http: HttpClient,
@@ -213,6 +214,12 @@ export class BandejaEntradaComponent implements OnInit {
 
   changeVigencia(event) {
     this.filtros.vigencia = event.value;
+    this.resetPaginator();
+  }
+
+  resetPaginator() {
+    this.pagina = 1;
+    this.paginator.firstPage();
   }
 
   validateDate(){

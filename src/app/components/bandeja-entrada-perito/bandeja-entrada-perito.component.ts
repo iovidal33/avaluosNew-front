@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '@env/environment';
@@ -9,6 +9,7 @@ import { TileStyler } from '@angular/material/grid-list/tile-styler';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
  
 
 export interface Filtros {
@@ -46,6 +47,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   busqueda;
   errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
   canSearch = false;
+  @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(
     private http: HttpClient,
@@ -209,7 +211,13 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   changeVigencia(event) {
     this.filtros.vigencia = event.value;
+    this.resetPaginator();
     // this.getData();
+  }
+
+  resetPaginator() {
+    this.pagina = 1;
+    this.paginator.firstPage();
   }
 
   validateDate(){
