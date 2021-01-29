@@ -68,9 +68,9 @@ export class BandejaEntradaComponent implements OnInit {
     };
 
     if(sessionStorage.filtrosRevisor){
-      this.filtroSelected = sessionStorage.filtroSelected;
-      this.opcionFiltro[sessionStorage.filtroSelected] = false;
-      this.canSearch = sessionStorage.canSearch;
+      this.filtroSelected = sessionStorage.filtroSelectedRevisor;
+      this.opcionFiltro[sessionStorage.filtroSelectedRevisor] = false;
+      this.canSearch = sessionStorage.canSearchRevisor;
       this.filtros = JSON.parse(sessionStorage.filtrosRevisor);
       if(this.filtros.perito_sociedad){
         this.registroPeritoSociedad = sessionStorage.registroPeritoSociedad;
@@ -118,8 +118,8 @@ export class BandejaEntradaComponent implements OnInit {
       filtros = filtros + '&vigencia=' + this.filtros.vigencia;
     }
     sessionStorage.filtrosRevisor = JSON.stringify(this.filtros);
-    sessionStorage.filtroSelected = this.filtroSelected;
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.filtroSelectedRevisor = this.filtroSelected;
+    sessionStorage.canSearchRevisor = this.canSearch;
     if(this.filtros.perito_sociedad){
       sessionStorage.registroPeritoSociedad = this.registroPeritoSociedad;
       sessionStorage.tipoBusqueda = this.tipoBusqueda;
@@ -187,12 +187,12 @@ export class BandejaEntradaComponent implements OnInit {
     }
     
     sessionStorage.removeItem('filtrosRevisor');
-    sessionStorage.removeItem('filtroSelected');
-    sessionStorage.removeItem('canSearch');
+    sessionStorage.removeItem('filtroSelectedRevisor');
+    sessionStorage.removeItem('canSearchRevisor');
     sessionStorage.removeItem('registroPeritoSociedad');
     sessionStorage.removeItem('tipoBusqueda');
-    sessionStorage.filtroSelected = event.value;
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.filtroSelectedRevisor = event.value;
+    sessionStorage.canSearchRevisor = this.canSearch;
   }
 
   keyPressAlphaNumeric(event) {
@@ -228,7 +228,7 @@ export class BandejaEntradaComponent implements OnInit {
         this.canSearch = true;
       }
     }
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.canSearchRevisor = this.canSearch;
   }
 
   checkCanSearch(){
@@ -250,7 +250,7 @@ export class BandejaEntradaComponent implements OnInit {
         break; 
       } 
     }
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.canSearchRevisor = this.canSearch;
   }
 
   avaluosProximos(no_unico): void{

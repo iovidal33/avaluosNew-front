@@ -69,9 +69,9 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     };
 
     if(sessionStorage.filtrosPerito){
-      this.filtroSelected = sessionStorage.filtroSelected;
-      this.opcionFiltro[sessionStorage.filtroSelected] = false;
-      this.canSearch = sessionStorage.canSearch;
+      this.filtroSelected = sessionStorage.filtroSelectedPerito;
+      this.opcionFiltro[sessionStorage.filtroSelectedPerito] = false;
+      this.canSearch = sessionStorage.canSearchPerito;
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
       this.getData();
     }
@@ -110,8 +110,8 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     }
     
     sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
-    sessionStorage.filtroSelected = this.filtroSelected;
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.filtroSelectedPerito = this.filtroSelected;
+    sessionStorage.canSearchPerito = this.canSearch;
     this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -185,10 +185,10 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.opcionFiltro[3] = false;
     }
     sessionStorage.removeItem('filtrosPerito');
-    sessionStorage.removeItem('filtroSelected');
-    sessionStorage.removeItem('canSearch');
-    sessionStorage.filtroSelected = event.value;
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.removeItem('filtroSelectedPerito');
+    sessionStorage.removeItem('canSearchPerito');
+    sessionStorage.filtroSelectedPerito = event.value;
+    sessionStorage.canSearchPerito = this.canSearch;
   }
 
   keyPressAlphaNumeric(event) {
@@ -225,7 +225,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         this.canSearch = true;
       }
     }
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.canSearchPerito = this.canSearch;
   }
 
   checkCanSearch(){
@@ -247,7 +247,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         break; 
       } 
     }
-    sessionStorage.canSearch = this.canSearch;
+    sessionStorage.canSearchPerito = this.canSearch;
   }
 
   avaluosProximos(no_unico): void{
