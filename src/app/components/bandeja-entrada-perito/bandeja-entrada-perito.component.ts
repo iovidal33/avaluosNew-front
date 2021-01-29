@@ -285,6 +285,37 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.router.navigate(['main/acuse-avaluo/' + no_unico]);
   }
 
+  descargarJustificante(no_unico): void{
+    this.http.get(environment.endpoint + 'bandeja-entrada/reimprimeAvaluo?no_unico='+ no_unico,
+      this.httpOptions).subscribe(
+        (res: any) => {
+          if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
+            const byteCharacters = atob(res.pdfbase64);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/pdf' });
+            window.navigator.msSaveOrOpenBlob(blob, res.nombre);
+          } else {
+            const linkSource = 'data:application/pdf;base64,' + res.pdfbase64;
+            const downloadLink = document.createElement('a');
+            const fileName = res.nombre;
+            downloadLink.href = linkSource;
+            downloadLink.download = fileName;
+            downloadLink.click();
+          }
+        },
+        (error) => {
+          this.snackBar.open(error.error.mensaje, 'Cerrar', {
+            duration: 10000,
+            horizontalPosition: 'end',
+            verticalPosition: 'top'
+          });
+        });
+  }
+
 }
 
 
