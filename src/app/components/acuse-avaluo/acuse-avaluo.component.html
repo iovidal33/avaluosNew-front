@@ -245,9 +245,20 @@
         </ng-container>   
     </mat-card-content>
     <br>
-    <div class="col-md-12">
-        <button mat-raised-button (click)="generarPDF()">
-            <mat-icon>save</mat-icon> Guardar
-        </button>
+    <div class="row">
+        <div class="col-md-12">
+            <button mat-raised-button (click)="generarPDF()">
+                <mat-icon>save_alt</mat-icon> Descargar PDF
+            </button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <button mat-raised-button (click)="regresar()">
+                <mat-icon>arrow_back</mat-icon> Regresar
+            </button>
+        </div>
     </div>
 </mat-card>

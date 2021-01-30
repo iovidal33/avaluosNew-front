@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -21,13 +21,15 @@ export class AcuseAvaluoComponent implements OnInit {
   noUnico;
   dataAvaluo;
   tokenDataAvaluo;
+  menu;
 
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
     private auth: AuthService,
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class AcuseAvaluoComponent implements OnInit {
         Authorization: this.auth.getSession().token
       })
     };
+    this.menu = this.auth.getMenu();
     this.getData();
   }
 
@@ -58,6 +61,10 @@ export class AcuseAvaluoComponent implements OnInit {
             verticalPosition: 'top'
           });
         });
+  }
+
+  regresar(): void{
+    this.router.navigate(['main/' + this.menu[0].ruta]);
   }
 
   generarPDF(): void {
