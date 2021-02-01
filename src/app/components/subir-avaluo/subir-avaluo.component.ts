@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent, HttpEventType } from '@angular/common/http';
 import { AuthService } from '@serv/auth.service';
 import { environment } from '@env/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { FileUploadService } from "@serv/file-upload.service";
-import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { timer } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 

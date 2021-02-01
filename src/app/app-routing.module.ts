@@ -17,8 +17,8 @@ const routes: Routes = [
     path: 'main', component: MainComponent, canActivate: [GuardService],
     children: [
        { path: 'bandeja-entrada', component: BandejaEntradaComponent, canActivate: [GuardService] },
-       { path: 'subir-avaluo', component: SubirAvaluoComponent, canActivate: [GuardService] },
        { path: 'bandeja-entrada-perito', component: BandejaEntradaPeritoComponent, canActivate: [GuardService] },
+       { path: 'subir-avaluo', component: SubirAvaluoComponent, canActivate: [GuardService] },
        { path: 'avaluos-proximos/:no_unico', component: AvaluosProximosComponent, canActivate: [GuardService] },
        { path: 'acuse-avaluo/:no_unico', component: AcuseAvaluoComponent, canActivate: [GuardService] },
     ]

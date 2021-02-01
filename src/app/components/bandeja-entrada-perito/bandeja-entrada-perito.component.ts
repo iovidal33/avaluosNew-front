@@ -131,6 +131,33 @@ export class BandejaEntradaPeritoComponent implements OnInit {
         });
   }
 
+  openDialogAsignaNotario(numerounico): void {
+    const dialogRef = this.dialog.open(DialogAsignaNotario, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){        
+        this.http.get(environment.endpoint + 'bandeja-entrada/asignaNotarioAvaluo?id_persona_notario=' + result.IDPERSONA + '&no_unico='+ numerounico,
+          this.httpOptions).subscribe(
+            (res: any) => {
+              this.snackBar.open(res.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+              this.getData();
+            },
+            (error) => {
+              this.snackBar.open(error.error.mensaje, 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'end',
+                verticalPosition: 'top'
+              });
+          });
+      }
+    });
+  }
+
   cancelAvaluo(no_unico): void{  
     this.dialogService.openConfirmDialog('Nuevo Estado Cancelado')
     .afterClosed().subscribe(res =>{      
@@ -260,33 +287,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   avaluosProximos(no_unico): void{
     this.router.navigate(['main/avaluos-proximos/' + no_unico]);
-  }
-
-  openDialogAsignaNotario(numerounico): void {
-    const dialogRef = this.dialog.open(DialogAsignaNotario, {
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){        
-        this.http.get(environment.endpoint + 'bandeja-entrada/asignaNotarioAvaluo?id_persona_notario=' + result.IDPERSONA + '&no_unico='+ numerounico,
-          this.httpOptions).subscribe(
-            (res: any) => {
-              this.snackBar.open(res.mensaje, 'Cerrar', {
-                duration: 10000,
-                horizontalPosition: 'end',
-                verticalPosition: 'top'
-              });
-              this.getData();
-            },
-            (error) => {
-              this.snackBar.open(error.error.mensaje, 'Cerrar', {
-                duration: 10000,
-                horizontalPosition: 'end',
-                verticalPosition: 'top'
-              });
-          });
-      }
-    });
   }
 
   acuseAvaluo(no_unico): void{
