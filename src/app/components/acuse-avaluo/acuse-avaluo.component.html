@@ -247,7 +247,7 @@
     <br>
     <div class="row">
         <div class="col-md-12">
-            <button mat-raised-button (click)="generarPDF()">
+            <button mat-raised-button [class.spinner]="loadingPDF" [disabled]="loadingPDF" (click)="generarPDF()">
                 <mat-icon>save_alt</mat-icon> Descargar PDF
             </button>
         </div>

@@ -17,6 +17,7 @@ import html2canvas from 'html2canvas';
 export class AcuseAvaluoComponent implements OnInit {
   endpoint = environment.endpoint + 'bandeja-entrada';
   loading = false;
+  loadingPDF = false;
   httpOptions;
   noUnico;
   dataAvaluo;
@@ -46,15 +47,18 @@ export class AcuseAvaluoComponent implements OnInit {
 
   getData(): void {
     this.loading = true;
+    this.loadingPDF = true;
     this.http.get(this.endpoint + '/acuseAvaluo?no_unico=' + this.noUnico,
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
+          this.loadingPDF = false;
           this.dataAvaluo = res[0];
           this.tokenDataAvaluo = res[1];
         },
         (error) => {
           this.loading = false;
+          this.loadingPDF = false;
           this.snackBar.open(error.error.mensaje, 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'end',
@@ -68,9 +72,11 @@ export class AcuseAvaluoComponent implements OnInit {
   }
 
   generarPDF(): void {
+    this.loadingPDF = true;
     this.http.post(this.endpoint + '/generaAcusePDF', { 'token': this.tokenDataAvaluo, 'no_unico': this.noUnico },
       this.httpOptions).subscribe(
         (res: any) => {
+          this.loadingPDF = false;
           if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
             const byteCharacters = atob(res.pdfbase64);
             const byteNumbers = new Array(byteCharacters.length);
@@ -90,7 +96,7 @@ export class AcuseAvaluoComponent implements OnInit {
           }
         },
         (error) => {
-          this.loading = false;
+          this.loadingPDF = false;
           this.snackBar.open(error.error.mensaje, 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'end',
