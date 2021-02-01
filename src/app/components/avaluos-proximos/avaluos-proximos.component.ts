@@ -23,6 +23,7 @@ export class AvaluosProximosComponent implements OnInit {
   dataSource = [];
   httpOptions;
   noUnico;
+  menu;
 
   constructor(
     private http: HttpClient,
@@ -41,6 +42,7 @@ export class AvaluosProximosComponent implements OnInit {
         Authorization: this.auth.getSession().token
       })
     };
+    this.menu = this.auth.getMenu();
     this.getData();
   }
 
@@ -69,7 +71,7 @@ export class AvaluosProximosComponent implements OnInit {
   }
 
   regresar(): void{
-    this.router.navigate(['main/bandeja-entrada-perito/']);
+    this.router.navigate(['main/' + this.menu[0].ruta]);
   }
 
 }
