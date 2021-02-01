@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +23,7 @@ export class AcuseAvaluoComponent implements OnInit {
   dataAvaluo;
   tokenDataAvaluo;
   menu;
+  @ViewChild('contenidoPDF') contenidoPDF: ElementRef;
 
   constructor(
     private http: HttpClient,
