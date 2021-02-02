@@ -246,9 +246,14 @@
     </mat-card-content>
     <br>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
             <button mat-raised-button [class.spinner]="loadingPDF" [disabled]="loadingPDF" (click)="generarPDF()">
                 <mat-icon>save_alt</mat-icon> Descargar PDF
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button mat-raised-button [class.spinner]="loadingDOC" [disabled]="loadingDOC" (click)="generarDOC()">
+                <mat-icon>save_alt</mat-icon> Descargar DOC
             </button>
         </div>
     </div>

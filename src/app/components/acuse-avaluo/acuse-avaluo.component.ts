@@ -18,6 +18,7 @@ export class AcuseAvaluoComponent implements OnInit {
   endpoint = environment.endpoint + 'bandeja-entrada';
   loading = false;
   loadingPDF = false;
+  loadingDOC = false;
   httpOptions;
   noUnico;
   dataAvaluo;
@@ -49,17 +50,20 @@ export class AcuseAvaluoComponent implements OnInit {
   getData(): void {
     this.loading = true;
     this.loadingPDF = true;
+    this.loadingDOC = true;
     this.http.get(this.endpoint + '/acuseAvaluo?no_unico=' + this.noUnico,
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
           this.loadingPDF = false;
+          this.loadingDOC = false;
           this.dataAvaluo = res[0];
           this.tokenDataAvaluo = res[1];
         },
         (error) => {
           this.loading = false;
           this.loadingPDF = false;
+          this.loadingDOC = false;
           this.snackBar.open(error.error.mensaje, 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'end',
@@ -104,6 +108,10 @@ export class AcuseAvaluoComponent implements OnInit {
             verticalPosition: 'top'
           });
         });
+  }
+
+  generarDOC(): void {
+    console.log("hola");
   }
 
 }
