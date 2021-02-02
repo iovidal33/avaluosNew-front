@@ -8,6 +8,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import * as moment from 'moment';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import * as htmlDocx from 'html-docx-js/dist/html-docx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-acuse-avaluo',
@@ -111,7 +113,10 @@ export class AcuseAvaluoComponent implements OnInit {
   }
 
   generarDOC(): void {
-    console.log("hola");
+    let htmlDocument = '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>';
+    htmlDocument = htmlDocument + '</head><body>' + this.contenidoPDF.nativeElement.innerHTML + '</body></html>';
+    const converted = htmlDocx.asBlob(htmlDocument);
+    saveAs(converted, this.noUnico + '.docx');
   }
 
 }
