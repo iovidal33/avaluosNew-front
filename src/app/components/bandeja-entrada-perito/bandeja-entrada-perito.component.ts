@@ -297,11 +297,10 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogDescargaJustificante, {
       width: '600px',
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
     this.http.get(environment.endpoint + 'bandeja-entrada/reimprimeAvaluo?no_unico='+ no_unico,
       this.httpOptions).subscribe(
         (res: any) => {
+          dialogRef.close();
           if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
             const byteCharacters = atob(res.pdfbase64);
             const byteNumbers = new Array(byteCharacters.length);
@@ -321,6 +320,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
           }
         },
         (error) => {
+          dialogRef.close();
           this.snackBar.open(error.error.mensaje, 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'end',
