@@ -18,7 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { LoginFirmaComponent } from './components/login-firma/login-firma.component';
-import { BandejaEntradaComponent, DialogPeritoSociedad, DialogAsignaNotarioRevisor } from './components/bandeja-entrada/bandeja-entrada.component';
+import { BandejaEntradaComponent, DialogPeritoSociedad, DialogAsignaNotarioRevisor, DialogDescargaJustificante } from './components/bandeja-entrada/bandeja-entrada.component';
 import { MainComponent } from './components/main/main.component';
 import { SubirAvaluoComponent, DialogProgresoUpload } from './components/subir-avaluo/subir-avaluo.component';
 import { BandejaEntradaPeritoComponent, DialogAsignaNotario, DialogDescargaJustificantePerito } from './components/bandeja-entrada-perito/bandeja-entrada-perito.component';
@@ -49,6 +49,7 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     DialogAsignaNotario,
     AcuseAvaluoComponent,
     DialogDescargaJustificantePerito,
+    DialogDescargaJustificante,
   ],
   imports: [
     BrowserModule,

@@ -296,9 +296,13 @@ export class BandejaEntradaComponent implements OnInit {
   }
 
   descargarJustificante(no_unico): void{
+    const dialogRef = this.dialog.open(DialogDescargaJustificante, {
+      width: '600px',
+    });
     this.http.get(environment.endpoint + 'bandeja-entrada/reimprimeAvaluo?no_unico='+ no_unico,
       this.httpOptions).subscribe(
         (res: any) => {
+          dialogRef.close();
           if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
             const byteCharacters = atob(res.pdfbase64);
             const byteNumbers = new Array(byteCharacters.length);
@@ -318,6 +322,7 @@ export class BandejaEntradaComponent implements OnInit {
           }
         },
         (error) => {
+          dialogRef.close();
           this.snackBar.open(error.error.mensaje, 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'end',
@@ -522,4 +527,17 @@ export class DialogAsignaNotarioRevisor {
     this.dataNotario = dataRadio;
   }
 
+}
+
+
+@Component({
+  selector: 'app-dialog-descarga-justificante',
+  templateUrl: 'app-dialog-descarga-justificante.html',
+})
+export class DialogDescargaJustificante {
+  constructor(
+    public dialogRef: MatDialogRef<DialogDescargaJustificante>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
+    }
 }
