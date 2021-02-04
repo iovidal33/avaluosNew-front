@@ -294,6 +294,11 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   }
 
   descargarJustificante(no_unico): void{
+    const dialogRef = this.dialog.open(DialogDescargaJustificante, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
     this.http.get(environment.endpoint + 'bandeja-entrada/reimprimeAvaluo?no_unico='+ no_unico,
       this.httpOptions).subscribe(
         (res: any) => {
@@ -404,4 +409,17 @@ export class DialogAsignaNotario {
     this.dataNotario = dataRadio;
   }
 
+}
+
+
+@Component({
+  selector: 'app-dialog-descarga-justificante',
+  templateUrl: 'app-dialog-descarga-justificante.html',
+})
+export class DialogDescargaJustificante {
+  constructor(
+    public dialogRef: MatDialogRef<DialogDescargaJustificante>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      dialogRef.disableClose = true;
+    }
 }
