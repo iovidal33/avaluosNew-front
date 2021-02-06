@@ -16,4 +16,5 @@
 </div>
 <mat-dialog-actions align="end">
     <button mat-flat-button color="default" *ngIf="loading" [mat-dialog-close]="">Cancelar</button>
+    <button mat-flat-button color="primary" *ngIf="!loading" mat-dialog-close>Cerrar</button>
 </mat-dialog-actions>
