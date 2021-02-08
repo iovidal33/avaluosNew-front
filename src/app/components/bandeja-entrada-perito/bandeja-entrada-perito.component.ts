@@ -198,6 +198,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
     this.canSearch = false;
+    this.resetPaginator();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
@@ -244,7 +245,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   resetPaginator() {
     this.pagina = 1;
-    this.paginator.firstPage();
+    this.paginator.pageIndex = 0;
   }
 
   validateDate(){

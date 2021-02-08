@@ -197,6 +197,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros.vigencia = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
+    this.resetPaginator();
     this.canSearch = false;
     if(event.value == 0){
       this.opcionFiltro[0] = false;
@@ -246,7 +247,7 @@ export class BandejaEntradaComponent implements OnInit {
 
   resetPaginator() {
     this.pagina = 1;
-    this.paginator.firstPage();
+    this.paginator.pageIndex = 0;
   }
 
   validateDate(){
