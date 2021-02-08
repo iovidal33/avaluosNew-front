@@ -511,8 +511,12 @@ export class DialogAsignaNotarioRevisor {
       this.httpOptions).subscribe(
         (res: any) => {
           this.loading = false;
-          this.dataSource = res.data;
-          this.total = res.total;
+          if(res.mensaje){
+            this.dataSource = [];
+          }else{
+            this.dataSource = res.data;
+            this.total = res.total;
+          }
         },
         (error) => {
           this.loading = false;

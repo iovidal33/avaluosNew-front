@@ -37,7 +37,7 @@
         <p>Cargando...</p>
     </div>
     <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading">
-        No se encontraron datos.
+        No se encontro información del Notario.
     </div>
     <table mat-table [dataSource]="dataSource" *ngIf="dataSource.length > 0 && !loading">
         <ng-container matColumnDef="numero">
