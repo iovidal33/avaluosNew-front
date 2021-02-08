@@ -7,8 +7,16 @@
             <mat-spinner style="margin:0 auto;"></mat-spinner>
             <p>Cargando...</p>
         </div>
+        <br>
         <ng-container *ngIf="dataAvaluo">
             <div id="contenidoPDF" #contenidoPDF>
+                <div class="d-block d-md-none d-lg-none d-xl-none">
+                    <img src="assets/img/logo_dependencia.png" class="img-responsive" alt="Secretaría de Administración y Finanzas">
+                </div>
+                <div class="d-none d-md-block d-lg-block d-xl-block">
+                    <img src="assets/img/logo_dependencia.png" height="60" alt="Secretaría de Administración y Finanzas">
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-md-12">
                         <strong>NÚMERO ÚNICO </strong>{{noUnico}}
