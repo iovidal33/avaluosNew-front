@@ -195,26 +195,26 @@
                         <mat-icon>more_vert</mat-icon>
                       </button>
                       <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <!--<button mat-menu-item>
                             <mat-icon>sync_alt</mat-icon>
                             <span>Cambiar estado del avalúo</span>
-                        </button>
+                        </button>-->
                         <button mat-menu-item (click)="avaluosProximos(element.numerounico)">
                           <mat-icon>videocam</mat-icon>
                           <span>Avalúos Próximos</span>
                         </button>
-                        <button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado' || element.tipotramite == 'CAT'" (click)="openDialogAsignaNotario(element.numerounico)">
+                        <!--<button mat-menu-item [disabled]="element.estadoavaluo == 'Enviado notario' || element.estadoavaluo == 'Cancelado' || element.tipotramite == 'CAT'" (click)="openDialogAsignaNotario(element.numerounico)">
                             <mat-icon>account_box</mat-icon>
                             <span>Asignar notario</span>
-                        </button>
+                        </button>-->
                         <button mat-menu-item [disabled]="element.estadoavaluo == 'Cancelado'" (click)="acuseAvaluo(element.numerounico)">
                             <mat-icon>library_books</mat-icon>
                             <span>Acuse de avalúo</span>
                         </button>
-                        <button mat-menu-item>
+                        <!--<button mat-menu-item>
                           <mat-icon>zoom_in</mat-icon>
                           <span>Visualizar Avalúo</span>
-                        </button>
+                        </button>-->
                         <button mat-menu-item (click)="descargarJustificante(element.numerounico)">
                             <mat-icon>visibility</mat-icon>
                             <span>Descargar Justificante</span>
