@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "~10.1.5",
     "@angular/router": "~10.1.5",
     "@types/html2canvas": "0.0.36",
-    "bn-ng-idle": "^1.0.1",
     "bootstrap": "^4.5.2",
     "file-saver": "^2.0.5",
     "html-docx-js": "^0.3.1",
