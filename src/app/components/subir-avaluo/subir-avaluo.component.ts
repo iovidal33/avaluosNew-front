@@ -82,6 +82,10 @@ export class DialogProgresoUpload {
             //console.log('Request has been made!');
             break;
           case HttpEventType.ResponseHeader:
+            if(event.status == 500){
+              this.loading = false;
+              this.mensaje = 'No se pudo cargar el avalúo'; 
+            }
             //console.log('Response header has been received!');
             break;
           case HttpEventType.UploadProgress:
