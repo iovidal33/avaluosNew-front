@@ -6,6 +6,7 @@ import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { formatDate } from "@angular/common";
 import * as moment from 'moment';
 
 export interface Filtros {
@@ -286,6 +287,19 @@ export class BandejaEntradaComponent implements OnInit {
       } 
     }
     sessionStorage.canSearchRevisor = this.canSearch;
+  }
+
+  isDict(element){
+    var year = moment(element.fecha_presentacion).subtract(1, 'year').year();
+    var fecha_avaluo = moment(element.fecha_avaluo).format('YYYY-MM-DD');
+    var fecha_presentacion = moment(element.fecha_presentacion).format('YYYY-MM-DD');
+    var fecha = moment(year + '-12-31').format('YYYY-MM-DD');
+    if(element.proposito == 'DICTAMINACIÓN' || (fecha_avaluo > fecha_presentacion && fecha_presentacion == fecha))
+    {
+      return true;
+    }else{
+      return false;
+    }
   }
 
   avaluosProximos(no_unico): void{
