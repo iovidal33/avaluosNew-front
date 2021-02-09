@@ -11,7 +11,8 @@
   </a>
   <span class="spacer"></span>
   <div *ngIf="isAuth">
-      <ngx-avatar [name]="session.userData.nombre.charAt(0)" [matMenuTriggerFor]="menu"></ngx-avatar>
+    <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>user</mat-icon></button>
+      <!--ngx-avatar [name]="session.userData.nombre.charAt(0)" [matMenuTriggerFor]="menu"></ngx-avatar-->
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="cerrarSession()">
         <mat-icon>power_settings_new</mat-icon>
