@@ -3,7 +3,8 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-//import { AvatarModule } from 'ngx-avatar';
+import { AvatarModule } from 'ngx-avatar';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { registerLocaleData } from '@angular/common';
 import localeEsMx from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMx, 'es-Mx');
@@ -59,7 +60,7 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    //AvatarModule,
+    AvatarModule,
     NgxMatFileInputModule,
   ],
   entryComponents: [
@@ -69,7 +70,8 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     DialogAsignaNotarioRevisor,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es-Mx' }
+    { provide: LOCALE_ID, useValue: 'es-Mx' },
+    BnNgIdleService
   ],
   bootstrap: [AppComponent]
 })
