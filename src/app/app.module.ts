@@ -7,6 +7,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { registerLocaleData } from '@angular/common';
 import localeEsMx from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMx, 'es-Mx');
+import { BnNgIdleService } from 'bn-ng-idle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
@@ -69,7 +70,8 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     DialogAsignaNotarioRevisor,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es-Mx' }
+    { provide: LOCALE_ID, useValue: 'es-Mx' },
+    BnNgIdleService
   ],
   bootstrap: [AppComponent]
 })
