@@ -381,7 +381,6 @@ export class DialogPeritoSociedad {
 
   constructor(
     private http: HttpClient,
-    private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<DialogPeritoSociedad>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.tipoBusqueda = 'perito';
@@ -444,11 +443,7 @@ export class DialogPeritoSociedad {
         },
         (error) => {
           this.loading = false;
-          this.snackBar.open(error.error.mensaje, 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'end',
-            verticalPosition: 'top'
-          });
+          this.dataSource = [];
         });
   }
 
@@ -459,7 +454,7 @@ export class DialogPeritoSociedad {
 
   resetPaginator() {
     this.pagina = 1;
-    this.paginator.firstPage();
+    this.paginator.pageIndex = 0;
   }
 
 }
