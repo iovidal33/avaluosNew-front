@@ -366,6 +366,7 @@ export class DialogAsignaNotario {
   dataSource = [];
   httpOptions;
   loading = false;
+  busqueda;
   filtro: FiltroNotario = {} as FiltroNotario;
   dataNotario;
 
@@ -388,6 +389,7 @@ export class DialogAsignaNotario {
 
   getDataNotario(): void {
     this.loading = true;
+    this.busqueda = true;
     let filtro = '';
     
     if(this.filtro.no_notario){

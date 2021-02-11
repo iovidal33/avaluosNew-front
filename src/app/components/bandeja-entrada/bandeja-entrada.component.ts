@@ -479,6 +479,7 @@ export class DialogAsignaNotarioRevisor {
   dataSource = [];
   httpOptions;
   loading = false;
+  busqueda;
   filtro: FiltroNotario = {} as FiltroNotario;
   dataNotario;
 
@@ -501,6 +502,7 @@ export class DialogAsignaNotarioRevisor {
 
   getDataNotario(): void {
     this.loading = true;
+    this.busqueda = true;
     let filtro = '';
     
     if(this.filtro.no_notario){
