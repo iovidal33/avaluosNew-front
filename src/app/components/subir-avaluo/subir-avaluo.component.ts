@@ -84,7 +84,7 @@ export class DialogProgresoUpload {
           case HttpEventType.ResponseHeader:
             if(event.status == 500){
               this.loading = false;
-              this.mensaje = 'No se pudo cargar el avalúo'; 
+              this.mensaje = 'No se registró el archivo XML'; 
             }
             //console.log('Response header has been received!');
             break;
