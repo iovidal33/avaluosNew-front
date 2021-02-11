@@ -46,6 +46,7 @@ export class BandejaEntradaComponent implements OnInit {
   busqueda;
   errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
   canSearch = false;
+  filtrosString;
   @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(
@@ -77,46 +78,47 @@ export class BandejaEntradaComponent implements OnInit {
         this.registroPeritoSociedad = sessionStorage.registroPeritoSociedad;
         this.tipoBusqueda = sessionStorage.tipoBusqueda;
       }
-      this.getData();
+      this.getData(true);
     }
   }
 
   paginado(evt): void{
     this.pagina = evt.pageIndex + 1;
-    this.getData();
+    this.getData(false);
   }
 
-  getData(): void {
+  getData(search): void {
     this.loading = true;
     this.busqueda = true;
-    let filtros = '';
+    if(search){
+      this.filtrosString = '';
     if(this.filtros.fecha_fin && this.filtros.fecha_ini){
-      filtros = filtros + '&fecha_ini=' + moment(this.filtros.fecha_ini).format('YYYY-MM-DD') +
+      this.filtrosString = this.filtrosString + '&fecha_ini=' + moment(this.filtros.fecha_ini).format('YYYY-MM-DD') +
       '&fecha_fin=' + moment(this.filtros.fecha_fin).format('YYYY-MM-DD');
     }
     if(this.filtros.no_avaluo){
-      filtros = filtros + '&no_avaluo=' + this.filtros.no_avaluo; 
+      this.filtrosString = this.filtrosString + '&no_avaluo=' + this.filtros.no_avaluo; 
     }
     if(this.tipoBusqueda){
       if(this.tipoBusqueda == 'perito')
-        filtros = filtros + '&id_perito=' + this.filtros.perito_sociedad;
+        this.filtrosString = this.filtrosString + '&id_perito=' + this.filtros.perito_sociedad;
       else if(this.tipoBusqueda == 'sociedad')
-        filtros = filtros + '&id_sociedad=' + this.filtros.perito_sociedad;
+        this.filtrosString = this.filtrosString + '&id_sociedad=' + this.filtros.perito_sociedad;
     }
     if(this.filtros.no_unico){
-      filtros = filtros + '&no_unico=' + this.filtros.no_unico;
+      this.filtrosString = this.filtrosString + '&no_unico=' + this.filtros.no_unico;
     }
     if(this.filtros.region || this.filtros.manzana || this.filtros.lote || this.filtros.unidad){
-      filtros = filtros + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
+      this.filtrosString = this.filtrosString + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
       + '-' + ((this.filtros.manzana) ? this.filtros.manzana : ' ')
       + '-' + ((this.filtros.lote) ? this.filtros.lote : ' ')
       + '-' + ((this.filtros.unidad) ? this.filtros.unidad : ' ');
     }
     if(this.filtros.estado){
-      filtros = filtros + '&estado=' + this.filtros.estado;
+      this.filtrosString = this.filtrosString + '&estado=' + this.filtros.estado;
     }
     if(this.filtros.vigencia){
-      filtros = filtros + '&vigencia=' + this.filtros.vigencia;
+      this.filtrosString = this.filtrosString + '&vigencia=' + this.filtros.vigencia;
     }
     sessionStorage.filtrosRevisor = JSON.stringify(this.filtros);
     sessionStorage.filtroSelectedRevisor = this.filtroSelected;
@@ -124,10 +126,12 @@ export class BandejaEntradaComponent implements OnInit {
     if(this.filtros.perito_sociedad){
       sessionStorage.registroPeritoSociedad = this.registroPeritoSociedad;
       sessionStorage.tipoBusqueda = this.tipoBusqueda;
+      }
     }
-    this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
+    this.http.get(this.endpoint + '?page=' + this.pagina + this.filtrosString,
       this.httpOptions).subscribe(
         (res: any) => {
+          (search) ? this.resetPaginator() : '';
           this.loading = false;
           this.dataSource = res.data;
           this.total = res.total;
@@ -172,7 +176,7 @@ export class BandejaEntradaComponent implements OnInit {
                 horizontalPosition: 'end',
                 verticalPosition: 'top'
               });
-              this.getData();
+              this.getData(true);
             },
             (error) => {
               this.snackBar.open(error.error.mensaje, 'Cerrar', {
@@ -197,7 +201,6 @@ export class BandejaEntradaComponent implements OnInit {
     this.filtros.vigencia = '';
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
-    this.resetPaginator();
     this.canSearch = false;
     if(event.value == 0){
       this.opcionFiltro[0] = false;
@@ -242,7 +245,6 @@ export class BandejaEntradaComponent implements OnInit {
 
   changeVigencia(event) {
     this.filtros.vigencia = event.value;
-    this.resetPaginator();
   }
 
   resetPaginator() {
