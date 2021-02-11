@@ -233,7 +233,20 @@ export class AcuseAvaluoComponent implements OnInit {
                 +   '<strong>Nombre del Notario</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.escritura.nombrenotario  + '</span>'
                 +   '<br>'
                 +   '<strong>Entidad Federativa</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.escritura.distritojudicialnotario  + '</span>'
-                + '</div>';
+                + '</div>'
+                + '<br>'
+                + '<hr>'
+                + '<footer>'
+                +   '<div style="text-align: center; font-size: 13px;">' 
+                +     '<span><strong>'
+                +       'Dirección de Desarrollo Catastral'
+                +       '<br>'
+                +       'Subtesorería de Catastro y Padrón Territorial'
+                +       '<br>'
+                +       'Secretaría de Administración y Finanzas.'
+                +     '</strong></span>'   
+                +   '</div>' 
+                + '</footer>';
     htmlDocument = htmlDocument + styles + '</head><body>' + content + '</body></html>';
     const converted = htmlDocx.asBlob(htmlDocument);
     saveAs(converted, this.noUnico + '.docx');
