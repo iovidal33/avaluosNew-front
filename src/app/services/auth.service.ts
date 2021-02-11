@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '@env/environment';
+import { MatDialog } from '@angular/material/dialog';
 import * as sha1 from 'js-sha1';
 
 
@@ -14,7 +15,7 @@ export interface AuthData {
 })
 export class AuthService {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, private dialogRef: MatDialog) { }
 
   public setSession(session: AuthData): void {
     sessionStorage.setItem('session_' + environment.appName, JSON.stringify(session));
@@ -39,6 +40,7 @@ export class AuthService {
 
   public closeSession(): void {
     sessionStorage.removeItem('session_' + environment.appName);
+    this.dialogRef.closeAll();
     sessionStorage.clear();
     this.router.navigate([environment.baseHref]);
   }
