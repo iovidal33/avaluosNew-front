@@ -409,6 +409,7 @@ export class DialogPeritoSociedad {
   getDataPeritoSociedad(): void {
     this.busquedaPeritoSociedad = true;
     this.loading = true;
+    this.total = 0;
     let filtros = '';
     if(this.tipoBusqueda == 'perito'){
       if(this.filtros.registro){
