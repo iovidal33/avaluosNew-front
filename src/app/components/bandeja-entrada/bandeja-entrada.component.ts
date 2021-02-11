@@ -376,6 +376,7 @@ export class DialogPeritoSociedad {
   loading = false;
   tipoBusqueda = '';
   filtros: FiltrosPeritoSociedad = {} as FiltrosPeritoSociedad;
+  filtrosString;
   busquedaPeritoSociedad;
   PeritoSociedad;
   busqueda: busqueda = {} as busqueda;
@@ -395,7 +396,7 @@ export class DialogPeritoSociedad {
 
   paginado(evt): void{
     this.pagina = evt.pageIndex + 1;
-    this.getDataPeritoSociedad();
+    this.getDataPeritoSociedad(false);
   }
 
   cleanBusqueda(): void{
@@ -408,38 +409,40 @@ export class DialogPeritoSociedad {
     this.busqueda = {} as busqueda;
   }
 
-  getDataPeritoSociedad(): void {
+  getDataPeritoSociedad(search): void {
     this.busquedaPeritoSociedad = true;
     this.loading = true;
-    this.total = 0;
-    let filtros = '';
+    if(search){
+      this.filtrosString = '';
     if(this.tipoBusqueda == 'perito'){
       if(this.filtros.registro){
-        filtros = filtros + '&reg=' + this.filtros.registro;
+        this.filtrosString = this.filtrosString + '&reg=' + this.filtros.registro;
       }else{
         if(this.filtros.nombre){
-          filtros = filtros + '&nombre=' + this.filtros.nombre;
+          this.filtrosString = this.filtrosString + '&nombre=' + this.filtros.nombre;
         }
         if(this.filtros.primer_apellido){
-          filtros = filtros + '&apaterno=' + this.filtros.primer_apellido; 
+          this.filtrosString = this.filtrosString + '&apaterno=' + this.filtros.primer_apellido; 
         }
         if(this.filtros.segundo_apellido){
-          filtros = filtros + '&amaterno=' + this.filtros.segundo_apellido;
+          this.filtrosString = this.filtrosString + '&amaterno=' + this.filtros.segundo_apellido;
         }
       }
     }
     if(this.tipoBusqueda == 'sociedad'){
       if(this.filtros.registro){
-        filtros = filtros + '&reg=' + this.filtros.registro;
+        this.filtrosString = this.filtrosString + '&reg=' + this.filtros.registro;
       }else{
         if(this.filtros.nombre){
-          filtros = filtros + '&nombre=' + this.filtros.nombre;
+          this.filtrosString = this.filtrosString + '&nombre=' + this.filtros.nombre;
         }
       }
+      }
     }
-    this.http.get(this.endpoint + this.tipoBusqueda + '?page=' + this.pagina + filtros,
+    this.http.get(this.endpoint + this.tipoBusqueda + '?page=' + this.pagina + this.filtrosString,
       this.httpOptions).subscribe(
         (res: any) => {
+          (search) ? this.resetPaginator() : '';
           this.loading = false;
           this.dataSource = res.data;
           this.total = res.total;
@@ -447,6 +450,7 @@ export class DialogPeritoSociedad {
         (error) => {
           this.loading = false;
           this.dataSource = [];
+          this.resetPaginator();
         });
   }
 
@@ -457,6 +461,7 @@ export class DialogPeritoSociedad {
 
   resetPaginator() {
     this.pagina = 1;
+    this.total = 0;
     this.paginator.pageIndex = 0;
   }
 

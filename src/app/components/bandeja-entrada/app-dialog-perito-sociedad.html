@@ -14,29 +14,29 @@
             <ng-container *ngIf="tipoBusqueda == 'perito'">
                 <mat-form-field class="col-md-12">
                     <mat-label>Registro</mat-label>
-                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro">
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
                     <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Nombre" [(ngModel)]="filtros.nombre" name="nombre" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Nombre" [(ngModel)]="filtros.nombre" name="nombre">
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
                     <mat-label>Apellido Paterno</mat-label>
-                    <input matInput placeholder="Apellido Paterno" [(ngModel)]="filtros.primer_apellido" name="primer_apellido" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Apellido Paterno" [(ngModel)]="filtros.primer_apellido" name="primer_apellido">
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
                     <mat-label>Apellido Materno</mat-label>
-                    <input matInput placeholder="Apellido Materno" [(ngModel)]="filtros.segundo_apellido" name="segundo_apellido" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Apellido Materno" [(ngModel)]="filtros.segundo_apellido" name="segundo_apellido">
                 </mat-form-field>
             </ng-container>
             <ng-container *ngIf="tipoBusqueda == 'sociedad'">
                 <mat-form-field class="col-md-12">
                     <mat-label>Registro</mat-label>
-                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Registro" [(ngModel)]="filtros.registro" name="registro">
                 </mat-form-field>
                 <mat-form-field class="col-md-12">
                     <mat-label>Razón Social</mat-label>
-                    <input matInput placeholder="Razón Social" [(ngModel)]="filtros.nombre" name="nombre" (ngModelChange)="resetPaginator()">
+                    <input matInput placeholder="Razón Social" [(ngModel)]="filtros.nombre" name="nombre">
                 </mat-form-field>
             </ng-container>
             <br>
@@ -45,7 +45,7 @@
                 <h3 class="cdmx-color-accent">Resultado</h3>
             </div>
             <div class="col" align="end">
-                <button mat-icon-button color="primary" aria-label="Buscar" matTooltip="Buscar" (click)="getDataPeritoSociedad()">
+                <button mat-icon-button color="primary" aria-label="Buscar" matTooltip="Buscar" (click)="getDataPeritoSociedad(true)">
                     <mat-icon>search</mat-icon>
                 </button>
             </div>
