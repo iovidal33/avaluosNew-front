@@ -48,6 +48,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
   errores: Array<{isError: boolean, errorMessage: string}> = [{isError: false, errorMessage: ''}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}, {isError: false, errorMessage: 'Requerido'}];
   canSearch = false;
   @ViewChild('paginator') paginator: MatPaginator;
+  filtrosString;
 
   constructor(
     private http: HttpClient,
@@ -75,48 +76,51 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.opcionFiltro[sessionStorage.filtroSelectedPerito] = false;
       this.canSearch = sessionStorage.canSearchPerito;
       this.filtros = JSON.parse(sessionStorage.filtrosPerito);
-      this.getData();
+      this.getData(true);
     }
   }
 
   paginado(evt): void{
     this.pagina = evt.pageIndex + 1;
-    this.getData();
+    this.getData(false);
   }
  
-  getData(): void {
+  getData(search): void {
     this.loading = true;
     this.busqueda = true;
-    let filtros = '';
-    if(this.filtros.fecha_fin && this.filtros.fecha_ini){
-      filtros = filtros + '&fecha_ini=' + moment(this.filtros.fecha_ini).format('YYYY-MM-DD') +
-      '&fecha_fin=' + moment(this.filtros.fecha_fin).format('YYYY-MM-DD');
+    if(search){
+      this.filtrosString = '';
+      if(this.filtros.fecha_fin && this.filtros.fecha_ini){
+        this.filtrosString = this.filtrosString + '&fecha_ini=' + moment(this.filtros.fecha_ini).format('YYYY-MM-DD') +
+        '&fecha_fin=' + moment(this.filtros.fecha_fin).format('YYYY-MM-DD');
+      }
+      if(this.filtros.no_avaluo){
+        this.filtrosString = this.filtrosString + '&no_avaluo=' + this.filtros.no_avaluo; 
+      }
+      if(this.filtros.no_unico){
+        this.filtrosString = this.filtrosString + '&no_unico=' + this.filtros.no_unico;
+      }
+      if(this.filtros.region || this.filtros.manzana || this.filtros.lote || this.filtros.unidad){
+        this.filtrosString = this.filtrosString + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
+        + '-' + ((this.filtros.manzana) ? this.filtros.manzana : ' ')
+        + '-' + ((this.filtros.lote) ? this.filtros.lote : ' ')
+        + '-' + ((this.filtros.unidad) ? this.filtros.unidad : ' ');
+      }
+      if(this.filtros.estado){
+        this.filtrosString = this.filtrosString + '&estado=' + this.filtros.estado;
+      }
+      if(this.filtros.vigencia){
+        this.filtrosString = this.filtrosString + '&vigencia=' + this.filtros.vigencia;
+      }
+      
+      sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
+      sessionStorage.filtroSelectedPerito = this.filtroSelected;
+      sessionStorage.canSearchPerito = this.canSearch;
     }
-    if(this.filtros.no_avaluo){
-      filtros = filtros + '&no_avaluo=' + this.filtros.no_avaluo; 
-    }
-    if(this.filtros.no_unico){
-      filtros = filtros + '&no_unico=' + this.filtros.no_unico;
-    }
-    if(this.filtros.region || this.filtros.manzana || this.filtros.lote || this.filtros.unidad){
-      filtros = filtros + '&cta_catastral=' + ((this.filtros.region) ? this.filtros.region : ' ')
-      + '-' + ((this.filtros.manzana) ? this.filtros.manzana : ' ')
-      + '-' + ((this.filtros.lote) ? this.filtros.lote : ' ')
-      + '-' + ((this.filtros.unidad) ? this.filtros.unidad : ' ');
-    }
-    if(this.filtros.estado){
-      filtros = filtros + '&estado=' + this.filtros.estado;
-    }
-    if(this.filtros.vigencia){
-      filtros = filtros + '&vigencia=' + this.filtros.vigencia;
-    }
-    
-    sessionStorage.filtrosPerito = JSON.stringify(this.filtros);
-    sessionStorage.filtroSelectedPerito = this.filtroSelected;
-    sessionStorage.canSearchPerito = this.canSearch;
-    this.http.get(this.endpoint + '?page=' + this.pagina + filtros,
+    this.http.get(this.endpoint + '?page=' + this.pagina + this.filtrosString,
       this.httpOptions).subscribe(
         (res: any) => {
+          (search) ? this.resetPaginator() : '';
           this.loading = false;
           this.dataSource = res.data;
           this.total = res.total;
@@ -145,7 +149,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
                 horizontalPosition: 'end',
                 verticalPosition: 'top'
               });
-              this.getData();
+              this.getData(true);
             },
             (error) => {
               this.snackBar.open(error.error.mensaje, 'Cerrar', {
@@ -173,7 +177,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
               horizontalPosition: 'end',
               verticalPosition: 'top'
             });
-            this.getData();
+            this.getData(true);
           },
           (error) => {
             this.loading = false;
@@ -198,7 +202,6 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.filtroSelected = '';
     this.opcionFiltro = [true, true, true, true];
     this.canSearch = false;
-    this.resetPaginator();
     if(event.value == 0){
       this.opcionFiltro[0] = false;
       this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
@@ -239,12 +242,11 @@ export class BandejaEntradaPeritoComponent implements OnInit {
 
   changeVigencia(event) {
     this.filtros.vigencia = event.value;
-    this.resetPaginator();
-    // this.getData();
   }
 
   resetPaginator() {
     this.pagina = 1;
+    this.total = 0;
     this.paginator.pageIndex = 0;
   }
 

@@ -101,7 +101,7 @@
             <div class="col">
                 <mat-form-field class="input-filter-long">
                     <mat-label>Estado</mat-label>
-                    <mat-select [(ngModel)]="filtros.estado" (selectionChange)="resetPaginator()">
+                    <mat-select [(ngModel)]="filtros.estado">
                         <mat-option value="">Todos</mat-option>
                         <mat-option value="1">Recibido</mat-option>
                         <mat-option value="2">Cancelado</mat-option>

@@ -94,7 +94,7 @@
             <div class="col">
                 <mat-form-field class="input-filter-long">
                     <mat-label>Estado</mat-label>
-                    <mat-select [(ngModel)]="filtros.estado" (selectionChange)="resetPaginator()">
+                    <mat-select [(ngModel)]="filtros.estado">
                         <mat-option value="">Todos</mat-option>
                         <mat-option value="1">Recibido</mat-option>
                         <mat-option value="2">Cancelado</mat-option>
@@ -125,7 +125,7 @@
                     <button mat-icon-button color="primary" aria-label="Limpiar Filtros" matTooltip="Limpiar Filtros" (click)="clean()">
                         <mat-icon>clear</mat-icon>
                     </button>
-                    <button mat-icon-button color="primary" aria-label="Busqueda" matTooltip="Buscar" (click)="getData()" [disabled]="!canSearch">
+                    <button mat-icon-button color="primary" aria-label="Busqueda" matTooltip="Buscar" (click)="getData(true)" [disabled]="!canSearch">
                         <mat-icon>search</mat-icon>
                     </button>
                 </div>
