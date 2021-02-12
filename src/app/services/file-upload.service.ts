@@ -37,21 +37,13 @@ export class FileUploadService {
     } else {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      if(!(error.error.mensaje instanceof Array)){
-        this.snackBar.open(error.error.mensaje, 'Cerrar', {
-          duration: 10000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top'
-        });
-      }else{
-          const dialogRef = this.dialog.open(DialogValidacionesXML, {
-            width: '600px',
-            data: error.error.mensaje
-          });
-          dialogRef.afterClosed().subscribe(result => {
-            window.location.reload();            
-          });     
-      }    
+      const dialogRef = this.dialog.open(DialogValidacionesXML, {
+        width: '600px',
+        data: error.error.mensaje
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        window.location.reload();            
+      });   
     }
     return throwError(errorMessage);
   }
