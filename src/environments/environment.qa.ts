@@ -6,7 +6,7 @@ export const environment = {
     production: false,
     appName: 'avaluos',
     baseHref: '/avaluos',
-    endpoint: 'http://ovica.linesolutions.tech/avaluosNew-backend/public/api/v1/',
+    endpoint: 'http://ovica.linesolutions.tech/avaluosNew_backend/public/api/v1/',
     //endpoint: 'http://ovica.linesolutions.tech/avaluos-backend/public/api/v1/',
     ssoEndpoint: 'http://ovica.linesolutions.tech/sso-backend/public/api/v1/',
     rconEndpoint: 'http://ovica.linesolutions.tech/rcon-backend/public/api/v1/',
