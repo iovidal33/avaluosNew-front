@@ -309,11 +309,15 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     this.router.navigate(['main/acuse-avaluo/' + no_unico]);
   }
 
-  descargarJustificante(no_unico): void{
+  descargarJustificante(element): void{
     const dialogRef = this.dialog.open(DialogDescargaJustificantePerito, {
       width: '600px',
     });
-    this.http.get(environment.endpoint + 'bandeja-entrada/reimprimeAvaluo?no_unico='+ no_unico,
+
+    var fecha_presentacion = moment(element.fecha_presentacion).format('YYYY-MM-DD');
+    var fecha = moment('2021-02-16').format('YYYY-MM-DD');
+
+    this.http.get(environment.endpoint + 'bandeja-entrada/'+((fecha_presentacion<fecha) ? 'reimprimeAvaluo' : 'reimprimeAvaluoNuevo')+'?no_unico='+ element.numerounico,
       this.httpOptions).subscribe(
         (res: any) => {
           dialogRef.close();
