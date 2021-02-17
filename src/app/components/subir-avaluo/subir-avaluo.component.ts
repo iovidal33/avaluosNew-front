@@ -7,6 +7,7 @@ import { ProgressBarMode } from '@angular/material/progress-bar';
 import { FileUploadService } from "@serv/file-upload.service";
 import { timer } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-subir-avaluo',
@@ -63,6 +64,7 @@ export class DialogProgresoUpload {
     public fileUploadService: FileUploadService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
+    private bnIdle: BnNgIdleService,
     public dialogRef: MatDialogRef<DialogProgresoUpload>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       dialogRef.disableClose = true;
@@ -71,7 +73,8 @@ export class DialogProgresoUpload {
       formData.append('files', data.file, data.file.name);
       formData.append('idPersona', '264');
       const subscription = this.source.subscribe(val => {
-        this.progress = val 
+        this.progress = val;
+        this.bnIdle.resetTimer(); 
       });
       this.fileUploadService.sendFile(this.endpoint, formData, data.httpOptions
       ).subscribe(
