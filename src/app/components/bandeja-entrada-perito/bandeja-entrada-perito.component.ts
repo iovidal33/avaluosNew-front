@@ -293,7 +293,7 @@ export class BandejaEntradaPeritoComponent implements OnInit {
     var fecha_avaluo = moment(element.fecha_avaluo).format('YYYY-MM-DD');
     var fecha_presentacion = moment(element.fecha_presentacion).format('YYYY-MM-DD');
     var fecha = moment(year + '-12-31').format('YYYY-MM-DD');
-    if(element.proposito == 'DICTAMINACIÓN' || (fecha_avaluo > fecha_presentacion && fecha_presentacion == fecha))
+    if(element.proposito == 'DICTAMINACIÓN' || element.objeto == 'DICTAMINACIÓN' || (fecha_avaluo > fecha_presentacion && fecha_presentacion == fecha))
     {
       return true;
     }else{
