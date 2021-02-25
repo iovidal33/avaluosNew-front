@@ -316,10 +316,10 @@ export class BandejaEntradaComponent implements OnInit {
       width: '600px',
     });
     
-    var fecha_presentacion = moment(element.fecha_presentacion).format('YYYY-MM-DD');
-    var fecha = moment('2021-02-16').format('YYYY-MM-DD');
+    var fecha_avaluo = moment(element.fecha_avaluo).format('YYYY-MM-DD');
+    var fecha = moment('2021-01-01').format('YYYY-MM-DD');
 
-    this.http.get(environment.endpoint + 'bandeja-entrada/'+((fecha_presentacion<fecha) ? 'reimprimeAvaluo' : 'reimprimeAvaluoNuevo')+'?no_unico='+ element.numerounico,
+    this.http.get(environment.endpoint + 'bandeja-entrada/'+((fecha_avaluo<fecha) ? 'reimprimeAvaluo' : 'reimprimeAvaluoNuevo')+'?no_unico='+ element.numerounico,
       this.httpOptions).subscribe(
         (res: any) => {
           dialogRef.close();
