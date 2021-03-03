@@ -218,8 +218,6 @@ export class AcuseAvaluoComponent implements OnInit {
                 + '<br><br>'
                 + '<strong>IV. UBICACIÓN DEL INMUEBLE QUE SE ADQUIERE</strong>'
                 + '<div class="ubicacion_inmueble">'
-                +   '<strong>Tipo Inmueble</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.tipoDeInmueble + '</span>'
-                +   '<br>'
                 +   '<strong>Calle</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.Ubicacion_Inmueble.Calle + '</span>' + '&emsp;&emsp;'
                 +   '<strong>Lote</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.Ubicacion_Inmueble.Lote + '</span>' + '&emsp;&emsp;'
                 +   '<strong>No. Exterior</strong>&emsp;' + '<span class="gris">' + this.dataAvaluo.Ubicacion_Inmueble.No_Exterior + '</span>' + '&emsp;&emsp;'
