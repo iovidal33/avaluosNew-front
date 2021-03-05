@@ -4,5 +4,6 @@ export const environment = {
   baseHref: '/',
   endpoint: '',
   ssoEndpoint: '',
+  ssoRemember: '',
   ssoToken: '',
 };

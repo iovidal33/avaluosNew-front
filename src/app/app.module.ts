@@ -27,6 +27,7 @@ import { DialogoConfirmacionComponent } from './components/dialogo-confirmacion/
 import { AvaluosProximosComponent } from './components/avaluos-proximos/avaluos-proximos.component';
 import { AcuseAvaluoComponent } from './components/acuse-avaluo/acuse-avaluo.component';
 import { DialogValidacionesXML } from "@serv/file-upload.service";
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { DialogValidacionesXML } from "@serv/file-upload.service";
     ReactiveFormsModule,
     AvatarModule,
     NgxMatFileInputModule,
+    NgxMaskModule.forRoot(),
   ],
   entryComponents: [
     DialogPeritoSociedad,

@@ -28,6 +28,15 @@ export class AuthService {
       return {} as AuthData;
     }
   }
+  
+  public getToken(): string {
+    if (this.isAuthenticated()) {
+      return JSON.parse(localStorage.getItem('session')).token;
+    } else {
+      return '';
+    }
+  }
+
 
   public getMenu(): any {
     const sess = JSON.parse(sessionStorage.getItem('session_' + environment.appName));
