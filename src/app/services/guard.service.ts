@@ -23,8 +23,7 @@ export class GuardService implements CanActivate {
     } else {
       if(route.data.rol) {
         const currentUser = this.auth.getSession();
-        const userBandejaEntrada = "/main" + currentUser.userData.menu[0].ruta;
-        
+        const userBandejaEntrada = "/main/" + currentUser.userData.redirect;
         if(userBandejaEntrada != state.url){
           this.router.navigate([userBandejaEntrada]);
         }
