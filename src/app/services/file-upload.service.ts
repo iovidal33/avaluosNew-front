@@ -64,7 +64,11 @@ export class FileUploadService {
   templateUrl: 'app-dialog-validaciones-xml.html',
 })
 export class DialogValidacionesXML {
-  displayedColumns: string[] = ['num', 'error'];
+  displayedColumns: string[] = ['mensaje'];
+  pageSize = 5;
+  pagina = 1;
+  total = 0;
+  dataSource = [];
   errores = [];
  
   constructor(
@@ -72,10 +76,21 @@ export class DialogValidacionesXML {
     @Inject(MAT_DIALOG_DATA) public data: any) {
       dialogRef.disableClose = true;
       this.errores = data.flat();
+      this.dataSource = this.paginate(this.errores, this.pageSize, this.pagina);
+      this.total = this.errores.length;
     }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  paginado(evt): void{
+    this.pagina = evt.pageIndex + 1;
+    this.dataSource = this.paginate(this.errores, this.pageSize, this.pagina);
+  }
+
+  paginate(array, page_size, page_number) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
   }
 
 }
