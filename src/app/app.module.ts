@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AvatarModule } from 'ngx-avatar';
 import { BnNgIdleService } from 'bn-ng-idle';
-import { JwPaginationModule } from 'jw-angular-pagination';
 import { registerLocaleData } from '@angular/common';
 import localeEsMx from '@angular/common/locales/es-MX';
 registerLocaleData(localeEsMx, 'es-Mx');
@@ -65,7 +64,6 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     AvatarModule,
     NgxMatFileInputModule,
     NgxMaskModule.forRoot(),
-    JwPaginationModule,
   ],
   entryComponents: [
     DialogPeritoSociedad,
