@@ -6,13 +6,13 @@
         <h3 class="cdmx-color-accent">Filtro de avalúos</h3>
         <mat-radio-group [(ngModel)]="filtroSelected">
             <div class="row">
-                <div class="col-1">
+                <div class="col-1 col-xs-6">
                     <mat-radio-button value="0" (change)="getFiltroSelected($event)"></mat-radio-button>
                 </div>
-                <div class="col-2">
+                <div class="col-2 col-xs-6">
                     <h4 class="cdmx-color-accent">Rango de fechas:</h4>
                 </div>
-                <div class="col">
+                <div class="col col-xs-12">
                     <mat-form-field class="input-filter">
                         <mat-label>Fecha Inicio</mat-label>
                         <input matInput readonly [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" [disabled]="opcionFiltro[0]" [required]="!opcionFiltro[0]" (dateChange)="validateDate()">
@@ -98,8 +98,8 @@
             <div class="col-2">
                 <h4 class="cdmx-color-accent">Estado:</h4>
             </div>
-            <div class="col">
-                <mat-form-field class="input-filter-long">
+            
+                <mat-form-field class="col-4">
                     <mat-label>Estado</mat-label>
                     <mat-select [(ngModel)]="filtros.estado">
                         <mat-option value="">Todos</mat-option>
@@ -108,7 +108,6 @@
                         <mat-option value="6">Enviado Notario</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>
         </div>
         <div class="row">
             <div class="col-2">
@@ -150,6 +149,7 @@
         <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading && busqueda">
             No hay avalúos para el filtro seleccionado
         </div>
+        <div style="overflow-x:auto; white-space: nowrap;">
         <table mat-table [dataSource]="dataSource" *ngIf="!loading && dataSource.length > 0 && busqueda">
             <ng-container matColumnDef="no_unico">
                 <th mat-header-cell *matHeaderCellDef> Nº único </th>
@@ -225,6 +225,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+    </div>
         <mat-paginator #paginator [length]="total" [pageSize]="15" [pageSizeOptions]="[15]" (page)="paginado($event)">
         </mat-paginator>
     </mat-card-content>
