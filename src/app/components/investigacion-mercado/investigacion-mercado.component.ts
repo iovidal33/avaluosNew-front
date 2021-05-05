@@ -23,10 +23,12 @@ export interface Filtros {
 })
 export class InvestigacionMercadoComponent implements OnInit {
   endpoint = environment.endpoint;
+  pageSize = 15;
   pagina = 1;
   total = 0;
   loading = false;
   dataSource = [];
+  dataInforme = [];
   displayedColumns: string[] = ['alcaldia', 'colonia', 'region', 'manzana', 'ubicacion', 'descripcion', 'precios_solicitados', 'superficie', 'vu', 'tipo'];
   httpOptions;
   filtros: Filtros = {} as Filtros;
@@ -35,14 +37,36 @@ export class InvestigacionMercadoComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   canSearch = true;
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private http: HttpClient,
+  ) { }
 
   ngOnInit(): void {
     this.clean();
+
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.auth.getSession().token
+      })
+    };
   }
 
-  getData(isSearch): void {
-    console.log(isSearch);
+  getData(): void {
+    this.loading = true;
+    this.isBusqueda = true;
+    this.pagina = 1;
+    this.queryParamFiltros = '';
+  }
+
+  paginado(evt): void{
+    this.pagina = evt.pageIndex + 1;
+    this.dataSource = this.paginate(this.dataInforme, this.pageSize, this.pagina);
+  }
+
+  paginate(array, page_size, page_number) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
   }
 
   clean(): void{
@@ -51,7 +75,11 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.filtros.fecha_fin = new Date((new Date().getTime()));
     this.filtros.tipo = 0;
     this.filtros.alcaldia = 0;
-    this.filtros.colonia = 0;   
+    this.filtros.colonia = 0;
+    this.pagina = 1;
+    this.total = 0;   
+    this.dataInforme = [];
+    this.isBusqueda = false;
   }
 
   validateDate(){
