@@ -10,38 +10,57 @@
         <mat-card-content>
             <br>
             <div class="row">
+                <div class="col-2"></div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Rango de fechas:</h4>
                 </div>
-                <mat-form-field class="col-5">
+                <mat-form-field class="col-3">
                     <mat-label>Fecha Inicial</mat-label>
                     <input matInput readonly [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" (dateChange)="validateDate()">
                     <mat-datepicker-toggle matSuffix [for]="pickini"></mat-datepicker-toggle>
                     <mat-datepicker #pickini></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field class="col-5">
+                <mat-form-field class="col-3">
                     <mat-label>Fecha Final</mat-label>
                     <input matInput readonly [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [min]="filtros.fecha_ini" (dateChange)="validateDate()">
                     <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
                     <mat-datepicker #pickfin></mat-datepicker>
                     <mat-error>La fecha final tiene que ser mayor a la inicial</mat-error>
                 </mat-form-field>
+                <div class="col-2"></div>
             </div>
             <br>
             <div class="row">
+                <div class="col-2"></div>
                 <div class="col-2">
                     <h4 class="cdmx-color-accent">Cuenta catastral:</h4>
                 </div>
-                <mat-form-field class="col-5">
+                <mat-form-field class="col-3">
                     <mat-label>Región</mat-label>
                     <input matInput #region [(ngModel)]="filtros.region" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)" (keyup)="focusNextInput($event, manzana)">
                     <mat-error>La región debe de tener 3 carácteres alfanuméricos</mat-error>
                 </mat-form-field>
-                <mat-form-field class="col-5">
+                <mat-form-field class="col-3">
                     <mat-label>Manzana</mat-label>
                     <input matInput #manzana [(ngModel)]="filtros.manzana" minlength="3" maxlength="3" (keypress)="keyPressAlphaNumeric($event)">
                     <mat-error>La manzana debe de tener 3 carácteres alfanuméricos</mat-error>
                 </mat-form-field>
+                <div class="col-2"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-2">
+                    <h4 class="cdmx-color-accent">Tipo:</h4>
+                </div>
+                <mat-form-field class="col-6">
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="filtros.tipo">
+                        <mat-option value="">Seleccione ...</mat-option>
+                        <mat-option value="1">Todos</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="col-2"></div>
             </div>
             <div class="row">
                 <div class="col" align="end">
