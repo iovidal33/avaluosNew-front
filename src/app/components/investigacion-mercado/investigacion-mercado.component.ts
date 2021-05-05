@@ -38,7 +38,8 @@ export class InvestigacionMercadoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.filtros.fecha_ini = new Date((new Date().getTime()));
+    this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
+    this.filtros.fecha_fin = new Date((new Date().getTime()));
   }
 
   validateDate(){
