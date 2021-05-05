@@ -9,6 +9,7 @@ import { SubirAvaluoComponent } from '@comp/subir-avaluo/subir-avaluo.component'
 import { GuardService } from '@serv/guard.service';
 import { AvaluosProximosComponent } from '@comp/avaluos-proximos/avaluos-proximos.component';
 import { AcuseAvaluoComponent } from '@comp/acuse-avaluo/acuse-avaluo.component';
+import { InvestigacionMercadoComponent } from '@comp/investigacion-mercado/investigacion-mercado.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
        { path: 'subir-avaluo', component: SubirAvaluoComponent, canActivate: [GuardService] },
        { path: 'avaluos-proximos/:no_unico', component: AvaluosProximosComponent, canActivate: [GuardService] },
        { path: 'acuse-avaluo/:no_unico', component: AcuseAvaluoComponent, canActivate: [GuardService] },
+       { path: 'investigacion-mercado', component: InvestigacionMercadoComponent, canActivate: [GuardService] },
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },
