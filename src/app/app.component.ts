@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '@env/environment';
 import { AuthService } from '@serv/auth.service';
 import { BnNgIdleService } from 'bn-ng-idle';
 
@@ -14,9 +15,12 @@ export class AppComponent {
     private bnIdle: BnNgIdleService,
     private auth: AuthService) {
     this.isAuth = this.auth.isAuthenticated();
+    /* Para cerrar sesion si esta inactivo*/
     this.bnIdle.startWatching(300).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
-        this.auth.closeSession();
+        if(environment.closeSession){
+          this.auth.closeSession();
+        }
       }
     });
   }

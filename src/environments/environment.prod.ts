@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  closeSession: true,
   appName: 'avaluos',
   baseHref: '/',
   endpoint: '',
