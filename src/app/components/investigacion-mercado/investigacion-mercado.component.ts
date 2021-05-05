@@ -33,13 +33,21 @@ export class InvestigacionMercadoComponent implements OnInit {
   isBusqueda;
   queryParamFiltros;
   @ViewChild('paginator') paginator: MatPaginator;
-  canSearch = false;
+  canSearch = true;
 
   constructor() { }
 
   ngOnInit(): void {
     this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
     this.filtros.fecha_fin = new Date((new Date().getTime()));
+  }
+
+  getData(isSearch): void {
+    console.log(isSearch);
+  }
+
+  clean(): void{
+    console.log("limpiar");
   }
 
   validateDate(){
@@ -50,12 +58,20 @@ export class InvestigacionMercadoComponent implements OnInit {
     }
   }
 
-  clean(): void{
-    console.log("limpiar");
+  keyPressAlphaNumeric(event) {
+    var inp = String.fromCharCode(event.keyCode);
+    if (/[a-zA-Z0-9]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 
-  getData(isSearch): void {
-    console.log(isSearch);
+  focusNextInput(event, input) {
+    if(event.srcElement.value.length === event.srcElement.maxLength){
+      input.focus();
+    }
   }
 
 }
