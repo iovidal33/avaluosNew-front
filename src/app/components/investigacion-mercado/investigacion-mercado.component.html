@@ -29,7 +29,6 @@
                 </mat-form-field>
                 <div class="col-2"></div>
             </div>
-            <br>
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -47,7 +46,6 @@
                 </mat-form-field>
                 <div class="col-2"></div>
             </div>
-            <br>
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-2">
@@ -56,14 +54,43 @@
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
                     <mat-select [(ngModel)]="filtros.tipo">
-                        <mat-option value="">Seleccione ...</mat-option>
-                        <mat-option value="1">Todos</mat-option>
+                        <mat-option [value]="0">Seleccione ...</mat-option>
+                        <mat-option [value]="1">Todos</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div class="col-2"></div>
             </div>
             <div class="row">
-                <div class="col" align="end">
+                <div class="col-2"></div>
+                <div class="col-2">
+                    <h4 class="cdmx-color-accent">Alcaldía:</h4>
+                </div>
+                <mat-form-field class="col-6">
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="filtros.alcaldia">
+                        <mat-option [value]="0">Seleccione ...</mat-option>
+                        <mat-option [value]="1">AZCAPOTZALCO</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-2">
+                    <h4 class="cdmx-color-accent">Colonia:</h4>
+                </div>
+                <mat-form-field class="col-6">
+                    <mat-label></mat-label>
+                    <mat-select [(ngModel)]="filtros.colonia">
+                        <mat-option [value]="0">Seleccione ...</mat-option>
+                        <mat-option [value]="1">COLONIA</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="col-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col">
                     <div class="d-flex flex-row-reverse">
                         <button mat-icon-button color="primary" aria-label="Limpiar Filtros" matTooltip="Limpiar Filtros" (click)="clean()">
                             <mat-icon>clear</mat-icon>
@@ -73,6 +100,7 @@
                         </button>
                     </div>
                 </div>
+                <div class="col-5"></div>
             </div>
         </mat-card-content>
     </ng-container>
