@@ -1,1 +1,41 @@
-<p>investigacion-mercado works!</p>
+<mat-card>
+    <div style="padding: 30px; text-align: center;" *ngIf="false">
+        <mat-spinner style="margin:0 auto;"></mat-spinner>
+        <p>Cargando...</p>
+    </div>
+    <ng-container *ngIf="true">
+        <mat-card-header>
+            <mat-card-title>Reporte de Investigación de Mercado</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            <div class="row">
+                <mat-form-field class="col-6">
+                    <mat-label>Fecha Inicial</mat-label>
+                    <input matInput readonly [matDatepicker]="pickini" [(ngModel)]="filtros.fecha_ini" (dateChange)="validateDate()">
+                    <mat-datepicker-toggle matSuffix [for]="pickini"></mat-datepicker-toggle>
+                    <mat-datepicker #pickini></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-6">
+                    <mat-label>Fecha Final</mat-label>
+                    <input matInput readonly [matDatepicker]="pickfin" [(ngModel)]="filtros.fecha_fin" [min]="filtros.fecha_ini" (dateChange)="validateDate()">
+                    <mat-datepicker-toggle matSuffix [for]="pickfin"></mat-datepicker-toggle>
+                    <mat-datepicker #pickfin></mat-datepicker>
+                    <mat-error>La fecha final tiene que ser mayor a la inicial</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col" align="end">
+                    <div class="d-flex flex-row-reverse">
+                        <button mat-icon-button color="primary" aria-label="Limpiar Filtros" matTooltip="Limpiar Filtros" (click)="clean()">
+                            <mat-icon>clear</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" aria-label="Busqueda" matTooltip="Buscar" (click)="getData(true)" [disabled]="!canSearch">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </ng-container>
+</mat-card>

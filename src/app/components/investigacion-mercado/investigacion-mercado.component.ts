@@ -33,10 +33,28 @@ export class InvestigacionMercadoComponent implements OnInit {
   isBusqueda;
   queryParamFiltros;
   @ViewChild('paginator') paginator: MatPaginator;
+  canSearch = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.filtros.fecha_ini = new Date((new Date().getTime()));
+  }
+
+  validateDate(){
+    if(moment(this.filtros.fecha_ini).format('YYYY-MM-DD') > moment(this.filtros.fecha_fin).format('YYYY-MM-DD')){
+      this.canSearch = false;        
+    }else{
+      this.canSearch = true;
+    }
+  }
+
+  clean(): void{
+    console.log("limpiar");
+  }
+
+  getData(isSearch): void {
+    console.log(isSearch);
   }
 
 }
