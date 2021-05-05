@@ -38,11 +38,7 @@ export class InvestigacionMercadoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
-    this.filtros.fecha_fin = new Date((new Date().getTime()));
-    this.filtros.tipo = 0;
-    this.filtros.alcaldia = 0;
-    this.filtros.colonia = 0;    
+    this.clean();
   }
 
   getData(isSearch): void {
@@ -50,7 +46,12 @@ export class InvestigacionMercadoComponent implements OnInit {
   }
 
   clean(): void{
-    console.log("limpiar");
+    this.filtros = {} as Filtros;
+    this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
+    this.filtros.fecha_fin = new Date((new Date().getTime()));
+    this.filtros.tipo = 0;
+    this.filtros.alcaldia = 0;
+    this.filtros.colonia = 0;   
   }
 
   validateDate(){
