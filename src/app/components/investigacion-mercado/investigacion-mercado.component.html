@@ -81,7 +81,7 @@
                 </div>
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
-                    <mat-select [(ngModel)]="filtros.colonia">
+                    <mat-select [(ngModel)]="filtros.colonia" [disabled]="filtros.alcaldia == '0'">
                         <mat-option [value]="0">Seleccione ...</mat-option>
                         <mat-option [value]="1">COLONIA</mat-option>
                     </mat-select>
