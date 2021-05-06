@@ -13,7 +13,7 @@ export interface Filtros {
   region: string;
   manzana: string;
   tipo: number;
-  alcaldia: number;
+  alcaldia: string;
   colonia: number;
 }
 @Component({
@@ -22,6 +22,9 @@ export interface Filtros {
   styleUrls: ['./investigacion-mercado.component.css']
 })
 export class InvestigacionMercadoComponent implements OnInit {
+  endpointCatalogos = environment.endpoint + "bandeja-entrada/";
+  loadingDelegaciones = false;
+  delegaciones;
   endpoint = environment.endpoint + 'bandeja-entrada/getInvestigacionMercado';
   pageSize = 15;
   pagina = 1;
@@ -45,14 +48,28 @@ export class InvestigacionMercadoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.clean();
-
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: this.auth.getSession().token
       })
     };
+
+    this.getDataDelegaciones();
+    this.clean();
+  }
+
+  getDataDelegaciones(): void {
+    this.loadingDelegaciones = true;
+    this.http.get(this.endpointCatalogos + 'getDelegaciones', this.httpOptions).subscribe(
+      (res: any) => {
+        this.loadingDelegaciones = false;
+        this.delegaciones = res[0];
+      },
+      (error) => {
+        this.loadingDelegaciones = false;
+      }
+    );
   }
 
   getData(): void {
@@ -113,7 +130,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
     this.filtros.fecha_fin = new Date((new Date().getTime()));
     this.filtros.tipo = 0;
-    this.filtros.alcaldia = 0;
+    this.filtros.alcaldia = '0';
     this.filtros.colonia = 0;
     this.pagina = 1;
     this.total = 0;   

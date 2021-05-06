@@ -1,9 +1,9 @@
 <mat-card>
-    <div style="padding: 30px; text-align: center;" *ngIf="false">
+    <div style="padding: 30px; text-align: center;" *ngIf="loadingDelegaciones">
         <mat-spinner style="margin:0 auto;"></mat-spinner>
         <p>Cargando...</p>
     </div>
-    <ng-container *ngIf="true">
+    <ng-container *ngIf="!loadingDelegaciones">
         <mat-card-header>
             <mat-card-title>Reporte de Investigación de Mercado</mat-card-title>
         </mat-card-header>
@@ -68,8 +68,9 @@
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
                     <mat-select [(ngModel)]="filtros.alcaldia">
-                        <mat-option [value]="0">Seleccione ...</mat-option>
-                        <mat-option [value]="1">AZCAPOTZALCO</mat-option>
+                        <mat-option *ngFor="let delegacion of delegaciones" [value]="delegacion.iddelegacion">
+                            {{ delegacion.nombre }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div class="col-2"></div>
