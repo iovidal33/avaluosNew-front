@@ -67,7 +67,7 @@
                 </div>
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
-                    <mat-select [(ngModel)]="filtros.alcaldia">
+                    <mat-select [(ngModel)]="filtros.alcaldia" (selectionChange)="getDataColonias($event)">
                         <mat-option *ngFor="let delegacion of delegaciones" [value]="delegacion.iddelegacion">
                             {{ delegacion.nombre }}
                         </mat-option>
@@ -82,9 +82,10 @@
                 </div>
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
-                    <mat-select [(ngModel)]="filtros.colonia" [disabled]="filtros.alcaldia == '0'">
-                        <mat-option [value]="0">Seleccione ...</mat-option>
-                        <mat-option [value]="1">COLONIA</mat-option>
+                    <mat-select [(ngModel)]="filtros.colonia" [disabled]="filtros.alcaldia == '0'" [class.spinner]="loadingColonias">
+                        <mat-option *ngFor="let colonia of colonias" [value]="colonia.idcolonia">
+                            {{ colonia.nombre }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div class="col-2"></div>

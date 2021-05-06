@@ -24,7 +24,9 @@ export interface Filtros {
 export class InvestigacionMercadoComponent implements OnInit {
   endpointCatalogos = environment.endpoint + "bandeja-entrada/";
   loadingDelegaciones = false;
+  loadingColonias = false;
   delegaciones;
+  colonias;
   endpoint = environment.endpoint + 'bandeja-entrada/getInvestigacionMercado';
   pageSize = 15;
   pagina = 1;
@@ -68,6 +70,19 @@ export class InvestigacionMercadoComponent implements OnInit {
       },
       (error) => {
         this.loadingDelegaciones = false;
+      }
+    );
+  }
+
+  getDataColonias(event): void {
+    this.loadingColonias = true;
+    this.http.get(this.endpointCatalogos + 'getColonias?idDelegacion=' + event.value, this.httpOptions).subscribe(
+      (res: any) => {
+        this.loadingColonias = false;
+        this.colonias = res[0];
+      },
+      (error) => {
+        this.loadingColonias = false;
       }
     );
   }
