@@ -22,7 +22,7 @@ export interface Filtros {
   styleUrls: ['./investigacion-mercado.component.css']
 })
 export class InvestigacionMercadoComponent implements OnInit {
-  endpoint = environment.endpoint;
+  endpoint = environment.endpoint + 'bandeja-entrada/getInvestigacionMercado';
   pageSize = 15;
   pagina = 1;
   total = 0;
@@ -61,7 +61,42 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.pagina = 1;
     this.queryParamFiltros = '';
 
-    this.loading = false;
+    if(this.filtros.fecha_ini){
+      this.queryParamFiltros = this.queryParamFiltros + '&fechainicio=' + moment(this.filtros.fecha_ini).format('DD-MM-YYYY');
+    }
+    if(this.filtros.fecha_fin){
+      this.queryParamFiltros = this.queryParamFiltros + '&fechafin=' + moment(this.filtros.fecha_fin).format('DD-MM-YYYY');
+    }
+    if(this.filtros.region){
+      this.queryParamFiltros = this.queryParamFiltros + '&region=' + this.filtros.region;
+    }
+    if(this.filtros.manzana){
+      this.queryParamFiltros = this.queryParamFiltros + '&manzana=' + this.filtros.manzana;
+    }
+    if(this.filtros.tipo){
+      this.queryParamFiltros = this.queryParamFiltros + '&tipo=' + this.filtros.tipo;
+    }
+    if(this.filtros.alcaldia){
+      this.queryParamFiltros = this.queryParamFiltros + '&delegacion=' + this.filtros.alcaldia;
+    }
+    if(this.filtros.colonia){
+      this.queryParamFiltros = this.queryParamFiltros + '&colonia=' + this.filtros.colonia;
+    }
+
+    this.http.post(this.endpoint + '?' + this.queryParamFiltros, '', this.httpOptions).subscribe(
+      (res: any) => {
+        this.loading = false;
+        this.dataInforme = res;
+        console.log(res);
+        this.dataSource = this.paginate(this.dataInforme, this.pageSize, this.pagina);
+        this.total = this.dataInforme.length;
+        this.paginator.pageIndex = 0;
+      },
+      (error) => {
+        this.loading = false;
+        this.dataSource = [];
+      }
+    );
   }
 
   paginado(evt): void{

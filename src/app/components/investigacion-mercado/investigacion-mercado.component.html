@@ -111,7 +111,7 @@
                 <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading">
                     No se encontraron datos.
                 </div>
-                <div class="row" *ngIf="dataSource.length == 0 && !loading">
+                <div class="row" *ngIf="dataSource.length > 0 && !loading">
                     <div class="col-5"></div>
                     <div class="col">
                         <mat-form-field>
