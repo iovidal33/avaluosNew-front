@@ -94,7 +94,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.queryParamFiltros = '';
 
     if(this.filtros.fecha_ini){
-      this.queryParamFiltros = this.queryParamFiltros + 'fechainicio=' + moment(this.filtros.fecha_ini).format('DD-MM-YYYY');
+      this.queryParamFiltros = this.queryParamFiltros + '&fechainicio=' + moment(this.filtros.fecha_ini).format('DD-MM-YYYY');
     }
     if(this.filtros.fecha_fin){
       this.queryParamFiltros = this.queryParamFiltros + '&fechafin=' + moment(this.filtros.fecha_fin).format('DD-MM-YYYY');
