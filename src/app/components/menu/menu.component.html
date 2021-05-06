@@ -3,11 +3,8 @@
         <mat-icon matListIcon>{{menu.icono}}</mat-icon>
         {{menu.nombre}}
     </mat-list-option>
-    <mat-list-option [routerLink]="'/main'">
-        <mat-icon matListIcon>assignment</mat-icon>
-        Informes
+    <mat-list-option [routerLink]="'/main/investigacion-mercado'">
+        <mat-icon matListIcon>leaderboard</mat-icon>
+        Investigación de Mercado
     </mat-list-option>
-    <mat-nav-list style="margin-left: 45px;">
-        <a mat-list-item [routerLink]="'/main/investigacion-mercado'"><mat-icon>leaderboard</mat-icon> Investigación de Mercado </a>
-    </mat-nav-list>
 </mat-selection-list>
