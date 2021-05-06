@@ -94,7 +94,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.queryParamFiltros = '';
 
     if(this.filtros.fecha_ini){
-      this.queryParamFiltros = this.queryParamFiltros + '&fechainicio=' + moment(this.filtros.fecha_ini).format('DD-MM-YYYY');
+      this.queryParamFiltros = this.queryParamFiltros + 'fechainicio=' + moment(this.filtros.fecha_ini).format('DD-MM-YYYY');
     }
     if(this.filtros.fecha_fin){
       this.queryParamFiltros = this.queryParamFiltros + '&fechafin=' + moment(this.filtros.fecha_fin).format('DD-MM-YYYY');
@@ -108,7 +108,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     if(this.filtros.tipo){
       this.queryParamFiltros = this.queryParamFiltros + '&tipo=' + this.filtros.tipo;
     }
-    if(this.filtros.alcaldia){
+    if(this.filtros.alcaldia && this.filtros.alcaldia != '0'){
       this.queryParamFiltros = this.queryParamFiltros + '&delegacion=' + this.filtros.alcaldia;
     }
     if(this.filtros.colonia){
@@ -118,11 +118,15 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.http.post(this.endpoint + '?' + this.queryParamFiltros, '', this.httpOptions).subscribe(
       (res: any) => {
         this.loading = false;
-        this.dataInforme = res;
-        console.log(res);
-        this.dataSource = this.paginate(this.dataInforme, this.pageSize, this.pagina);
-        this.total = this.dataInforme.length;
-        this.paginator.pageIndex = 0;
+
+        if(res[0].length > 0){
+          this.dataInforme = res[0];
+          this.dataSource = this.paginate(this.dataInforme, this.pageSize, this.pagina);
+          this.total = this.dataInforme.length;
+          this.paginator.pageIndex = 0;
+        } else {
+          this.dataSource = [];
+        }
       },
       (error) => {
         this.loading = false;
