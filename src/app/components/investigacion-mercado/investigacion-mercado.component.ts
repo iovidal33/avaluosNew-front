@@ -34,8 +34,10 @@ export class InvestigacionMercadoComponent implements OnInit {
   filtros: Filtros = {} as Filtros;
   isBusqueda;
   queryParamFiltros;
-  @ViewChild('paginator') paginator: MatPaginator;
   canSearch = true;
+  formato;
+  @ViewChild('paginator') paginator: MatPaginator;
+  
 
   constructor(
     private auth: AuthService,
@@ -58,6 +60,8 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.isBusqueda = true;
     this.pagina = 1;
     this.queryParamFiltros = '';
+
+    this.loading = false;
   }
 
   paginado(evt): void{
@@ -80,6 +84,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.total = 0;   
     this.dataInforme = [];
     this.isBusqueda = false;
+    this.formato = 0;
   }
 
   validateDate(){
@@ -104,6 +109,10 @@ export class InvestigacionMercadoComponent implements OnInit {
     if(event.srcElement.value.length === event.srcElement.maxLength){
       input.focus();
     }
+  }
+
+  downloadInforme(): void {
+    console.log(this.formato);
   }
 
 }

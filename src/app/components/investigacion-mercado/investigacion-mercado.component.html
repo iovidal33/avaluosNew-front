@@ -111,6 +111,23 @@
                 <div class="alert alert-info" *ngIf="dataSource.length == 0 && !loading">
                     No se encontraron datos.
                 </div>
+                <div class="row" *ngIf="dataSource.length == 0 && !loading">
+                    <div class="col-5"></div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label></mat-label>
+                            <mat-select [(ngModel)]="formato">
+                                <mat-option [value]="0">Seleccione...</mat-option>
+                                <mat-option value="pdf">PDF</mat-option>
+                                <mat-option value="excel">EXCEL</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button mat-flat-button class="little-button" color="primary" aria-label="Descargar" matTooltip="Descargar" (click)="downloadInforme()" [disabled]="formato == 0" class="little-button">
+                            <mat-icon>download</mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
                 <table mat-table [dataSource]="dataSource" *ngIf="dataSource.length > 0 && !loading">
                     <ng-container matColumnDef="numero">
                         <th mat-header-cell *matHeaderCellDef> Número </th>
