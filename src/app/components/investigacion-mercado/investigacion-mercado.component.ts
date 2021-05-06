@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import { ExcelService } from '@serv/excel.service';
 
 export interface Filtros {
   fecha_ini: Date;
@@ -49,6 +50,7 @@ export class InvestigacionMercadoComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private http: HttpClient,
+    private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
@@ -208,6 +210,10 @@ export class InvestigacionMercadoComponent implements OnInit {
         //doc.output('dataurlnewwindow');
         // below line for Download PDF document
         doc.save('Informe.pdf');
+        break; 
+      }
+      case 'excel': {
+        this.excelService.exportAsExcelFile(head.concat(data), 'Informe');
         break; 
       }
       default: {
