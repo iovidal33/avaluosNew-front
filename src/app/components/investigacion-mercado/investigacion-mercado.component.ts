@@ -6,6 +6,8 @@ import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 
 export interface Filtros {
   fecha_ini: Date;
@@ -182,9 +184,24 @@ export class InvestigacionMercadoComponent implements OnInit {
   }
 
   downloadInforme(): void {
+    let head = [['Alcaldia', 'Colonia', 'Región', 'Manzana', 'Ubicación', 'Descripción', 'Precios solicitado', 'Superficie', 'VU', 'Tipo']];
+    let data = [];
+    this.dataInforme.forEach(element => data.push([element.DELEGACION, element.COLONIA, element.REGION, element.MANZANA, element.UBICACION, element.DESCRIPCION, element.PRECIOSOLICITADO, element.SUPERFICIE, element.VALORUNITARIO, element.TIPO]));
     switch(this.formato) {
       case 'pdf': {
-        console.log("pdf");
+        let doc  = new jsPDF();
+        doc.setFontSize(10);
+        doc.setTextColor(100);
+        
+        (doc as any).autoTable({
+          head: head,
+          body: data,
+          theme: 'grid',
+        })
+        // below line for Open PDF document in new tab
+        doc.output('dataurlnewwindow')
+        // below line for Download PDF document
+        doc.save('Informe.pdf');
         break; 
       }
       default: {
