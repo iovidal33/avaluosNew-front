@@ -187,19 +187,25 @@ export class InvestigacionMercadoComponent implements OnInit {
     let head = [['Alcaldia', 'Colonia', 'Región', 'Manzana', 'Ubicación', 'Descripción', 'Precios solicitado', 'Superficie', 'VU', 'Tipo']];
     let data = [];
     this.dataInforme.forEach(element => data.push([element.DELEGACION, element.COLONIA, element.REGION, element.MANZANA, element.UBICACION, element.DESCRIPCION, element.PRECIOSOLICITADO, element.SUPERFICIE, element.VALORUNITARIO, element.TIPO]));
+
     switch(this.formato) {
       case 'pdf': {
-        let doc  = new jsPDF();
-        doc.setFontSize(10);
-        doc.setTextColor(100);
+        let doc = new jsPDF();
         
         (doc as any).autoTable({
           head: head,
           body: data,
           theme: 'grid',
-        })
+          styles: {
+            fontSize: 8,
+            textColor: [0, 0, 0]
+          },
+          headStyles: {
+            fillColor: [254, 210, 1]
+          },
+        });
         // below line for Open PDF document in new tab
-        doc.output('dataurlnewwindow')
+        //doc.output('dataurlnewwindow');
         // below line for Download PDF document
         doc.save('Informe.pdf');
         break; 
@@ -208,7 +214,7 @@ export class InvestigacionMercadoComponent implements OnInit {
         console.log("asd");
         break; 
       } 
-   }
+    }
   }
 
 }
