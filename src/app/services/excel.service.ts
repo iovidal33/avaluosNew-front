@@ -11,12 +11,15 @@ const EXCEL_EXTENSION = '.xlsx';
 export class ExcelService {
   constructor() {}
 
-  public exportAsExcelFile(json: any[], excelFileName: string): void {
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json, {skipHeader: true});
-    const workbook: XLSX.WorkBook = {
-      Sheets: { data: worksheet },
-      SheetNames: ['data'],
-    };
+  public exportAsExcelFile(headers: any[], data: any[], excelFileName: string): void {
+    let worksheet: XLSX.WorkSheet;
+    let sheetName = 'Investigación de mercado';
+    data.unshift(headers);
+    worksheet = XLSX.utils.json_to_sheet(data, {skipHeader: true});
+    worksheet['!cols'] = [{wch: 30}, {wch: 40}, {wch: 10}, {wch: 10}, {wch: 40}, {wch: 30}, {wch: 15}, {wch: 10}, {wch: 10}, {wch: 10}];
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
 
     const excelBuffer: any = XLSX.write(workbook, {
       bookType: 'xlsx',

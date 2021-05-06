@@ -213,7 +213,7 @@ export class InvestigacionMercadoComponent implements OnInit {
         break; 
       }
       case 'excel': {
-        this.excelService.exportAsExcelFile(head.concat(data), 'Informe');
+        this.excelService.exportAsExcelFile(head[0], data, 'Informe');
         break; 
       }
       default: {
