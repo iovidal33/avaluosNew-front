@@ -6,6 +6,8 @@ import { AuthService } from '@serv/auth.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import * as moment from 'moment';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export interface Filtros {
   fecha_ini: Date;
@@ -182,7 +184,16 @@ export class InvestigacionMercadoComponent implements OnInit {
   }
 
   downloadInforme(): void {
-    console.log(this.formato);
+    switch(this.formato) {
+      case 'pdf': {
+        console.log("pdf");
+        break; 
+      }
+      default: {
+        console.log("asd");
+        break; 
+      } 
+   }
   }
 
 }
