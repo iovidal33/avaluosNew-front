@@ -131,9 +131,45 @@
                     <div class="col-3"></div>
                 </div>
                 <table mat-table [dataSource]="dataSource" *ngIf="dataSource.length > 0 && !loading">
-                    <ng-container matColumnDef="numero">
-                        <th mat-header-cell *matHeaderCellDef> Número </th>
-                        <td mat-cell *matCellDef="let element"> {{(element.NUMNOTARIO)}} </td>
+                    <ng-container matColumnDef="alcaldia">
+                        <th mat-header-cell *matHeaderCellDef> Alcaldia </th>
+                        <td mat-cell *matCellDef="let element"> {{element.DELEGACION}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="colonia">
+                        <th mat-header-cell *matHeaderCellDef> Colonia </th>
+                        <td mat-cell *matCellDef="let element"> {{element.COLONIA}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="region">
+                        <th mat-header-cell *matHeaderCellDef> Región </th>
+                        <td mat-cell *matCellDef="let element"> {{element.REGION}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="manzana">
+                        <th mat-header-cell *matHeaderCellDef> Manzana </th>
+                        <td mat-cell *matCellDef="let element"> {{element.MANZANA}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="ubicacion">
+                        <th mat-header-cell *matHeaderCellDef> Ubicación </th>
+                        <td mat-cell *matCellDef="let element"> {{element.UBICACION}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                        <td mat-cell *matCellDef="let element"> {{element.DESCRIPCION}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="precios_solicitados">
+                        <th mat-header-cell *matHeaderCellDef> Precios solicitado </th>
+                        <td mat-cell *matCellDef="let element"> {{element.PRECIOSOLICITADO | currency:'MXN'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="superficie">
+                        <th mat-header-cell *matHeaderCellDef> Superficie </th>
+                        <td mat-cell *matCellDef="let element"> {{element.SUPERFICIE}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="vu">
+                        <th mat-header-cell *matHeaderCellDef> VU </th>
+                        <td mat-cell *matCellDef="let element"> {{element.VALORUNITARIO | currency:'MXN'}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                        <td mat-cell *matCellDef="let element"> {{element.TIPO}} </td>
                     </ng-container>
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
