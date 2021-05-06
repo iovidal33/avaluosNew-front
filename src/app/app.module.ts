@@ -29,7 +29,6 @@ import { AcuseAvaluoComponent } from './components/acuse-avaluo/acuse-avaluo.com
 import { DialogValidacionesXML } from "@serv/file-upload.service";
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { InvestigacionMercadoComponent } from './components/investigacion-mercado/investigacion-mercado.component';
-import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [
@@ -66,8 +65,7 @@ import { MatTableExporterModule } from 'mat-table-exporter';
     ReactiveFormsModule,
     AvatarModule,
     NgxMatFileInputModule,
-    NgxMaskModule.forRoot(),
-    MatTableExporterModule
+    NgxMaskModule.forRoot()
   ],
   entryComponents: [
     DialogPeritoSociedad,

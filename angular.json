@@ -14,7 +14,11 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "js-sha1"
+              "js-sha1",
+              "raf",
+              "file-saver",
+              "xlsx",
+              "@babel/runtime-corejs3"
             ],
             "outputPath": "dist/avaluos-front",
             "index": "src/index.html",

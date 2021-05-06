@@ -31,7 +31,6 @@
     "js-sha1": "^0.6.0",
     "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.14",
-    "mat-table-exporter": "^10.2.3",
     "moment": "^2.29.1",
     "ngx-avatar": "^4.0.0",
     "ngx-mask": "^11.1.4",
@@ -39,6 +38,7 @@
     "rxjs": "~6.6.3",
     "ts-md5": "^1.2.7",
     "tslib": "^2.0.0",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
