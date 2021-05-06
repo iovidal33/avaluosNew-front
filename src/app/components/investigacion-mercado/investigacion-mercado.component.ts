@@ -28,6 +28,7 @@ export class InvestigacionMercadoComponent implements OnInit {
   endpointCatalogos = environment.endpoint + "bandeja-entrada/";
   loadingDelegaciones = false;
   loadingColonias = false;
+  downloading = false;
   delegaciones;
   colonias;
   endpoint = environment.endpoint + 'bandeja-entrada/getInvestigacionMercado';
@@ -186,6 +187,7 @@ export class InvestigacionMercadoComponent implements OnInit {
   }
 
   downloadInforme(): void {
+    this.downloading = true;
     let head = [['Alcaldia', 'Colonia', 'Región', 'Manzana', 'Ubicación', 'Descripción', 'Precios solicitado', 'Superficie', 'VU', 'Tipo']];
     let data = [];
     this.dataInforme.forEach(element => data.push([element.DELEGACION, element.COLONIA, element.REGION, element.MANZANA, element.UBICACION, element.DESCRIPCION, element.PRECIOSOLICITADO, element.SUPERFICIE, element.VALORUNITARIO, element.TIPO]));
@@ -221,6 +223,8 @@ export class InvestigacionMercadoComponent implements OnInit {
         break; 
       } 
     }
+
+    this.downloading = false;
   }
 
 }

@@ -124,7 +124,7 @@
                                 <mat-option value="excel">EXCEL</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button mat-flat-button class="little-button" color="primary" aria-label="Descargar" matTooltip="Descargar" (click)="downloadInforme()" [disabled]="formato == 0" class="little-button">
+                        <button mat-flat-button class="little-button" color="primary" aria-label="Descargar" matTooltip="Descargar" (click)="downloadInforme()" [disabled]="formato == 0" class="little-button" [class.spinner]="downloading">
                             <mat-icon>download</mat-icon>
                         </button>
                     </div>
