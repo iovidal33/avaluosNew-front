@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import { ExcelService } from '@serv/excel.service';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 export interface Filtros {
   fecha_ini: Date;
@@ -51,12 +52,19 @@ export class InvestigacionMercadoComponent implements OnInit {
   
 
   constructor(
+    public router: Router,
     private auth: AuthService,
     private http: HttpClient,
     private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
+    const currentUser = this.auth.getSession();
+    const userBandejaEntrada = "/main/" + currentUser.userData.redirect;
+    if(currentUser.userData.redirect != "bandeja-entrada"){
+      this.router.navigate([userBandejaEntrada]);
+    }
+
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
