@@ -3,7 +3,7 @@
         <mat-icon matListIcon>{{menu.icono}}</mat-icon>
         {{menu.nombre}}
     </mat-list-option>
-    <mat-list-option [routerLink]="'/main/investigacion-mercado'">
+    <mat-list-option *ngIf="isRevisor" [routerLink]="'/main/investigacion-mercado'">
         <mat-icon matListIcon>leaderboard</mat-icon>
         Investigación de Mercado
     </mat-list-option>
