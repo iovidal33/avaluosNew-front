@@ -15,9 +15,9 @@ export interface Filtros {
   fecha_fin: Date;
   region: string;
   manzana: string;
-  tipo: number;
+  tipo: string;
   alcaldia: string;
-  colonia: number;
+  colonia: string;
 }
 @Component({
   selector: 'app-investigacion-mercado',
@@ -26,9 +26,11 @@ export interface Filtros {
 })
 export class InvestigacionMercadoComponent implements OnInit {
   endpointCatalogos = environment.endpoint + "bandeja-entrada/";
+  loadingTipos = false;
   loadingDelegaciones = false;
   loadingColonias = false;
   downloading = false;
+  tipos;
   delegaciones;
   colonias;
   endpoint = environment.endpoint + 'bandeja-entrada/getInvestigacionMercado';
@@ -62,8 +64,22 @@ export class InvestigacionMercadoComponent implements OnInit {
       })
     };
 
+    this.getDataTipos();
     this.getDataDelegaciones();
     this.clean();
+  }
+
+  getDataTipos(): void {
+    this.loadingTipos = true;
+    this.http.get(this.endpointCatalogos + 'getTiposComparable', this.httpOptions).subscribe(
+      (res: any) => {
+        this.loadingTipos = false;
+        this.tipos = res[0];
+      },
+      (error) => {
+        this.loadingTipos = false;
+      }
+    );
   }
 
   getDataDelegaciones(): void {
@@ -113,7 +129,7 @@ export class InvestigacionMercadoComponent implements OnInit {
     if(this.filtros.tipo){
       this.queryParamFiltros = this.queryParamFiltros + '&tipo=' + this.filtros.tipo;
     }
-    if(this.filtros.alcaldia && this.filtros.alcaldia != '0'){
+    if(this.filtros.alcaldia){
       this.queryParamFiltros = this.queryParamFiltros + '&delegacion=' + this.filtros.alcaldia;
     }
     if(this.filtros.colonia){
@@ -131,6 +147,8 @@ export class InvestigacionMercadoComponent implements OnInit {
           this.paginator.pageIndex = 0;
         } else {
           this.dataSource = [];
+          this.total = 0;
+          this.paginator.pageIndex = 0;
         }
       },
       (error) => {
@@ -153,8 +171,6 @@ export class InvestigacionMercadoComponent implements OnInit {
     this.filtros = {} as Filtros;
     this.filtros.fecha_ini = new Date((new Date().getTime() - 2592000000));
     this.filtros.fecha_fin = new Date((new Date().getTime()));
-    this.filtros.tipo = 0;
-    this.filtros.alcaldia = '0';
     this.pagina = 1;
     this.total = 0;   
     this.dataInforme = [];

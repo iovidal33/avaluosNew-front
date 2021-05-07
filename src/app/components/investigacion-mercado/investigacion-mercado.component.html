@@ -1,9 +1,9 @@
 <mat-card>
-    <div style="padding: 30px; text-align: center;" *ngIf="loadingDelegaciones">
+    <div style="padding: 30px; text-align: center;" *ngIf="loadingDelegaciones || loadingTipos">
         <mat-spinner style="margin:0 auto;"></mat-spinner>
         <p>Cargando...</p>
     </div>
-    <ng-container *ngIf="!loadingDelegaciones">
+    <ng-container *ngIf="!loadingDelegaciones && !loadingTipos">
         <mat-card-header>
             <mat-card-title>Reporte de Investigación de Mercado</mat-card-title>
         </mat-card-header>
@@ -54,8 +54,10 @@
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
                     <mat-select [(ngModel)]="filtros.tipo">
-                        <mat-option [value]="0">Seleccione ...</mat-option>
-                        <mat-option [value]="1">Todos</mat-option>
+                        <mat-option value="">Todos</mat-option>
+                        <mat-option *ngFor="let tipo of tipos" [value]="tipo.codtipocomparable">
+                            {{ tipo.descripcion }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div class="col-2"></div>
@@ -82,7 +84,7 @@
                 </div>
                 <mat-form-field class="col-6">
                     <mat-label></mat-label>
-                    <mat-select [(ngModel)]="filtros.colonia" [disabled]="filtros.alcaldia == '0'" [class.spinner]="loadingColonias">
+                    <mat-select [(ngModel)]="filtros.colonia" [disabled]="!filtros.alcaldia" [class.spinner]="loadingColonias">
                         <mat-option *ngFor="let colonia of colonias" [value]="colonia.idcolonia">
                             {{ colonia.nombre }}
                         </mat-option>
