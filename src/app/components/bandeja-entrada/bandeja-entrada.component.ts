@@ -311,7 +311,7 @@ export class BandejaEntradaComponent implements OnInit {
     this.router.navigate(['main/acuse-avaluo/' + no_unico]);
   }
 
-  descargarJustificante(element): void{
+  descargarJustificante(element, formato): void{
     const dialogRef = this.dialog.open(DialogDescargaJustificante, {
       width: '600px',
     });
@@ -319,7 +319,7 @@ export class BandejaEntradaComponent implements OnInit {
     var fecha_avaluo = moment(element.fecha_avaluo).format('YYYY-MM-DD');
     var fecha = moment('2021-01-01').format('YYYY-MM-DD');
 
-    this.http.get(environment.endpoint + 'bandeja-entrada/'+((fecha_avaluo<fecha) ? 'reimprimeAvaluo' : 'reimprimeAvaluo')+'?no_unico='+ element.numerounico,
+    this.http.get(environment.endpoint + 'bandeja-entrada/'+((fecha_avaluo<fecha) ? 'reimprimeAvaluo' : 'reimprimeAvaluo')+'?no_unico='+ element.numerounico+ '&formato='+formato,
       this.httpOptions).subscribe(
         (res: any) => {
           dialogRef.close();
