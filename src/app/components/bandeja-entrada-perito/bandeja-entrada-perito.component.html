@@ -228,9 +228,17 @@
                                 <mat-icon>account_box</mat-icon>
                                 <span>Acuse avalúo</span>
                             </button>
-                            <button mat-menu-item (click)="descargarJustificante(element)">
-                                <mat-icon>visibility</mat-icon>
-                                <span>Descargar Justificante</span>
+                            <button mat-menu-item [matMenuTriggerFor]="justificante"><mat-icon>library_books</mat-icon>Descargar Justificante
+                                <mat-menu #justificante="matMenu">
+                                    <button mat-menu-item (click)="descargarJustificante(element, 'PDF')">
+                                        <mat-icon>file_download</mat-icon>
+                                        <span>PDF</span>
+                                    </button>
+                                    <button mat-menu-item (click)="descargarJustificante(element, 'DOCX')">
+                                        <mat-icon>file_download</mat-icon>
+                                        <span>DOCX</span>
+                                    </button>
+                                </mat-menu>
                             </button>
                             <!--<button mat-menu-item>
                           <mat-icon>zoom_in</mat-icon>
