@@ -10,6 +10,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import * as FileSaver from 'file-saver';
  
 
 export interface Filtros {
@@ -321,22 +322,27 @@ export class BandejaEntradaPeritoComponent implements OnInit {
       this.httpOptions).subscribe(
         (res: any) => {
           dialogRef.close();
-          if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
-            const byteCharacters = atob(res.pdfbase64);
-            const byteNumbers = new Array(byteCharacters.length);
-            for (let i = 0; i < byteCharacters.length; i++) {
-              byteNumbers[i] = byteCharacters.charCodeAt(i);
+          if(formato == 'PDF'){
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) { // IE workaround
+              const byteCharacters = atob(res.pdfbase64);
+              const byteNumbers = new Array(byteCharacters.length);
+              for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+              }
+              const byteArray = new Uint8Array(byteNumbers);
+              const blob = new Blob([byteArray], { type: 'application/pdf' });
+              window.navigator.msSaveOrOpenBlob(blob, res.nombre);
+            } else {
+              const linkSource = 'data:application/pdf;base64,' + res.pdfbase64;
+              const downloadLink = document.createElement('a');
+              const fileName = res.nombre;
+              downloadLink.href = linkSource;
+              downloadLink.download = fileName;
+              downloadLink.click();
             }
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], { type: 'application/pdf' });
-            window.navigator.msSaveOrOpenBlob(blob, res.nombre);
           } else {
-            const linkSource = 'data:application/pdf;base64,' + res.pdfbase64;
-            const downloadLink = document.createElement('a');
-            const fileName = res.nombre;
-            downloadLink.href = linkSource;
-            downloadLink.download = fileName;
-            downloadLink.click();
+            const blob = this.b64toBlob(res.docxbase64, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+            FileSaver.saveAs(blob, res.nombre);
           }
         },
         (error) => {
@@ -348,6 +354,22 @@ export class BandejaEntradaPeritoComponent implements OnInit {
           });
         });
   }
+
+  b64toBlob(b64Data, contentType = '', sliceSize = 512): Blob {​​​​​​​​
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {​​​​​​​​
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {​​​​​​​​
+        byteNumbers[i] = slice.charCodeAt(i);
+        }​​​​​​​​
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+    }​​​​​​​​
+    const blob = new Blob(byteArrays, {​​​​​​​​type: contentType}​​​​​​​​);
+    return blob;
+  }​​​​​​​​
 
 }
 
