@@ -118,6 +118,7 @@ export class AcuseAvaluoComponent implements OnInit {
     const myDate = this.dataAvaluo.fuenteInformacionLegal.fecha;
     const locale = 'es-Mx';
     const fecha = formatDate(myDate, format, locale);
+    const fechaPresentacion = formatDate(this.dataAvaluo.fechaPresentacion, format, locale);
     let htmlDocument = '<!DOCTYPE html><html><head><meta charset="utf-8"><title></title>';
     let styles  = '<style>'     
                 +   '@page {'
@@ -168,6 +169,8 @@ export class AcuseAvaluoComponent implements OnInit {
                 + '</header>'
                 + '<br><br><br>'
                 + '<strong>NÚMERO ÚNICO</strong>&emsp;' + '<span class="gris">' + this.noUnico + '</span>'
+                + '&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'
+                + '<strong>FECHA DE CARGA DE SIGAPRED: </strong><span class="gris">'+ fechaPresentacion +'</span>'
                 + '<br><br>'
                 + '<strong>I. CUENTA CATASTRAL</strong>'
                 + '<br>'
