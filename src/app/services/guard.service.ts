@@ -9,13 +9,12 @@ export class GuardService implements CanActivate {
 
   constructor(public auth: AuthService, public router: Router) { }
 
-  /*canActivate(): boolean {
-    if (!this.auth.isAuthenticated()) {
-      this.router.navigate(['/']);
-      return false;
-    }
-    return true;
-  }*/
+  /**
+  *Valida en cada ruta declarada que el usuario este autenticado y si tiene los permisos para ingresar a dicha ruta
+  *@return true = usuario autenticado y con permisos en la ruta
+  *
+  *false = usuario no autenticado y se redirige a la ruta principal
+  */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.auth.isAuthenticated()) {
       this.router.navigate(['/']);

@@ -15,7 +15,9 @@ export class AppComponent {
     private bnIdle: BnNgIdleService,
     private auth: AuthService) {
     this.isAuth = this.auth.isAuthenticated();
-    /* Para cerrar sesion si esta inactivo*/
+    /**
+      *Metodo para el cerrado automatico de sesión del usuario con 300 segundos (5 minutos) de inactividad
+      */
     this.bnIdle.startWatching(300).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         if(environment.closeSession){

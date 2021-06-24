@@ -4,8 +4,13 @@ import { environment } from '@env/environment';
 import { MatDialog } from '@angular/material/dialog';
 import * as sha1 from 'js-sha1';
 
-
-// Auth Data poner todos los datos extras
+/**
+ * Interface para datos de usuario logueado
+ * 
+ * token = Token de seguridad con información cifrada del usuario.
+ * 
+ * userData = Datos generales del usuario.
+ */
 export interface AuthData {
   token: string;
   userData: any;
@@ -17,10 +22,17 @@ export class AuthService {
 
   constructor(public router: Router, private dialogRef: MatDialog) { }
 
+  /**
+     * Metodo para setear los datos de la sesión
+     * @param session Variable de tipo de interface AuthData.
+     */
   public setSession(session: AuthData): void {
     sessionStorage.setItem('session_' + environment.appName, JSON.stringify(session));
   }
 
+  /**
+     * Metodo para obtener los datos de la sesión
+     */
   public getSession(): AuthData {
     if (this.isAuthenticated()) {
       return JSON.parse(sessionStorage.getItem('session_' + environment.appName))
@@ -29,6 +41,9 @@ export class AuthService {
     }
   }
   
+  /**
+     * Metodo para obtener el tokn cifrado del usuario logueado
+     */
   public getToken(): string {
     if (this.isAuthenticated()) {
       return JSON.parse(localStorage.getItem('session')).token;
@@ -37,7 +52,9 @@ export class AuthService {
     }
   }
 
-
+ /**
+     * Metodo para obtener el menu dependiendo del usuario logueado
+     */
   public getMenu(): any {
     const sess = JSON.parse(sessionStorage.getItem('session_' + environment.appName));
     if (sess) {
@@ -47,6 +64,15 @@ export class AuthService {
     }
   }
 
+  /**
+   * Metodo para cerrar sesión
+   * 
+   * - Limpia el almacenamiento local
+   * 
+   * - Cierra todas las ventanas emergentes
+   * 
+   * - Redirige al usuario a la pagina principal
+   */
   public closeSession(): void {
     sessionStorage.removeItem('session_' + environment.appName);
     this.dialogRef.closeAll();
@@ -54,15 +80,29 @@ export class AuthService {
     this.router.navigate([environment.baseHref]);
   }
 
+  /**
+  *Valida que el usuario este autenticado
+  *@return true = usuario autenticado
+  *
+  *false = usuario no autenticado
+  */
   public isAuthenticated(): boolean {
     const session = sessionStorage.getItem('session_' + environment.appName);
     return session ? true : false;
   }
 
+  /**
+  *Metodo para hashear el password
+  *@param password Password ingresado en el login.
+  *@return hash del password
+  */
   public hashPassword(password: string): string {
     return this.arrayBufferToBase64(sha1.array(this.toUTF8Array(password)));
   }
 
+   /**
+  *@ignore
+  */
   private toUTF8Array(str: string): any[] {
     const utf8 = [];
     for (let i = 0; i < str.length; i++) {
@@ -85,6 +125,9 @@ export class AuthService {
     return utf8;
   }
 
+   /**
+  *@ignore
+  */
   private arrayBufferToBase64(buffer: any): string {
     let binary = '';
     const bytes = new Uint8Array(buffer);

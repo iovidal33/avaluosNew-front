@@ -11,6 +11,9 @@ import { AvaluosProximosComponent } from '@comp/avaluos-proximos/avaluos-proximo
 import { AcuseAvaluoComponent } from '@comp/acuse-avaluo/acuse-avaluo.component';
 import { InvestigacionMercadoComponent } from '@comp/investigacion-mercado/investigacion-mercado.component';
 
+/**
+*Declaración de rutas para cada uno de los componentes que conforman al sistema
+*/
 const routes: Routes = [
   { path: '', component: LoginComponent },
   // { path: '', component: LoginFirmaComponent },

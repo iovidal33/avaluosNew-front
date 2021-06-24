@@ -18,12 +18,31 @@ export class FileUploadService {
     public dialog: MatDialog,
     ) { }
 
+    
+  /**
+   * Envia el archivo XML al servidor y esta en la espera de los eventos durante la carga.
+   * @param endpoint Ruta del servicio a donde se enviara.
+   * @param formData Datos del formulario junto con el archivo XML.
+   * @param httpOptions Datos de la cabecera de la petición.
+   * @return - Carga del archivo exitosa
+   * 
+   * - Errores de validación
+   * 
+   * - Error durante la subida
+   */
   sendFile(endpoint, formData, httpOptions): Observable<any> {
     return this.http.post(endpoint, formData, httpOptions).pipe(
       catchError((res) => this.errorMgmt(res))
     )
   }
 
+  /**
+   * Muestra mensaje de error correspondiente durante la subida del archivo XML.
+   * @param error Error en algún evento durante la subida.
+   * @return - Ventana emergente con errores de validación en el archivo XML
+   * 
+   * - Error durante la subida
+   */
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -58,7 +77,9 @@ export class FileUploadService {
 
 }
 
-
+/**
+   *@ignore
+   */
 @Component({
   selector: 'app-dialog-validaciones-xml',
   templateUrl: 'app-dialog-validaciones-xml.html',

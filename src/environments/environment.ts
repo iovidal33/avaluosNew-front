@@ -2,6 +2,9 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+/**
+*Rutas utilizadas para el desarrollo en ambiente local
+*/
 export const environment = {
   production: false,
   closeSession: false,

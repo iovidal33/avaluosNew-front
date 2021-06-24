@@ -1,4 +1,4 @@
 {
     "include": ["src/**/*.ts"],
-    "exclude": ["src/**/*.spec.ts", "src/polyfills.ts", "src/test.ts"]
+    "exclude": ["src/**/*.spec.ts", "src/polyfills.ts", "src/test.ts", "src/app/services/efirma.service.ts",]
 }
