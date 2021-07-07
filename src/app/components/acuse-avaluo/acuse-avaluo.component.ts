@@ -50,6 +50,9 @@ export class AcuseAvaluoComponent implements OnInit {
     this.getData();
   }
 
+  /**
+  *Obtiene los datos para la generación del acuse del avalúo
+  */
   getData(): void {
     this.loading = true;
     this.loadingPDF = true;
@@ -75,10 +78,16 @@ export class AcuseAvaluoComponent implements OnInit {
         });
   }
 
+  /**
+  *Regresa al anterior vista
+  */
   regresar(): void{
     this.router.navigate(['main/' + this.menu[0].ruta]);
   }
 
+  /**
+  *Genera el archivo PDF y lo descarga una vez ya generado
+  */
   generarPDF(): void {
     this.loadingPDF = true;
     this.http.post(this.endpoint + '/generaAcusePDF', { 'token': this.tokenDataAvaluo, 'no_unico': this.noUnico },
@@ -113,6 +122,9 @@ export class AcuseAvaluoComponent implements OnInit {
         });
   }
 
+  /**
+  *Genera el archivo DOC y lo descarga una vez ya generado
+  */
   generarDOC(): void {
     const format = 'dd/MM/yyyy';
     const myDate = this.dataAvaluo.fuenteInformacionLegal.fecha;

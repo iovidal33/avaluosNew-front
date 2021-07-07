@@ -46,11 +46,18 @@ export class AvaluosProximosComponent implements OnInit {
     this.getData();
   }
 
+   /**
+     * Avanza en el paginado de los datos obtenidos del servidor
+     * @param evt Evento al dar click en "siguiente"
+     */
   paginado(evt): void{
     this.pagina = evt.pageIndex + 1;
     this.getData();
   }
 
+  /**
+     * Genera el paginado con los datos obtenidos del servidor
+     */
   getData(): void {
     this.loading = true;
     this.http.get(this.endpoint + '?page=' + this.pagina + '&page_size=' + this.paginaSize + '&no_unico=' + this.noUnico,
@@ -70,6 +77,9 @@ export class AvaluosProximosComponent implements OnInit {
         });
   }
 
+  /**
+     * Regresa a la vista anterior
+     */
   regresar(): void{
     this.router.navigate(['main/' + this.menu[0].ruta]);
   }
